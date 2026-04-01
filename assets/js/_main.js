@@ -25,7 +25,6 @@ const browserPref = window.matchMedia('(prefers-color-scheme: dark)').matches ? 
 // Set the theme on page load or when explicitly called
 let updateThemeToggleUI = (theme) => {
   const isDark = theme === "dark";
-  const toggleLabel = isDark ? "Day Mode" : "Night Mode";
   const toggleTitle = isDark ? "Switch to light mode" : "Switch to dark mode";
 
   $("#theme-toggle")
@@ -35,10 +34,8 @@ let updateThemeToggleUI = (theme) => {
     .attr("data-mode", isDark ? "dark" : "light");
 
   $("#theme-icon")
-    .toggleClass("fa-moon", !isDark)
-    .toggleClass("fa-sun", isDark);
-
-  $("#theme-label").text(toggleLabel);
+    .toggleClass("fa-sun", !isDark)
+    .toggleClass("fa-moon", isDark);
 };
 
 let setTheme = (theme) => {

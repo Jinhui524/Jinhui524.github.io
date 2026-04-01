@@ -166,11 +166,11 @@ body::after {
 
 .theme-switch {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  min-height: 2.5rem;
-  padding: 0.5rem 0.82rem;
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
   border: 1px solid rgba(109, 136, 168, 0.18);
   border-radius: 999px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(246, 249, 253, 0.9));
@@ -207,21 +207,14 @@ body::after {
 }
 
 .theme-switch i,
-.theme-switch__label {
-  position: relative;
-  z-index: 1;
+.theme-switch__glow {
+  position: absolute;
 }
 
 .theme-switch i {
+  position: relative;
+  z-index: 1;
   font-size: 0.88rem;
-}
-
-.theme-switch__label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .page__footer {
@@ -792,13 +785,5 @@ html[data-theme="dark"] .page__footer .social-icons a:hover {
 
   .home-welcome__line {
     gap: 0.35rem;
-  }
-
-  .theme-switch {
-    padding: 0.5rem 0.68rem;
-  }
-
-  .theme-switch__label {
-    display: none;
   }
 }
