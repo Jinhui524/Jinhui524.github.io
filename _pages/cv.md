@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "CV / 简历"
+title: "CV"
 permalink: /cv/
 author_profile: true
 redirect_from:
@@ -11,8 +11,9 @@ redirect_from:
 
 <div class="archive-note">
   <p>
-    这份 CV 页面面向保研与科研联系场景，优先呈现我当前的研究兴趣、项目积累和公开材料。
-    它会随着论文、项目和 AI 随笔的更新持续补充，不会停留在一次性完成的静态版本。
+    This CV page is meant for graduate outreach and research contact.
+    It focuses on my current interests, project accumulation, and public materials,
+    and will keep evolving alongside my publications, projects, and AI notes.
   </p>
 </div>
 
@@ -38,8 +39,8 @@ redirect_from:
 Profile
 ======
 
-我希望这个主页不仅能展示我当前已经完成的内容，也能展示我之后会如何继续学习、思考和积累。
-对我来说，AI 并不是短期热点，而是一条希望长期走下去的路线。
+I want this homepage to show not only what I have already done, but also how I plan to keep learning, thinking, and growing.
+For me, AI is not a short-lived trend. It is a long path I want to keep walking.
 
 Research Interests
 ======
@@ -58,8 +59,8 @@ Selected Publications
   {% endfor %}</ul>
 {% else %}
   <div class="outreach-empty">
-    <p>当前还没有正式公开的论文条目。</p>
-    <p>后续会把可以展示的论文、课程研究成果或预印本逐步补到这里。</p>
+    <p>There are no public publication entries here yet.</p>
+    <p>I will gradually add papers, course research, or preprints that can be shared openly.</p>
   </div>
 {% endif %}
 
@@ -77,14 +78,14 @@ Selected Projects
   </ul>
 {% else %}
   <div class="outreach-empty">
-    <p>项目内容正在整理中。</p>
-    <p>我会把更能代表自己能力的项目、实现过程和阶段性总结逐步补进来。</p>
+    <p>Project entries are still being curated.</p>
+    <p>I will gradually add the projects, implementation process, and stage-by-stage reflections that represent me best.</p>
   </div>
 {% endif %}
 
 AI Notes and Direction
 ======
 
-- 我会持续记录自己对人工智能的理解、学习路线、论文阅读与方法反思。
-- 这个主页希望更像一个“持续生长的个人工作台”，而不是一份只用于投递的静态简历。
-- 未来也会逐渐加入兴趣爱好、阅读偏好与更个人化的表达，让老师看到更真实的我。
+- I plan to keep writing about my understanding of AI, learning routes, paper reading, and method reflections.
+- I want this homepage to feel like a growing personal workspace, not just a static CV page.
+- Over time I also want to add hobbies, reading taste, and more personal expression so the site feels more human and more honest.

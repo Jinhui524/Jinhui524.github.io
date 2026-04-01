@@ -1,11 +1,11 @@
 main:
-  - title: "论文"
+  - title: "Publications"
     url: /publications/
 
-  - title: "项目"
+  - title: "Projects"
     url: /projects/
 
-  - title: "AI 随笔"
+  - title: "AI Notes"
     url: /notes/
 
   - title: "CV"
