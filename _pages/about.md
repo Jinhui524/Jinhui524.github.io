@@ -1,122 +1,111 @@
 ---
-layout: splash
+layout: single
 permalink: /
 title: "Jinhui Luo"
-author_profile: false
-excerpt: "A personal AI-themed homepage for publications, projects, notes, and a growing CV."
+author_profile: true
+excerpt: "A simple personal homepage for publications, projects, notes, honors, and research outreach."
 redirect_from:
   - /about/
   - /about.html
 ---
 
-<section class="outreach-home">
-  <section class="outreach-hero">
-    <div class="outreach-hero__content">
-      <p class="outreach-kicker">AI RESEARCH OUTREACH / PERSONAL HOMEPAGE</p>
-      <h1>Jinhui Luo</h1>
-      <p class="outreach-hero__lead">
-        I am building this site as a lightweight personal homepage for graduate outreach:
-        a place where professors can quickly browse my publications, projects, AI notes, and CV,
-        while also getting a sense of how I think, learn, and grow.
-      </p>
-      <p class="outreach-hero__sublead">
-        It is not meant to be a stiff academic profile. I want it to feel more personal, more alive,
-        and a little more memorable.
-      </p>
+<section class="home-minimal">
+  <div class="home-minimal__intro">
+    <p class="home-minimal__eyebrow">Personal Homepage / Research Outreach</p>
+    <h2>Hello, I am Jinhui.</h2>
+    <p class="home-minimal__lead">
+      I built this site as a personal homepage for graduate outreach.
+      It is a small place where professors can quickly see my background, current interests,
+      selected work, and the way I am growing into AI.
+    </p>
+    <p>
+      I want the site to stay personal rather than overly formal:
+      serious enough to present my work, but still warm enough to show my taste, curiosity,
+      and long-term learning path.
+    </p>
+  </div>
 
-      <div class="outreach-hero__meta">
-        <span>{{ site.author.employer }}</span>
-        <span>{{ site.author.location }}</span>
-        <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
-      </div>
-
-      <div class="outreach-actions">
-        <a class="btn outreach-home__btn" href="{{ '/cv/' | relative_url }}">View CV</a>
-        <a class="btn outreach-home__btn outreach-home__btn--ghost" href="{{ '/projects/' | relative_url }}">See Projects</a>
-      </div>
-    </div>
-
-    <aside class="outreach-hero__panel">
-      <div class="outreach-portrait-shell">
-        <img
-          src="{{ '/images/kiyana.jpg' | relative_url }}"
-          alt="{{ site.author.name }}"
-          class="outreach-portrait"
-        >
-      </div>
-      <div class="outreach-field-note">
-        <span class="outreach-field-note__label">Field Note</span>
-        <p>
-          I like learning AI by building, reading, and writing in public.
-          This homepage will keep track of that process.
-        </p>
-      </div>
-    </aside>
-  </section>
-
-  <section class="outreach-dock">
-    <a class="outreach-dock__card" href="{{ '/publications/' | relative_url }}">
-      <span class="outreach-dock__index">01</span>
-      <h2>Publications</h2>
-      <p>Research papers, course projects, preprints, and any formal writing I can share.</p>
-      <span class="outreach-dock__arrow">Explore</span>
+  <div class="home-links-grid">
+    <a class="home-link-card" href="{{ '/publications/' | relative_url }}">
+      <span class="home-link-card__meta">01</span>
+      <h3>Publications</h3>
+      <p>Research papers, course studies, and any formal writing I can share publicly.</p>
     </a>
-
-    <a class="outreach-dock__card" href="{{ '/projects/' | relative_url }}">
-      <span class="outreach-dock__index">02</span>
-      <h2>Projects</h2>
-      <p>Things I built, how I built them, and what they taught me about systems and ideas.</p>
-      <span class="outreach-dock__arrow">Explore</span>
+    <a class="home-link-card" href="{{ '/projects/' | relative_url }}">
+      <span class="home-link-card__meta">02</span>
+      <h3>Projects</h3>
+      <p>Selected projects that show how I turn ideas into something concrete and usable.</p>
     </a>
-
-    <a class="outreach-dock__card" href="{{ '/notes/' | relative_url }}">
-      <span class="outreach-dock__index">03</span>
-      <h2>AI Notes</h2>
-      <p>My reading logs, AI reflections, learning routes, and evolving thoughts about the field.</p>
-      <span class="outreach-dock__arrow">Explore</span>
+    <a class="home-link-card" href="{{ '/notes/' | relative_url }}">
+      <span class="home-link-card__meta">03</span>
+      <h3>AI Notes</h3>
+      <p>My notes on papers, learning routes, technical reflections, and evolving thoughts on AI.</p>
     </a>
-
-    <a class="outreach-dock__card" href="{{ '/cv/' | relative_url }}">
-      <span class="outreach-dock__index">04</span>
-      <h2>CV</h2>
+    <a class="home-link-card" href="{{ '/cv/' | relative_url }}">
+      <span class="home-link-card__meta">04</span>
+      <h3>CV</h3>
       <p>A concise overview of my background, interests, public materials, and current direction.</p>
-      <span class="outreach-dock__arrow">Explore</span>
     </a>
-  </section>
+  </div>
 
-  <section class="outreach-duo">
-    <article class="outreach-note-card outreach-note-card--warm">
-      <p class="outreach-kicker">CURRENT INTERESTS</p>
-      <h2>What I am growing into</h2>
+  <div class="home-panels">
+    <section class="home-panel">
+      <p class="home-minimal__eyebrow">About Me</p>
+      <h3>Personal Profile</h3>
       <p>
         My main interests are artificial intelligence, machine learning, large language models,
-        and project-driven learning. I am especially drawn to the kind of work that connects
-        theory, implementation, and reflection.
+        and project-driven learning. I enjoy understanding ideas by building things,
+        reading papers, and writing notes in public.
       </p>
-    </article>
+    </section>
 
-    <article class="outreach-note-card outreach-note-card--tilted">
-      <p class="outreach-kicker">WHY THIS SITE</p>
-      <h2>Not just a CV mirror</h2>
-      <p>
-        I want this homepage to show more than a list of achievements.
-        It should also reveal how I study, what I care about, and why I want to keep walking deeper into AI.
-      </p>
-    </article>
-  </section>
+    <section class="home-panel">
+      <p class="home-minimal__eyebrow">Updates</p>
+      <h3>Recent News</h3>
+      <ul class="home-list">
+        <li>Building this homepage into a more complete personal research profile.</li>
+        <li>Organizing publications, projects, and AI notes for future updates.</li>
+        <li>Preparing materials that better present my interests and long-term potential.</li>
+      </ul>
+    </section>
 
-  <section class="outreach-strip">
-    <div class="outreach-strip__text">
-      <p class="outreach-kicker">NEXT</p>
-      <h2>What will grow here next</h2>
+    <section class="home-panel">
+      <p class="home-minimal__eyebrow">Highlights</p>
+      <h3>Honors & Recognition</h3>
+      <ul class="home-list">
+        <li>This section can be used for scholarships, awards, rankings, or competition results.</li>
+        <li>It is also a good place to list representative achievements at a glance.</li>
+      </ul>
+    </section>
+
+    <section class="home-panel">
+      <p class="home-minimal__eyebrow">Writing</p>
+      <h3>Notes Archive</h3>
       <p>
-        More AI notes, more project write-ups, more reading trails, and a clearer long-term roadmap.
-        I want this site to keep evolving with me.
+        My notes page will gradually collect AI reading notes, project retrospectives,
+        learning routes, and stage-by-stage reflections.
       </p>
-    </div>
-    <div class="outreach-actions">
-      <a class="btn outreach-home__btn outreach-home__btn--light" href="{{ '/notes/' | relative_url }}">Read Notes</a>
-      <a class="btn outreach-home__btn outreach-home__btn--ghost-light" href="mailto:{{ site.author.email }}">Contact Me</a>
-    </div>
-  </section>
+      <p><a href="{{ '/notes/' | relative_url }}">Open AI Notes</a></p>
+    </section>
+  </div>
+
+  <div class="home-panels home-panels--two">
+    <section class="home-panel home-panel--soft">
+      <p class="home-minimal__eyebrow">Interests</p>
+      <h3>Beyond Work</h3>
+      <p>
+        I also want this site to keep a little personality:
+        hobbies, reading taste, aesthetics, and the small things that make a homepage feel human.
+      </p>
+    </section>
+
+    <section class="home-panel home-panel--dark">
+      <p class="home-minimal__eyebrow">Future</p>
+      <h3>What I Want This Site To Become</h3>
+      <p>
+        Over time, I hope this homepage becomes a quiet but memorable record of my work,
+        my thinking, and my path into AI research.
+      </p>
+    </section>
+  </div>
 </section>
