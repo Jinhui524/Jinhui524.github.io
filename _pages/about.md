@@ -32,9 +32,7 @@ redirect_from:
   </section>
 
   <section class="home-section">
-    <div class="home-section__title">
-      <h3>Education</h3>
-    </div>
+    <h3>Education</h3>
     <div class="home-section__body">
       <article class="home-card home-card--timeline">
         <p class="home-card__eyebrow">University</p>
@@ -57,9 +55,7 @@ redirect_from:
   </section>
 
   <section class="home-section">
-    <div class="home-section__title">
-      <h3>Recent News</h3>
-    </div>
+    <h3>Recent News</h3>
     <div class="home-section__body">
       <article class="home-card home-card--news">
         <ul class="home-news-list">
@@ -90,9 +86,7 @@ redirect_from:
   </section>
 
   <section class="home-section">
-    <div class="home-section__title">
-      <h3>Honors & Awards</h3>
-    </div>
+    <h3>Honors & Awards</h3>
     <div class="home-section__body">
       <article class="home-card home-card--award">
         <p class="home-card__eyebrow">Scholarship</p>
@@ -118,9 +112,7 @@ redirect_from:
   </section>
 
   <section class="home-section">
-    <div class="home-section__title">
-      <h3>Notes & Writing</h3>
-    </div>
+    <h3>Notes & Writing</h3>
     <div class="home-section__body">
       <article class="home-card">
         <p>
@@ -136,9 +128,7 @@ redirect_from:
   </section>
 
   <section class="home-section">
-    <div class="home-section__title">
-      <h3>Interests</h3>
-    </div>
+    <h3>Interests</h3>
     <div class="home-section__body">
       <article class="home-card home-card--soft">
         <p>
@@ -150,9 +140,7 @@ redirect_from:
   </section>
 
   <section class="home-section home-section--last">
-    <div class="home-section__title">
-      <h3>More Coming Soon</h3>
-    </div>
+    <h3>More Coming Soon</h3>
     <div class="home-section__body">
       <article class="home-card home-card--dark">
         <p>
