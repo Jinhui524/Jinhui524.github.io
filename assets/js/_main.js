@@ -62,6 +62,59 @@ var toggleTheme = () => {
   setTheme(new_theme);
 };
 
+// Subtle click burst so the site feels a little more alive without losing the academic tone.
+const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+let spawnClickBurst = (x, y) => {
+  const burst = document.createElement("span");
+  burst.className = "click-burst";
+  burst.style.left = `${x}px`;
+  burst.style.top = `${y}px`;
+
+  const ring = document.createElement("span");
+  ring.className = "click-burst__ring";
+  burst.appendChild(ring);
+
+  const glow = document.createElement("span");
+  glow.className = "click-burst__glow";
+  burst.appendChild(glow);
+
+  const sparkAngles = [0, 52, 118, 180, 238, 304];
+  sparkAngles.forEach((angle, index) => {
+    const spark = document.createElement("span");
+    spark.className = "click-burst__spark";
+    spark.style.setProperty("--angle", `${angle + (Math.random() * 14 - 7)}deg`);
+    spark.style.setProperty("--travel", `${0.75 + Math.random() * 0.5}rem`);
+    spark.style.setProperty("--delay", `${index * 14}ms`);
+    spark.style.setProperty(
+      "--spark-color",
+      index % 3 === 0 ? "var(--outreach-spark-warm)" : "var(--outreach-spark-core)"
+    );
+    burst.appendChild(spark);
+  });
+
+  document.body.appendChild(burst);
+  window.setTimeout(() => burst.remove(), 720);
+};
+
+let initClickBurst = () => {
+  if (!window.PointerEvent || reducedMotionQuery.matches) {
+    return;
+  }
+
+  document.addEventListener("pointerdown", (event) => {
+    if (event.isPrimary === false) {
+      return;
+    }
+
+    if (event.pointerType === "mouse" && event.button !== 0) {
+      return;
+    }
+
+    spawnClickBurst(event.clientX, event.clientY);
+  }, { passive: true });
+};
+
 /* ==========================================================================
    Plotly integration script so that Markdown codeblocks will be rendered
    ========================================================================== */
@@ -116,6 +169,9 @@ $(document).ready(function () {
 
   // Enable the theme toggle
   $('#theme-toggle').on('click', toggleTheme);
+
+  // Add a light click flourish across the site.
+  initClickBurst();
 
   // Enable the sticky footer
   var bumpIt = function () {
