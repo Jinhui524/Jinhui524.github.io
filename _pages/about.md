@@ -37,19 +37,21 @@ redirect_from:
     </div>
     <div class="home-section__body">
       <article class="home-card home-card--timeline">
+        <p class="home-card__eyebrow">University</p>
         <h4>
           <a href="https://example.com" target="_blank" rel="noopener">Your University Name</a>
         </h4>
-        <p>Your School / Major / Degree</p>
-        <p class="home-card__meta">Sep 2022 - Present</p>
+        <p class="home-card__sub">School of XXX · B.S. in XXX</p>
+        <p class="home-card__meta">Sep 2022 - Present · City, Country</p>
       </article>
 
       <article class="home-card home-card--timeline">
+        <p class="home-card__eyebrow">Undergraduate Lab</p>
         <h4>
           <a href="https://example.com" target="_blank" rel="noopener">Your Undergraduate Lab</a>
         </h4>
-        <p>Your Lab / Position / Research Direction</p>
-        <p class="home-card__meta">Jul 2024 - Present</p>
+        <p class="home-card__sub">Research Intern / Undergraduate Member · AI / ML / LLM</p>
+        <p class="home-card__meta">Jul 2024 - Present · Research Group / Supervisor</p>
       </article>
     </div>
   </section>
@@ -59,19 +61,30 @@ redirect_from:
       <h3>Recent News</h3>
     </div>
     <div class="home-section__body">
-      <article class="home-card home-card--compact">
-        <p class="home-card__tag">Apr 2026</p>
-        <p>I am refining this homepage into a clearer and more complete personal research profile.</p>
-      </article>
-
-      <article class="home-card home-card--compact">
-        <p class="home-card__tag">Current</p>
-        <p>I am organizing publications, projects, and AI notes so they can be presented more systematically.</p>
-      </article>
-
-      <article class="home-card home-card--compact">
-        <p class="home-card__tag">Next</p>
-        <p>I am preparing materials that better reflect my interests, learning path, and long-term potential for research.</p>
+      <article class="home-card home-card--news">
+        <ul class="home-news-list">
+          <li class="home-news-item">
+            <span class="home-news-item__date">2026.04</span>
+            <div class="home-news-item__content">
+              <strong>Homepage update.</strong>
+              <p>Replace this line with a recent milestone, project update, paper submission, or personal academic progress.</p>
+            </div>
+          </li>
+          <li class="home-news-item">
+            <span class="home-news-item__date">2026.03</span>
+            <div class="home-news-item__content">
+              <strong>Research / project progress.</strong>
+              <p>Use this slot to mention a new experiment, a project release, a reading direction, or a key stage in your preparation.</p>
+            </div>
+          </li>
+          <li class="home-news-item">
+            <span class="home-news-item__date">2026.02</span>
+            <div class="home-news-item__content">
+              <strong>Future note.</strong>
+              <p>You can also use one item here to signal what you are focusing on next.</p>
+            </div>
+          </li>
+        </ul>
       </article>
     </div>
   </section>
@@ -81,11 +94,25 @@ redirect_from:
       <h3>Honors & Awards</h3>
     </div>
     <div class="home-section__body">
-      <article class="home-card">
-        <ul class="home-story__list">
-          <li>This section can be used for scholarships, academic honors, competition awards, or rankings.</li>
-          <li>You can also use it to highlight a few achievements that professors may want to notice quickly.</li>
-        </ul>
+      <article class="home-card home-card--award">
+        <p class="home-card__eyebrow">Scholarship</p>
+        <h4>First-Class Scholarship / National Scholarship</h4>
+        <p class="home-card__sub">Your University or Organization</p>
+        <p class="home-card__meta">2024</p>
+      </article>
+
+      <article class="home-card home-card--award">
+        <p class="home-card__eyebrow">Competition</p>
+        <h4>Mathematical Contest / Innovation Competition</h4>
+        <p class="home-card__sub">Prize level / Team role / Brief highlight</p>
+        <p class="home-card__meta">2023 - 2024</p>
+      </article>
+
+      <article class="home-card home-card--award">
+        <p class="home-card__eyebrow">Academic Recognition</p>
+        <h4>Outstanding Student / Merit Award</h4>
+        <p class="home-card__sub">Anything you want professors to notice quickly at a glance</p>
+        <p class="home-card__meta">Add your year here</p>
       </article>
     </div>
   </section>
