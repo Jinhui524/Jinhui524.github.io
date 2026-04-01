@@ -67,7 +67,6 @@ body::after {
   z-index: 0;
 }
 
-.masthead,
 .initial-content,
 .page__footer {
   position: relative;
@@ -85,6 +84,9 @@ body::after {
 }
 
 .masthead {
+  position: fixed;
+  top: 0;
+  z-index: 30;
   background: rgba(255, 255, 255, 0.86);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--outreach-line);

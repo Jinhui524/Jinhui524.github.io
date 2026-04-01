@@ -1,7 +1,7 @@
 ---
 layout: single
 permalink: /
-title: "Jinhui Luo"
+title: ""
 author_profile: true
 excerpt: "A personal homepage for research outreach, notes, honors, and long-term growth in AI."
 redirect_from:
