@@ -24,11 +24,12 @@ repository               : "Jinhui524/Jinhui524.github.io"
 author:
   # Biographic information
   avatar           : "kiyana.jpg"
-  name             : "Jinhui Luo"
+  name             : "Jinhui Luo 罗锦辉"
   pronouns         : "He/Him"  
   bio              : "我希望我的希望会有希望"
   location         : "China"
   employer         : "HNUST"
+  employer_uri     : # URL
   uri              : # URL
   email            : "Luojh0524@163.com" 
 
