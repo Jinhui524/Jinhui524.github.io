@@ -1,36 +1,48 @@
 ---
 layout: archive
-title: "Publications"
+title: "论文 / Publications"
 permalink: /publications/
 author_profile: true
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
-
 {% include base_path %}
 
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
+<div class="archive-note">
+  <p>
+    这里会集中展示与人工智能、机器学习、大语言模型或课程研究相关的论文、预印本与公开写作。
+    这部分更像我的研究表达入口，也会随着后续积累持续更新。
+  </p>
+</div>
+
+{% assign publication_count = site.publications | size %}
+
+{% if publication_count > 0 %}
+  {% if site.author.googlescholar %}
+    <div class="wordwrap">You can also find my articles on <a href="{{ site.author.googlescholar }}">my Google Scholar profile</a>.</div>
+  {% endif %}
+
+  {% if site.publication_category %}
+    {% for category in site.publication_category %}
+      {% assign title_shown = false %}
+      {% for post in site.publications reversed %}
+        {% if post.category != category[0] %}
+          {% continue %}
+        {% endif %}
+        {% unless title_shown %}
+          <h2>{{ category[1].title }}</h2><hr />
+          {% assign title_shown = true %}
+        {% endunless %}
+        {% include archive-single.html %}
+      {% endfor %}
+    {% endfor %}
+  {% else %}
     {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
       {% include archive-single.html %}
     {% endfor %}
-  {% endfor %}
+  {% endif %}
 {% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
+  <div class="outreach-empty">
+    <p>这里暂时还没有正式公开的论文条目。</p>
+    <p>后续我会把可以公开的论文、课程研究、预印本或系统整理后的技术写作逐步补到这里。</p>
+  </div>
 {% endif %}
-
-
-

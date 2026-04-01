@@ -1,56 +1,202 @@
 ---
+layout: splash
 permalink: /
-title: "Academic Pages is a ready-to-fork GitHub Pages template for academic personal websites"
-author_profile: true
-redirect_from: 
+title: "Jinhui Luo"
+author_profile: false
+excerpt: "面向人工智能的长期学习者，记录论文、项目、CV，以及我对 AI 的理解、路线与成长轨迹。"
+redirect_from:
   - /about/
   - /about.html
 ---
 
-This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the repository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. Incidentally, these same features make it a great template for anyone that needs to show off a professional template!
+<section class="outreach-home">
+  <section class="outreach-hero">
+    <div class="outreach-hero__content">
+      <p class="outreach-section__eyebrow">Research Outreach · Personal Homepage</p>
+      <h1>{{ site.author.name }}</h1>
+      <p class="outreach-lead">
+        我正在准备保研，也想把这个主页做成一张长期生长的个人名片:
+        既能让老师快速看到我的论文、项目与 CV，也能看到我对人工智能的兴趣、理解和未来路线。
+      </p>
+      <p class="outreach-lead-secondary">
+        这里不会只是简历的网页版。它更像一个真实的个人主页: 有研究兴趣，有项目痕迹，也会慢慢长出我对 AI 的判断、学习方法和个人审美。
+      </p>
+      <div class="outreach-taglist">
+        <span>Artificial Intelligence</span>
+        <span>LLM</span>
+        <span>Projects</span>
+        <span>Research Potential</span>
+        <span>AI Notes</span>
+      </div>
+      <div class="outreach-actions">
+        <a class="btn outreach-home__btn" href="{{ '/cv/' | relative_url }}">查看 CV</a>
+        <a class="btn outreach-home__btn outreach-home__btn--ghost" href="{{ '/projects/' | relative_url }}">看项目</a>
+      </div>
+    </div>
 
- You can fork [this template](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and Markdown files, add your own PDFs and other content, and have your own site for free, with no ads!
+    <aside class="outreach-hero__aside">
+      <div class="outreach-portrait-card">
+        <img
+          src="{{ '/images/kiyana.jpg' | relative_url }}"
+          alt="{{ site.author.name }}"
+          class="outreach-portrait"
+        >
+        <div class="outreach-facts">
+          <div class="outreach-fact">
+            <span>Current Base</span>
+            <strong>{{ site.author.employer }}</strong>
+          </div>
+          <div class="outreach-fact">
+            <span>Location</span>
+            <strong>{{ site.author.location }}</strong>
+          </div>
+          <div class="outreach-fact">
+            <span>Contact</span>
+            <strong>{{ site.author.email }}</strong>
+          </div>
+          <div class="outreach-fact">
+            <span>Keywords</span>
+            <strong>AI · LLM · Projects · Notes</strong>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </section>
 
-A data-driven personal website
-======
-Like many other Jekyll-based GitHub Pages templates, Academic Pages makes you separate the website's content from its form. The content & metadata of your website are in structured Markdown files, while various other files constitute the theme, specifying how to transform that content & metadata into HTML pages. You keep these various Markdown (.md), YAML (.yml), HTML, and CSS files in a public GitHub repository. Each time you commit and push an update to the repository, the [GitHub pages](https://pages.github.com/) service creates static HTML pages based on these files, which are hosted on GitHub's servers free of charge.
+  <section class="outreach-section">
+    <div class="outreach-section__heading">
+      <p class="outreach-section__eyebrow">Why This Site</p>
+      <h2>这是一张可以持续更新的“套磁名片”</h2>
+      <p>
+        对老师来说，重要的不只是“我做过什么”，还包括“我会怎样继续做下去”。
+        所以我希望这个主页能同时展示成果、过程和长期潜力。
+      </p>
+    </div>
+    <div class="outreach-card-grid">
+      <article class="outreach-card">
+        <div class="outreach-card__icon"><i class="fas fa-lightbulb" aria-hidden="true"></i></div>
+        <h3>研究兴趣</h3>
+        <p>
+          目前持续关注人工智能、机器学习与大语言模型相关方向，希望逐步形成更清晰的问题意识和研究表达。
+        </p>
+      </article>
+      <article class="outreach-card">
+        <div class="outreach-card__icon"><i class="fas fa-code-branch" aria-hidden="true"></i></div>
+        <h3>项目能力</h3>
+        <p>
+          我更偏好“读一点、做一点、再写一点”的学习方式。通过项目实现、复现与记录，把理解真正沉淀下来。
+        </p>
+      </article>
+      <article class="outreach-card">
+        <div class="outreach-card__icon"><i class="fas fa-seedling" aria-hidden="true"></i></div>
+        <h3>长期潜力</h3>
+        <p>
+          我想向老师展示的，不只是短期结果，而是我是否具备长期投入 AI、持续学习和不断迭代的能力。
+        </p>
+      </article>
+    </div>
+  </section>
 
-Many of the features of dynamic content management systems (like Wordpress) can be achieved in this fashion, using a fraction of the computational resources and with far less vulnerability to hacking and DDoSing. You can also modify the theme to your heart's content without touching the content of your site. If you get to a point where you've broken something in Jekyll/HTML/CSS beyond repair, your Markdown files describing your talks, publications, etc. are safe. You can rollback the changes or even delete the repository and start over - just be sure to save the Markdown files! You can also write scripts that process the structured data on the site, such as [this one](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb) that analyzes metadata in pages about talks to display [a map of every location you've given a talk](https://academicpages.github.io/talkmap.html).
+  <section class="outreach-section">
+    <div class="outreach-section__heading">
+      <p class="outreach-section__eyebrow">Start Here</p>
+      <h2>从这些入口了解我会更快</h2>
+      <p>
+        我把老师最可能关心的内容集中成四个入口: 论文、项目、CV，以及未来会持续更新的 AI 随笔。
+      </p>
+    </div>
+    <div class="outreach-link-grid">
+      <a class="outreach-link-card" href="{{ '/publications/' | relative_url }}">
+        <span class="outreach-link-card__index">01</span>
+        <h3>论文</h3>
+        <p>集中展示论文、预印本、课程研究成果，以及后续可以公开的正式写作。</p>
+      </a>
+      <a class="outreach-link-card" href="{{ '/projects/' | relative_url }}">
+        <span class="outreach-link-card__index">02</span>
+        <h3>项目</h3>
+        <p>更偏向“我如何把想法落成东西”，包括实现过程、工程能力与问题拆解方式。</p>
+      </a>
+      <a class="outreach-link-card" href="{{ '/cv/' | relative_url }}">
+        <span class="outreach-link-card__index">03</span>
+        <h3>CV</h3>
+        <p>把当前阶段最关键的个人信息、研究兴趣和公开材料整合在一起，适合快速浏览。</p>
+      </a>
+      <a class="outreach-link-card" href="{{ '/notes/' | relative_url }}">
+        <span class="outreach-link-card__index">04</span>
+        <h3>AI 随笔</h3>
+        <p>未来我会在这里持续写下对人工智能的理解、学习路线、论文阅读与阶段性反思。</p>
+      </a>
+    </div>
+  </section>
 
-For those users that need more advanced functionality, the template also supports the following popular tools:
-- [MathJax](https://www.mathjax.org/) for mathematical equations
-- [Mermaid](https://mermaid.js.org/) for diagraming
-- [Plotly](https://plotly.com/javascript/) for plotting
+  <section class="outreach-section">
+    <div class="outreach-section__heading">
+      <p class="outreach-section__eyebrow">Learning Route</p>
+      <h2>我想把自己的 AI 学习路线也公开放在这里</h2>
+      <p>
+        未来这个主页会慢慢补齐从基础学习到项目实践，再到论文阅读与个人理解的完整路径，
+        让它既能展示现在，也能展示我准备如何继续走下去。
+      </p>
+    </div>
+    <div class="outreach-path-grid">
+      <article class="outreach-path-step">
+        <span class="outreach-path-step__label">01 · Base</span>
+        <h3>基础</h3>
+        <p>继续补强机器学习、深度学习与大模型相关基础，把概念、原理和工具真正打通。</p>
+      </article>
+      <article class="outreach-path-step">
+        <span class="outreach-path-step__label">02 · Build</span>
+        <h3>实践</h3>
+        <p>通过项目、复现和实验，把抽象知识变成可运行、可解释、可展示的成果。</p>
+      </article>
+      <article class="outreach-path-step">
+        <span class="outreach-path-step__label">03 · Read</span>
+        <h3>研究</h3>
+        <p>逐步积累论文阅读、问题提炼和方向判断能力，让兴趣从“想做”走向“能做”。</p>
+      </article>
+      <article class="outreach-path-step">
+        <span class="outreach-path-step__label">04 · Write</span>
+        <h3>表达</h3>
+        <p>把自己的理解写成随笔、路线图和阶段性复盘，让这个站点成为公开的成长轨迹。</p>
+      </article>
+    </div>
+  </section>
 
-Getting started
-======
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this template](https://github.com/academicpages/academicpages.github.io) by clicking the "Use this template" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](https://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
+  <section class="outreach-section outreach-section--split">
+    <div class="outreach-note-card">
+      <p class="outreach-section__eyebrow">Personal Tone</p>
+      <h2>我希望它依然像个人主页，而不是纯模板化的学术页</h2>
+      <p>
+        除了论文和项目，我也希望保留一点“人味”:
+        比如我的兴趣、阅读、审美、长期关注的问题，以及我为什么会被人工智能吸引。
+      </p>
+      <p>
+        这样老师看到的，不只是一个信息列表，而是一个更真实的人。
+      </p>
+    </div>
+    <div class="outreach-note-card">
+      <p class="outreach-section__eyebrow">Future Updates</p>
+      <h2>接下来我会持续补上的内容</h2>
+      <ul class="outreach-list">
+        <li>真实可公开的论文、课程研究或预印本</li>
+        <li>更能代表自己能力的项目整理与复盘</li>
+        <li>对人工智能的理解、学习路线与阶段性总结</li>
+        <li>兴趣爱好、阅读偏好与更个人化的表达</li>
+      </ul>
+    </div>
+  </section>
 
-Site-wide configuration
-------
-The main configuration file for the site is in the base directory in [_config.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_config.yml), which defines the content in the sidebars and other site-wide features. You will need to replace the default variables with ones about yourself and your site's github repository. The configuration file for the top menu is in [_data/navigation.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_data/navigation.yml). For example, if you don't have a portfolio or blog posts, you can remove those items from that navigation.yml file to remove them from the header. 
-
-Create content & metadata
-------
-For site content, there is one Markdown file for each type of content, which are stored in directories like _publications, _talks, _posts, _teaching, or _pages. For example, each talk is a Markdown file in the [_talks directory](https://github.com/academicpages/academicpages.github.io/tree/master/_talks). At the top of each Markdown file is structured data in YAML about the talk, which the theme will parse to do lots of cool stuff. The same structured data about a talk is used to generate the list of talks on the [Talks page](https://academicpages.github.io/talks), each [individual page](https://academicpages.github.io/talks/2012-03-01-talk-1) for specific talks, the talks section for the [CV page](https://academicpages.github.io/cv), and the [map of places you've given a talk](https://academicpages.github.io/talkmap.html) (if you run this [python file](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.py) or [Jupyter notebook](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb), which creates the HTML for the map based on the contents of the _talks directory).
-
-**Markdown generator**
-
-The repository includes [a set of Jupyter notebooks](https://github.com/academicpages/academicpages.github.io/tree/master/markdown_generator
-) that converts a CSV containing structured data about talks or presentations into individual Markdown files that will be properly formatted for the Academic Pages template. The sample CSVs in that directory are the ones I used to create my own personal website at stuartgeiger.com. My usual workflow is that I keep a spreadsheet of my publications and talks, then run the code in these notebooks to generate the Markdown files, then commit and push them to the GitHub repository.
-
-How to edit your site's GitHub repository
-------
-Many people use a git client to create files on their local computer and then push them to GitHub's servers. If you are not familiar with git, you can directly edit these configuration and Markdown files directly in the github.com interface. Navigate to a file (like [this one](https://github.com/academicpages/academicpages.github.io/blob/master/_talks/2012-03-01-talk-1.md) and click the pencil icon in the top right of the content preview (to the right of the "Raw | Blame | History" buttons). You can delete a file by clicking the trashcan icon to the right of the pencil icon. You can also create new files or upload files by navigating to a directory and clicking the "Create new file" or "Upload files" buttons. 
-
-Example: editing a Markdown file for a talk
-![Editing a Markdown file for a talk](/images/editing-talk.png)
-
-For more info
-------
-More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/), the [growing wiki](https://github.com/academicpages/academicpages.github.io/wiki), and you can always [ask a question on GitHub](https://github.com/academicpages/academicpages.github.io/discussions). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+  <section class="outreach-cta">
+    <div>
+      <p class="outreach-section__eyebrow">Contact</p>
+      <h2>如果您愿意进一步了解我</h2>
+      <p>
+        欢迎通过邮件联系我。我也会继续把这个主页更新成一个更完整、更真实的个人研究主页。
+      </p>
+    </div>
+    <div class="outreach-actions">
+      <a class="btn outreach-home__btn outreach-home__btn--light" href="mailto:{{ site.author.email }}">邮件联系</a>
+      <a class="btn outreach-home__btn outreach-home__btn--ghost-light" href="{{ '/notes/' | relative_url }}">看 AI 随笔</a>
+    </div>
+  </section>
+</section>

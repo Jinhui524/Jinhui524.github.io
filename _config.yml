@@ -8,11 +8,10 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-
 site_theme               : "sunrise" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
-title                    : "JinhuiLuo"
+title                    : "Jinhui Luo"
 title_separator          : "-"
-name                     : "JinhuiLuo"
+name                     : "Jinhui Luo"
 description              : "Welcome to the academic website of Jinhui Luo. An award-winning developer and researcher focused on deep learning, process mining, and building impactful AI applications."   # Update this with a general description of your site, this is the default if not overridden by a page
 url                      : https://Jinhui524.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
                                                            # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
@@ -27,7 +26,7 @@ author:
   avatar           : "kiyana.jpg"
   name             : "Jinhui Luo"
   pronouns         : "He/Him"  
-  bio              : "LLM"
+  bio              : "我希望我的希望会有希望"
   location         : "China"
   employer         : "Hunan University of Science and Technology"
   uri              : # URL
