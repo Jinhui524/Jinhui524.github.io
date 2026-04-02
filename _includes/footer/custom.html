@@ -1,6 +1,11 @@
 <!-- start custom footer snippets -->
 
-<a href="/sitemap/">Sitemap</a>
+{% include base_path %}
+
+<a class="footer-sitemap" href="{{ base_path }}/sitemap/">
+  <i class="fas fa-sitemap" aria-hidden="true"></i>
+  <span>Sitemap</span>
+</a>
 
 <!-- Support for MatJax -->
 <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>

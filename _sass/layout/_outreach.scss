@@ -237,6 +237,29 @@ body::after {
   color: var(--outreach-accent);
 }
 
+.footer-sitemap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34rem;
+  margin-bottom: 0.8rem;
+  color: var(--outreach-muted);
+  font-family: "Poppins", "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.footer-sitemap i {
+  font-size: 0.68rem;
+  color: var(--outreach-muted);
+}
+
+.footer-sitemap:hover,
+.footer-sitemap:hover i {
+  color: var(--outreach-accent);
+}
+
 .author__avatar img,
 img.author__avatar {
   border-radius: 18px;
