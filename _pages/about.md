@@ -19,7 +19,7 @@ redirect_from:
   </section>
 
   <section class="home-story__hero home-text-block">
-    <p class="home-story__eyebrow">Personal Homepage / Research Outreach</p>
+    <!-- <p class="home-story__eyebrow">Personal Homepage / Research Outreach</p> -->
     <h2>About Me</h2>
     <p class="home-story__lead">
       Hello! I am Jinhui Luo. I built this site as a simple personal homepage for graduate outreach,
