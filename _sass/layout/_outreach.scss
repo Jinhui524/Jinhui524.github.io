@@ -395,6 +395,35 @@ img.author__avatar {
   margin-bottom: 0;
 }
 
+.soft-404 {
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
+  text-align: center;
+}
+
+.soft-404__code {
+  margin-bottom: 0.25rem;
+  color: var(--outreach-accent-deep);
+  font-family: "Poppins", "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: clamp(2.3rem, 6vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.soft-404 h2 {
+  margin-top: 0;
+  margin-bottom: 0.9rem;
+  font-family: "Poppins", "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.soft-404 p {
+  max-width: 34rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .cv-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

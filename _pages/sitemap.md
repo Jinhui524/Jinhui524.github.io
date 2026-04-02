@@ -1,37 +1,26 @@
 ---
 layout: archive
-title: "Sitemap"
+title: ""
 permalink: /sitemap/
 author_profile: true
+show_page_title: false
+sitemap: false
 ---
 
 {% include base_path %}
 
-A list of all the posts and pages found on the site. For you robots out there, there is an [XML version]({{ base_path }}/sitemap.xml) available for digesting as well.
-
-<h2>Pages</h2>
-{% for post in site.pages %}
-  {% include archive-single.html %}
-{% endfor %}
-
-<h2>Posts</h2>
-{% for post in site.posts %}
-  {% include archive-single.html %}
-{% endfor %}
-
-{% capture written_label %}'None'{% endcapture %}
-
-{% for collection in site.collections %}
-{% unless collection.output == false or collection.label == "posts" %}
-  {% capture label %}{{ collection.label }}{% endcapture %}
-  {% if label != written_label %}
-  <h2>{{ label }}</h2>
-  {% capture written_label %}{{ label }}{% endcapture %}
-  {% endif %}
-{% endunless %}
-{% for post in collection.docs %}
-  {% unless collection.output == false or collection.label == "posts" %}
-  {% include archive-single.html %}
-  {% endunless %}
-{% endfor %}
-{% endfor %}
+<section class="outreach-empty soft-404" aria-labelledby="soft-404-title">
+  <p class="soft-404__code">404</p>
+  <h2 id="soft-404-title">This page is not available.</h2>
+  <p>
+    I no longer keep a public sitemap page here.
+    The site is meant to stay simple, so the main navigation is a better way to explore it.
+  </p>
+  <p>
+    You can go back to <a href="{{ base_path }}/">Home</a>,
+    or continue with <a href="{{ base_path }}/publications/">Publications</a>,
+    <a href="{{ base_path }}/projects/">Projects</a>,
+    <a href="{{ base_path }}/notes/">AI Notes</a>,
+    and <a href="{{ base_path }}/cv/">CV</a>.
+  </p>
+</section>
