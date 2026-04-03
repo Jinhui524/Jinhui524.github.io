@@ -9,6 +9,8 @@ priority: 5
 shortvenue: "ICSS"
 level: "CCF C"
 status: "Under Review"
+framework_variant: "semantic-rag"
+framework_caption: "A retrieval-augmented framework that organizes event logs into semantic stories, retrieves historical context, and guides a fine-tuned LLM for next-activity prediction."
 ---
 
-I am the second author of this conference paper. It investigates retrieval-augmented generation and fine-tuning for next activity prediction, and the entry can be updated with abstract and paper links later.
+This work explores **retrieval-augmented generation and fine-tuning for next activity prediction**. Historical traces are rewritten as semantic stories, embedded into a searchable memory, and dynamically retrieved to support a fine-tuned predictive LLM during online inference. I am the second author of this paper.

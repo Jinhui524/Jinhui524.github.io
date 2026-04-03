@@ -9,6 +9,8 @@ priority: 6
 shortvenue: "CIMS"
 level: "Chinese Core / CNKI Q1"
 status: "Accept"
+framework_variant: "cims"
+framework_caption: "A fusion framework that combines event-sequence semantics and attribute-association semantics for next-event prediction in business processes."
 ---
 
-I am a co-first author of this journal paper. The work studies next event prediction by integrating event-sequence semantics with attribute-association semantics, and this page can later include a fuller abstract and publication resources.
+This paper studies **next event prediction by integrating event-sequence semantics with attribute-association semantics**. Sequence-level semantic stories and attribute-level relational cues are modeled separately and then fused into a shared representation for downstream prediction. I am a co-first author of this work.

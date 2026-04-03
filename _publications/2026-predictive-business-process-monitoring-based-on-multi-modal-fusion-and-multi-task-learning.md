@@ -9,6 +9,8 @@ priority: 3
 shortvenue: "ASOC"
 level: "SCI 2区 TOP, JCR Q1"
 status: "Under Review"
+framework_variant: "asoc"
+framework_caption: "A multimodal predictive process monitoring framework that couples semantic, sequential, and attribute-aware branches with joint multi-task optimization."
 ---
 
-I am a co-first author of this journal paper. It explores predictive business process monitoring through multi-modal fusion and multi-task learning, and this entry can later include the abstract, publication links, and supplementary materials.
+This journal paper studies **predictive business process monitoring with multi-modal fusion and multi-task learning**. It integrates semantic stories, trace-order features, and attribute-aware representations into a shared embedding space, and then optimizes multiple predictive targets together. I am a co-first author of this work.

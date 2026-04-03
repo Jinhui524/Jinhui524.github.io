@@ -9,6 +9,8 @@ priority: 2
 shortvenue: "IJCNN"
 level: "CCF C"
 status: "Accept"
+framework_variant: "fhgsn"
+framework_caption: "A graph-sequence fusion architecture that learns structural dependencies and temporal dynamics jointly for accurate next-activity prediction."
 ---
 
-I am the first author of this conference paper. The work focuses on next activity prediction through a frequency-based heterogeneous graph-sequence fusion framework, and more details can be added here once the final public version is available.
+This paper proposes a **frequency-based heterogeneous graph-sequence fusion network** for next activity prediction. The model combines heterogeneous graph learning with Transformer-LSTM sequence encoding so that structural relations and temporal signals are fused into a unified representation for downstream prediction. I am the first author of this work.

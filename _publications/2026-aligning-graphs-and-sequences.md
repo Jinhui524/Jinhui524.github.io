@@ -9,6 +9,8 @@ priority: 4
 shortvenue: "CSCWD"
 level: "CCF C"
 status: "Accept"
+framework_variant: "align"
+framework_caption: "A contrastive graph-sequence alignment framework that learns structural and sequential process representations in a mutually reinforcing manner."
 ---
 
-I am the second author of this conference paper. The work studies next event prediction through graph-sequence alignment and contrastive learning, and this page can later be expanded with a fuller summary and links.
+This paper investigates **next event prediction through graph-sequence alignment and contrastive learning**. The framework learns graph-based structural states and sequence-based prefix states in parallel, then aligns them through contrastive objectives for joint prediction. I am the second author of this work.

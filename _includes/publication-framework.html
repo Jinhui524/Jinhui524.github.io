@@ -1,0 +1,226 @@
+{% assign variant = page.framework_variant | default: "" %}
+{% if variant != "" %}
+<section class="publication-framework" aria-labelledby="publication-framework-title">
+  <div class="publication-framework__header">
+    <span class="publication-framework__kicker">Method Snapshot</span>
+    <h2 id="publication-framework-title">Framework Overview</h2>
+    {% if page.framework_caption %}
+      <p class="publication-framework__lead">{{ page.framework_caption }}</p>
+    {% endif %}
+  </div>
+
+  {% case variant %}
+  {% when "llm4ppm" %}
+    <div class="publication-framework__chips">
+      <span>Cross-Domain Logs</span>
+      <span>Story Tokens</span>
+      <span>LoRA Adaptation</span>
+      <span>Predictive Heads</span>
+    </div>
+    <div class="framework-canvas framework-canvas--llm4ppm">
+      <div class="framework-row">
+        <div class="framework-node">
+          <strong>Cross-Domain Datasets</strong>
+          <p>Administration, finance, healthcare, and service logs are gathered into a unified corpus.</p>
+        </div>
+        <span class="framework-arrow" aria-hidden="true"></span>
+        <div class="framework-node">
+          <strong>Semantic Story Construction</strong>
+          <p>Each case is rewritten as a process story together with task-aware prompts.</p>
+        </div>
+        <span class="framework-arrow" aria-hidden="true"></span>
+        <div class="framework-node">
+          <strong>Tokenizer &amp; Embedding</strong>
+          <p>Story tokens and instance tokens are aligned before model adaptation.</p>
+        </div>
+      </div>
+      <div class="framework-branches">
+        <div class="framework-subpanel">
+          <span class="framework-badge">Stage 1</span>
+          <h3>Continuous Pre-Training</h3>
+          <p>A pre-trained LLM absorbs cross-domain process semantics from story tokens.</p>
+        </div>
+        <div class="framework-subpanel is-warm">
+          <span class="framework-badge">Stage 2</span>
+          <h3>Instruction Fine-Tuning</h3>
+          <p>LoRA-based adaptation specializes the model for predictive process monitoring tasks.</p>
+        </div>
+      </div>
+      <div class="framework-output">
+        <strong>Output Head</strong>
+        <span>Next activity, outcome, and other downstream predictions</span>
+      </div>
+    </div>
+
+  {% when "fhgsn" %}
+    <div class="publication-framework__chips">
+      <span>HeteroGraph</span>
+      <span>Transformer</span>
+      <span>LSTM</span>
+      <span>Fusion Prediction</span>
+    </div>
+    <div class="framework-canvas framework-canvas--fhgsn">
+      <div class="framework-grid framework-grid--two">
+        <div class="framework-lane">
+          <span class="framework-badge">Input View</span>
+          <h3>Event Log Attribute Preprocessing</h3>
+          <p>Raw logs are cleaned, transformed, and discretized into event prefixes and timing cues.</p>
+        </div>
+        <div class="framework-lane">
+          <span class="framework-badge">Graph View</span>
+          <h3>Frequency-Based Heterogeneous Graph Learning</h3>
+          <p>Graph miner and GraphSAGE modules capture structural dependencies among heterogeneous entities.</p>
+        </div>
+      </div>
+      <div class="framework-row">
+        <div class="framework-node is-soft">
+          <strong>Prefix Sequence Encoder</strong>
+          <p>Transformer and stacked LSTM layers model the sequential dynamics of prefixes.</p>
+        </div>
+        <span class="framework-arrow" aria-hidden="true"></span>
+        <div class="framework-node is-soft">
+          <strong>Graph-Sequence Fusion</strong>
+          <p>Structural and temporal representations are concatenated into a shared process state.</p>
+        </div>
+        <span class="framework-arrow" aria-hidden="true"></span>
+        <div class="framework-node is-highlight">
+          <strong>Prediction Head</strong>
+          <p>MLP and softmax layers produce the next-activity prediction.</p>
+        </div>
+      </div>
+    </div>
+
+  {% when "asoc" %}
+    <div class="publication-framework__chips">
+      <span>BERT Story Branch</span>
+      <span>Transformer + LSTM</span>
+      <span>CNN-ResNet</span>
+      <span>Multi-Task Learning</span>
+    </div>
+    <div class="framework-canvas framework-canvas--asoc">
+      <div class="framework-hub">
+        <div class="framework-lane">
+          <span class="framework-badge">Branch A</span>
+          <h3>Semantic Story Features</h3>
+          <p>BERT encodes text-style semantic stories generated from process prefixes.</p>
+        </div>
+        <div class="framework-lane">
+          <span class="framework-badge">Branch B</span>
+          <h3>Trace Order Features</h3>
+          <p>A Transformer-LSTM encoder models event-order dynamics and evolving trace context.</p>
+        </div>
+        <div class="framework-lane">
+          <span class="framework-badge">Branch C</span>
+          <h3>Attribute Fusion Features</h3>
+          <p>A CNN-based ResNet learns attribute correlations and multimodal interactions.</p>
+        </div>
+      </div>
+      <div class="framework-row is-compact">
+        <div class="framework-node is-soft">
+          <strong>Multi-Modal Fusion</strong>
+          <p>Three representation streams are aligned into a unified process embedding.</p>
+        </div>
+        <span class="framework-arrow" aria-hidden="true"></span>
+        <div class="framework-node is-highlight">
+          <strong>Multi-Task Outputs</strong>
+          <p>Separate heads predict next event and remaining time simultaneously.</p>
+        </div>
+      </div>
+    </div>
+
+  {% when "align" %}
+    <div class="publication-framework__chips">
+      <span>GCN</span>
+      <span>Transformer-LSTM</span>
+      <span>Contrastive Learning</span>
+      <span>Joint Optimization</span>
+    </div>
+    <div class="framework-canvas framework-canvas--align">
+      <div class="framework-grid framework-grid--two">
+        <div class="framework-lane">
+          <span class="framework-badge">Structure View</span>
+          <h3>Graph Representation Learning</h3>
+          <p>Multi-view dependency graphs are encoded by GCN layers to preserve structural relations.</p>
+        </div>
+        <div class="framework-lane">
+          <span class="framework-badge">Sequence View</span>
+          <h3>Hybrid Sequence Representation</h3>
+          <p>A Transformer-LSTM encoder summarizes the evolving prefix into sequential embeddings.</p>
+        </div>
+      </div>
+      <div class="framework-row is-compact">
+        <div class="framework-node is-soft">
+          <strong>Graph-Sequence Alignment</strong>
+          <p>Contrastive learning encourages graph states and sequence states to agree.</p>
+        </div>
+        <span class="framework-arrow" aria-hidden="true"></span>
+        <div class="framework-node is-highlight">
+          <strong>Joint Prediction Model</strong>
+          <p>Aligned representations are optimized together for next-event prediction.</p>
+        </div>
+      </div>
+    </div>
+
+  {% when "semantic-rag" %}
+    <div class="publication-framework__chips">
+      <span>Semantic Story</span>
+      <span>Embedding</span>
+      <span>Retrieval-Augmented Generation</span>
+      <span>Fine-Tuned LLM</span>
+    </div>
+    <div class="framework-canvas framework-canvas--semantic-rag">
+      <div class="framework-stage-grid">
+        <div class="framework-stage">
+          <h3>Offline Preparation</h3>
+          <div class="framework-stage__steps">
+            <div class="framework-node"><strong>Log Preprocessing</strong><p>Prefix traces are cleaned and organized.</p></div>
+            <div class="framework-node"><strong>Story Generation</strong><p>Semantic stories are built for historical traces.</p></div>
+            <div class="framework-node"><strong>Embedding &amp; Vector Store</strong><p>Stories are embedded and indexed for search.</p></div>
+          </div>
+        </div>
+        <div class="framework-stage">
+          <h3>Online Prediction</h3>
+          <div class="framework-stage__steps">
+            <div class="framework-node"><strong>Prefix Reception</strong><p>An incoming case prefix is converted into a semantic query.</p></div>
+            <div class="framework-node"><strong>Semantic Search</strong><p>Relevant historical contexts are retrieved from the vector store.</p></div>
+            <div class="framework-node is-highlight"><strong>Dynamic Prompt + Fine-Tuned LLM</strong><p>Retrieved evidence and prompt templates drive next-activity prediction.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% when "cims" %}
+    <div class="publication-framework__chips">
+      <span>Sequence Semantics</span>
+      <span>Attribute Semantics</span>
+      <span>Residual Units</span>
+      <span>Fusion Prediction</span>
+    </div>
+    <div class="framework-canvas framework-canvas--cims">
+      <div class="framework-grid framework-grid--two">
+        <div class="framework-lane">
+          <span class="framework-badge">Semantic Lane 1</span>
+          <h3>Event-Sequence Semantic Representation</h3>
+          <p>轨迹事件被转化为语义故事，并由语言模型提取序列语义特征。</p>
+        </div>
+        <div class="framework-lane">
+          <span class="framework-badge">Semantic Lane 2</span>
+          <h3>Attribute-Association Semantic Representation</h3>
+          <p>事件属性被编码成关联语义向量，并通过残差单元逐步增强。</p>
+        </div>
+      </div>
+      <div class="framework-row is-compact">
+        <div class="framework-node is-soft">
+          <strong>Semantic Fusion</strong>
+          <p>Sequence semantics and attribute semantics are merged into a joint representation.</p>
+        </div>
+        <span class="framework-arrow" aria-hidden="true"></span>
+        <div class="framework-node is-highlight">
+          <strong>Next-Event Prediction</strong>
+          <p>A downstream prediction model outputs the next event label from fused semantics.</p>
+        </div>
+      </div>
+    </div>
+  {% endcase %}
+</section>
+{% endif %}
