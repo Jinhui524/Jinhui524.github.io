@@ -37,14 +37,14 @@ redirect_from:
 
   <section class="home-section">
     <h3>Research Interests</h3>
-    <div class="home-text-block">
-      <p>&middot; Natural Language Processing</p>
-      <p>&middot; Large Language Model</p>
-      <p>&middot; Deep Learning Model</p>
-      <p>&middot; Computer Vision</p>
-      <p>&middot; Time Series Prediction</p>
-      <p>&middot; Vision-Language Model</p>
-    </div>
+    <ul class="home-bullet-list">
+      <li>Natural Language Processing</li>
+      <li>Large Language Models</li>
+      <li>Deep Learning</li>
+      <li>Computer Vision</li>
+      <li>Time Series Forecasting</li>
+      <li>Vision-Language Models</li>
+    </ul>
   </section>
 
   <section class="home-section">
@@ -52,16 +52,14 @@ redirect_from:
     <div class="home-text-block">
       <p>
         I am currently an undergraduate student at
-        <a href="https://example.com" target="_blank" rel="noopener">Your University Name</a>,
-        majoring in XXX and expected to graduate in 2026.
+        <a href="https://computer.hnust.edu.cn/" target="_blank" rel="noopener">School of Computer Science and Engineering, Hunan University of Science and Technology</a>,
+        majoring in Data Science and Big Data Technology and expected to graduate in 2027.
       </p>
       <p>
         I work in
-        <a href="https://example.com" target="_blank" rel="noopener">Your Undergraduate Lab</a>
-        as an undergraduate member / research intern, where I focus on AI / ML / LLM related topics.
-      </p>
-      <p>
-        You can replace this paragraph with a short sentence about your current direction, advisor, or research interests.
+        <a href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97%E4%B8%8E%E8%BD%AF%E4%BB%B6%E6%9C%8D%E5%8A%A1%E6%96%B0%E6%8A%80%E6%9C%AF%E6%B9%96%E5%8D%97%E7%9C%81%E9%87%8D%E7%82%B9%E5%AE%9E%E9%AA%8C%E5%AE%A4/61317819" target="_blank" rel="noopener">Hunan Provincial Key Laboratory of Service Computing and
+      New Software Technology</a>
+        as an undergraduate member.
       </p>
     </div>
   </section>
