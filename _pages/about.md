@@ -109,6 +109,102 @@ redirect_from:
             </figure>
           </div>
 
+          <section class="ppm-example">
+            <div class="ppm-example__intro">
+              <h4>An intuitive example</h4>
+              <p>
+                Consider an order-handling process in BPM. Each event log row records one completed
+                action in an ongoing case. At prediction time, we do not see the full case yet: we only
+                observe a prefix of the trace, and the model estimates what will happen next.
+              </p>
+            </div>
+
+            <div class="ppm-log-panel">
+              <table class="ppm-log-table">
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Event</th>
+                    <th>Resource</th>
+                    <th>Action</th>
+                    <th>Cost</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="is-observed">
+                    <td>1</td>
+                    <td>Create Offer</td>
+                    <td>User_17</td>
+                    <td>Created</td>
+                    <td>408.29</td>
+                  </tr>
+                  <tr class="is-observed">
+                    <td>2</td>
+                    <td>Created</td>
+                    <td>User_17</td>
+                    <td>State change</td>
+                    <td>408.29</td>
+                  </tr>
+                  <tr class="is-observed">
+                    <td>3</td>
+                    <td>Sent mail</td>
+                    <td>User_61</td>
+                    <td>State change</td>
+                    <td>408.29</td>
+                  </tr>
+                  <tr class="is-target">
+                    <td>4</td>
+                    <td>Cancelled</td>
+                    <td>User_1</td>
+                    <td>State change</td>
+                    <td>408.29</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Returned</td>
+                    <td>User_28</td>
+                    <td>Created</td>
+                    <td>408.29</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p class="ppm-log-note">
+                In this toy example, rows 1-3 are the observed prefix. The model is asked to predict
+                row 4 before it actually occurs.
+              </p>
+            </div>
+
+            <figure class="ppm-forecast">
+              <figcaption>How the prediction is made</figcaption>
+              <div class="ppm-forecast__track">
+                <div class="ppm-forecast__card">
+                  <span class="ppm-forecast__step">Step 1</span>
+                  <strong>Historical event logs</strong>
+                  <p>Collect completed process traces from past cases.</p>
+                </div>
+                <div class="ppm-forecast__arrow" aria-hidden="true">→</div>
+                <div class="ppm-forecast__card">
+                  <span class="ppm-forecast__step">Step 2</span>
+                  <strong>Prefix encoding</strong>
+                  <p>Create Offer → Created → Sent mail</p>
+                </div>
+                <div class="ppm-forecast__arrow" aria-hidden="true">→</div>
+                <div class="ppm-forecast__card">
+                  <span class="ppm-forecast__step">Step 3</span>
+                  <strong>Prediction model</strong>
+                  <p>LSTM / GNN / Transformer learns process patterns.</p>
+                </div>
+                <div class="ppm-forecast__arrow" aria-hidden="true">→</div>
+                <div class="ppm-forecast__card is-highlight">
+                  <span class="ppm-forecast__step">Output</span>
+                  <strong>Next event prediction</strong>
+                  <p>Most likely next event: <em>Cancelled</em></p>
+                </div>
+              </div>
+            </figure>
+          </section>
+
           <div class="ppm-topic-grid">
             <section class="ppm-topic">
               <h4>Problem Definition</h4>
@@ -123,7 +219,7 @@ redirect_from:
               <p>
                 Representative approaches include process-mining features, statistical learning, sequence
                 models such as LSTM, graph-based models for richer structural relations, and more recent
-                Transformer-, RAG-, and LLM-enhanced methods.
+                Transformer, RAG, and LLM-enhanced methods.
               </p>
             </section>
 

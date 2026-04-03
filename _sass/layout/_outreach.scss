@@ -1184,6 +1184,137 @@ img.author__avatar {
   line-height: 1.68;
 }
 
+.ppm-example {
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: 0.95rem;
+}
+
+.ppm-example__intro h4 {
+  margin: 0 0 0.32rem;
+  color: var(--outreach-accent-deep);
+  font-family: "Poppins", "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.ppm-example__intro p {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.72;
+}
+
+.ppm-log-panel {
+  padding: 0.85rem 0.9rem;
+  border: 1px solid var(--outreach-line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.ppm-log-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.ppm-log-table th,
+.ppm-log-table td {
+  padding: 0.45rem 0.5rem;
+  border: 1px solid var(--outreach-line);
+  text-align: left;
+}
+
+.ppm-log-table th {
+  color: var(--outreach-accent-deep);
+  font-family: "Poppins", "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  background: rgba(109, 136, 168, 0.08);
+}
+
+.ppm-log-table tbody tr.is-observed td {
+  background: rgba(109, 136, 168, 0.06);
+}
+
+.ppm-log-table tbody tr.is-target td {
+  background: rgba(194, 151, 130, 0.12);
+}
+
+.ppm-log-note {
+  margin: 0.62rem 0 0;
+  color: var(--outreach-muted);
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+
+.ppm-forecast {
+  margin: 0;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid var(--outreach-line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.ppm-forecast figcaption {
+  margin-bottom: 0.62rem;
+  color: var(--outreach-accent-deep);
+  font-family: "Poppins", "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.ppm-forecast__track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.42rem;
+  align-items: stretch;
+}
+
+.ppm-forecast__card {
+  padding: 0.72rem 0.78rem;
+  border: 1px solid var(--outreach-line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.ppm-forecast__card strong {
+  display: block;
+  margin-bottom: 0.22rem;
+  color: var(--outreach-ink);
+  font-family: "Poppins", "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.ppm-forecast__card p {
+  margin: 0;
+  font-size: 0.76rem;
+  line-height: 1.62;
+}
+
+.ppm-forecast__step {
+  display: block;
+  margin-bottom: 0.26rem;
+  color: var(--outreach-accent-deep);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ppm-forecast__card.is-highlight {
+  background:
+    linear-gradient(135deg, rgba(109, 136, 168, 0.12), rgba(109, 136, 168, 0.02)),
+    rgba(255, 255, 255, 0.88);
+}
+
+.ppm-forecast__arrow {
+  display: none;
+}
+
 .home-story a,
 .home-text-block a,
 .home-news-list a {
@@ -1466,7 +1597,10 @@ html[data-theme="dark"] .home-news-list li {
 
 html[data-theme="dark"] .ppm-disclosure,
 html[data-theme="dark"] .ppm-figure,
-html[data-theme="dark"] .ppm-topic {
+html[data-theme="dark"] .ppm-topic,
+html[data-theme="dark"] .ppm-log-panel,
+html[data-theme="dark"] .ppm-forecast,
+html[data-theme="dark"] .ppm-forecast__card {
   background: rgba(11, 17, 25, 0.76);
   border-color: var(--outreach-line);
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.2);
@@ -1487,7 +1621,11 @@ html[data-theme="dark"] .ppm-disclosure[open] summary {
 
 html[data-theme="dark"] .ppm-disclosure__title,
 html[data-theme="dark"] .ppm-topic h4,
-html[data-theme="dark"] .ppm-figure figcaption {
+html[data-theme="dark"] .ppm-figure figcaption,
+html[data-theme="dark"] .ppm-example__intro h4,
+html[data-theme="dark"] .ppm-forecast figcaption,
+html[data-theme="dark"] .ppm-forecast__card strong,
+html[data-theme="dark"] .ppm-log-table th {
   color: var(--outreach-ink);
 }
 
@@ -1495,8 +1633,30 @@ html[data-theme="dark"] .ppm-disclosure__hint,
 html[data-theme="dark"] .ppm-arrow,
 html[data-theme="dark"] .ppm-disclosure__lead,
 html[data-theme="dark"] .ppm-topic p,
-html[data-theme="dark"] .ppm-mini-list li {
+html[data-theme="dark"] .ppm-mini-list li,
+html[data-theme="dark"] .ppm-example__intro p,
+html[data-theme="dark"] .ppm-log-note,
+html[data-theme="dark"] .ppm-forecast__card p,
+html[data-theme="dark"] .ppm-log-table td {
   color: var(--outreach-muted);
+}
+
+html[data-theme="dark"] .ppm-log-table th {
+  background: rgba(141, 166, 198, 0.12);
+}
+
+html[data-theme="dark"] .ppm-log-table tbody tr.is-observed td {
+  background: rgba(141, 166, 198, 0.08);
+}
+
+html[data-theme="dark"] .ppm-log-table tbody tr.is-target td {
+  background: rgba(216, 181, 151, 0.14);
+}
+
+html[data-theme="dark"] .ppm-forecast__card.is-highlight {
+  background:
+    linear-gradient(135deg, rgba(141, 166, 198, 0.14), rgba(141, 166, 198, 0.04)),
+    rgba(11, 17, 25, 0.82);
 }
 
 html[data-theme="dark"] .home-story a,
@@ -1630,7 +1790,8 @@ html[data-theme="dark"] .click-burst__spark {
   }
 
   .ppm-figure-grid,
-  .ppm-topic-grid {
+  .ppm-topic-grid,
+  .ppm-forecast__track {
     grid-template-columns: 1fr;
   }
 }
