@@ -16,10 +16,8 @@ framework_alt: "Framework of graph-sequence contrastive alignment"
 framework_figure_label: "Original framework figure of the graph-sequence contrastive learning approach."
 ---
 
-### Overview
+<h3>Overview</h3>
+<p data-i18n-html="pub.align.overview">This paper studies <strong>graph-sequence alignment for next event prediction</strong> through a contrastive learning framework. It is motivated by the fact that many existing methods either rely mainly on sequence models or simply fuse multi-view data, without sufficiently modeling both process topology and long-range dependencies in event sequences. The paper has been <strong>accepted by CSCWD</strong>.</p>
 
-This paper studies **graph-sequence alignment for next event prediction** through a contrastive learning framework. It is motivated by the fact that many existing methods either rely mainly on sequence models or simply fuse multi-view data, without sufficiently modeling both process topology and long-range dependencies in event sequences. The paper has been **accepted by CSCWD**.
-
-### My Contribution
-
-I designed the module for **DFG construction** and **GCN-based graph representation learning**, and participated in the discussion and development of the contrastive learning framework. I further contributed to experimental design, wrote the abstract and introduction, and helped refine the final manuscript in detail.
+<h3>My Contribution</h3>
+<p data-i18n-html="pub.align.contribution">I designed the module for <strong>DFG construction</strong> and <strong>GCN-based graph representation learning</strong>, and participated in the discussion and development of the contrastive learning framework. I further contributed to experimental design, wrote the abstract and introduction, and helped refine the final manuscript in detail.</p>

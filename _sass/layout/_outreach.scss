@@ -55,6 +55,7 @@ body::after,
 .outreach-empty,
 .cv-card,
 .theme-switch,
+.language-switch,
 .theme-switch__glow,
 .author__avatar img,
 img.author__avatar,
@@ -167,6 +168,10 @@ body::after {
   padding-left: 0.35rem;
 }
 
+.language-toggle-item {
+  padding-left: 0.28rem;
+}
+
 .theme-switch {
   position: relative;
   display: inline-grid;
@@ -218,6 +223,56 @@ body::after {
   position: relative;
   z-index: 1;
   font-size: 0.88rem;
+}
+
+.language-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-width: 4.55rem;
+  height: 2.5rem;
+  padding: 0 0.88rem 0 0.8rem;
+  border: 1px solid rgba(109, 136, 168, 0.18);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(246, 249, 253, 0.9));
+  color: var(--outreach-accent-deep);
+  box-shadow: 0 10px 24px rgba(109, 136, 168, 0.08);
+  cursor: pointer;
+}
+
+.language-switch:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(109, 136, 168, 0.14);
+}
+
+.language-switch:active {
+  transform: translateY(0);
+}
+
+.language-switch:focus-visible {
+  outline: 0;
+  box-shadow:
+    0 0 0 3px rgba(109, 136, 168, 0.15),
+    0 14px 28px rgba(109, 136, 168, 0.14);
+}
+
+.language-switch i,
+.language-switch__label {
+  position: relative;
+  z-index: 1;
+}
+
+.language-switch i {
+  font-size: 0.84rem;
+}
+
+.language-switch__label {
+  font-family: "Poppins", "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .page__footer {
@@ -1473,6 +1528,17 @@ html[data-theme="dark"] .theme-switch {
 }
 
 html[data-theme="dark"] .theme-switch:hover {
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.34);
+}
+
+html[data-theme="dark"] .language-switch {
+  border-color: rgba(151, 176, 209, 0.2);
+  background: linear-gradient(135deg, rgba(17, 25, 37, 0.94), rgba(12, 18, 29, 0.92));
+  color: #edf4fe;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] .language-switch:hover {
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.34);
 }
 

@@ -16,10 +16,8 @@ framework_alt: "Framework of FHGSN"
 framework_figure_label: "Original framework figure of FHGSN."
 ---
 
-### Overview
+<h3>Overview</h3>
+<p data-i18n-html="pub.fhgsn.overview">This paper presents <strong>FHGSN</strong>, a <strong>frequency-based heterogeneous graph-sequence fusion network</strong> for next activity prediction. It is motivated by a key gap in prior work: purely sequential models often fail to capture complex structural relations among process attributes, while graph-based approaches usually struggle to jointly model interaction frequency and contextual dependency. The paper has been <strong>accepted by IJCNN</strong>.</p>
 
-This paper presents **FHGSN**, a **frequency-based heterogeneous graph-sequence fusion network** for next activity prediction. It is motivated by a key gap in prior work: purely sequential models often fail to capture complex structural relations among process attributes, while graph-based approaches usually struggle to jointly model interaction frequency and contextual dependency. The paper has been **accepted by IJCNN**.
-
-### My Contribution
-
-I proposed an event-log **heterogeneous graph construction strategy** and designed the concrete implementation of a **two-stage GraphSAGE-based representation framework** with two aggregation mechanisms. This model effectively captures both temporal interaction frequency and contextual dependency strength. I also completed the experimental design and wrote the full paper.
+<h3>My Contribution</h3>
+<p data-i18n-html="pub.fhgsn.contribution">I proposed an event-log <strong>heterogeneous graph construction strategy</strong> and designed the concrete implementation of a <strong>two-stage GraphSAGE-based representation framework</strong> with two aggregation mechanisms. This model effectively captures both temporal interaction frequency and contextual dependency strength. I also completed the experimental design and wrote the full paper.</p>

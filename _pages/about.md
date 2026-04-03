@@ -20,7 +20,7 @@ redirect_from:
 
   <section class="home-story__hero home-text-block">
     <h2>About Me</h2>
-    <p class="home-story__lead">
+    <p class="home-story__lead" data-i18n-html="home.about.lead">
       Hello! I am Jinhui Luo, an undergraduate student at
       <a href="https://www.hnust.edu.cn/" target="_blank" rel="noopener">Hunan University of Science and Technology</a>
       (2023-2027). My current academic interests center on artificial intelligence and its related
@@ -31,7 +31,7 @@ redirect_from:
       under the supervision of
       <a href="https://guoshengkang.github.io/" target="_blank" rel="noopener">Prof. Guosheng Kang</a>.
     </p>
-    <p>
+    <p data-i18n="home.about.more">
       So far, I have worked on topics including Transformers, GNN, LSTM, RAG and LLM, and have produced several preliminary research outputs in these areas. 
     </p>
   </section>
@@ -51,12 +51,12 @@ redirect_from:
   <section class="home-section">
     <h3>Education</h3>
     <div class="home-text-block">
-      <p>
+      <p data-i18n-html="home.education.school">
         I am currently an undergraduate student at
         <a href="https://computer.hnust.edu.cn/" target="_blank" rel="noopener">School of Computer Science and Engineering, Hunan University of Science and Technology</a>,
         majoring in Data Science and Big Data Technology and expected to graduate in 2027.
       </p>
-      <p>
+      <p data-i18n-html="home.education.lab">
         I work in
         <a href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97%E4%B8%8E%E8%BD%AF%E4%BB%B6%E6%9C%8D%E5%8A%A1%E6%96%B0%E6%8A%80%E6%9C%AF%E6%B9%96%E5%8D%97%E7%9C%81%E9%87%8D%E7%82%B9%E5%AE%9E%E9%AA%8C%E5%AE%A4/61317819" target="_blank" rel="noopener">Hunan Provincial Key Laboratory of Service Computing and
       New Software Technology</a>

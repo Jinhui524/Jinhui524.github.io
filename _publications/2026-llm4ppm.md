@@ -16,10 +16,8 @@ framework_alt: "Framework of LLM4PPM"
 framework_figure_label: "Original framework figure of LLM4PPM."
 ---
 
-### Overview
+<h3>Overview</h3>
+<p data-i18n-html="pub.llm4ppm.overview">This paper proposes <strong>LLM4PPM</strong>, the first foundation large language model for predictive process monitoring with both <strong>zero-shot prediction ability</strong> and <strong>multi-task support</strong>. It addresses two key limitations of existing work: the inability to fully exploit the rich semantics hidden in event data, and the lack of a unified cross-domain large model for predictive process monitoring. The paper is currently <strong>under review at ICWS</strong>.</p>
 
-This paper proposes **LLM4PPM**, the first foundation large language model for predictive process monitoring with both **zero-shot prediction ability** and **multi-task support**. It addresses two key limitations of existing work: the inability to fully exploit the rich semantics hidden in event data, and the lack of a unified cross-domain large model for predictive process monitoring. The paper is currently **under review at ICWS**.
-
-### My Contribution
-
-I standardized **13 structured event-log datasets** and transformed them into semantic stories to build a large-scale cross-domain corpus. I then implemented the core foundation-model pipeline, including **continuous pre-training** and **multi-task fine-tuning with LoRA**, and further took responsibility for experimental design and the writing of the full paper.
+<h3>My Contribution</h3>
+<p data-i18n-html="pub.llm4ppm.contribution">I standardized <strong>13 structured event-log datasets</strong> and transformed them into semantic stories to build a large-scale cross-domain corpus. I then implemented the core foundation-model pipeline, including <strong>continuous pre-training</strong> and <strong>multi-task fine-tuning with LoRA</strong>, and further took responsibility for experimental design and the writing of the full paper.</p>

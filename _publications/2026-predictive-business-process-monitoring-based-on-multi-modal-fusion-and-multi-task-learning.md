@@ -16,10 +16,8 @@ framework_alt: "Framework of the multimodal fusion and multi-task learning metho
 framework_figure_label: "Original framework figure of the multi-modal fusion and multi-task learning method."
 ---
 
-### Overview
+<h3>Overview</h3>
+<p data-i18n-html="pub.mfml.overview">This paper proposes <strong>MFML</strong>, a framework for predictive business process monitoring based on <strong>multi-modal fusion</strong> and <strong>multi-task learning</strong>. Existing methods are often trained for a single task and therefore cannot fully exploit the collaborative value of cross-task knowledge, while also overlooking the intrinsic correlations among different data modalities. This work is currently <strong>under review at Applied Soft Computing</strong>.</p>
 
-This paper proposes **MFML**, a framework for predictive business process monitoring based on **multi-modal fusion** and **multi-task learning**. Existing methods are often trained for a single task and therefore cannot fully exploit the collaborative value of cross-task knowledge, while also overlooking the intrinsic correlations among different data modalities. This work is currently **under review at Applied Soft Computing**.
-
-### My Contribution
-
-I implemented the branch that uses a **hybrid Transformer-LSTM encoder** to model sequential features and a **Residual CNN** to capture dependencies among event attributes. I also designed the **loss-driven multi-task learning framework**, and contributed to experimental design as well as the method and experiment sections of the manuscript.
+<h3>My Contribution</h3>
+<p data-i18n-html="pub.mfml.contribution">I implemented the branch that uses a <strong>hybrid Transformer-LSTM encoder</strong> to model sequential features and a <strong>Residual CNN</strong> to capture dependencies among event attributes. I also designed the <strong>loss-driven multi-task learning framework</strong>, and contributed to experimental design as well as the method and experiment sections of the manuscript.</p>
