@@ -80,19 +80,23 @@ redirect_from:
   </section> -->
 
   <section class="home-section">
-    <h3>Honors & Awards</h3>
+    <h3>Awards</h3>
     <ul class="home-news-list home-news-list--awards">
       <li>
-        <span class="home-news-item__accent">[Scholarship]</span>
-        First-Class Scholarship / National Scholarship, Your University, 2024.
+        <span class="home-news-item__accent">[National]</span>
+        Second Prize, Programming Challenge, 7th Chuanzhi Cup National IT Skills Competition.
       </li>
       <li>
-        <span class="home-news-item__accent">[Competition]</span>
-        Prize Name, Competition Name, Team Role or Brief Highlight, 2023.
+        <span class="home-news-item__accent">[National]</span>
+        Third Prize, Programming Skills Track, RAICOM Robotics Developer Competition.
       </li>
       <li>
-        <span class="home-news-item__accent">[Recognition]</span>
-        Outstanding Student / Merit Award / Ranking Highlight, add your real item here.
+        <span class="home-news-item__accent">[Provincial]</span>
+        First Prize, 21st Hunan Provincial Collegiate Programming Contest.
+      </li>
+      <li>
+        <span class="home-news-item__accent">[Provincial]</span>
+        Second Prize, 16th Lanqiao Cup Software and Information Technology Talent Competition.
       </li>
     </ul>
   </section>
