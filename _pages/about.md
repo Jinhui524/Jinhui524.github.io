@@ -36,6 +36,18 @@ redirect_from:
   </section>
 
   <section class="home-section">
+    <h3>Research Interests</h3>
+    <div class="home-text-block">
+      <p>&middot; Natural Language Processing</p>
+      <p>&middot; Large Language Model</p>
+      <p>&middot; Deep Learning Model</p>
+      <p>&middot; Computer Vision</p>
+      <p>&middot; Time Series Prediction</p>
+      <p>&middot; Vision-Language Model</p>
+    </div>
+  </section>
+
+  <section class="home-section">
     <h3>Education</h3>
     <div class="home-text-block">
       <p>
