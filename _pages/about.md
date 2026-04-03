@@ -21,12 +21,17 @@ redirect_from:
   <section class="home-story__hero home-text-block">
     <h2>About Me</h2>
     <p class="home-story__lead">
-      Hello! I am Jinhui Luo. I built this site as a simple personal homepage for graduate outreach,
-      where I can introduce myself, record my recent progress, and gradually organize my work around AI.
+      Hello! I am Jinhui Luo, an undergraduate student at Hunan University of Science and Technology
+      (2023-2027). My current academic interests center on artificial intelligence and its related
+      research directions.
     </p>
     <p>
-      I hope this homepage feels calm, readable, and a little memorable:
-      serious enough to present my work, but still personal enough to show how I think, learn, and grow.
+      So far, I have worked on topics including Transformers, graph neural networks (GNNs),
+      long short-term memory networks (LSTMs), graph convolutional networks (GCNs),
+      retrieval-augmented generation (RAG), and large language models (LLMs), and have produced
+      several preliminary research outputs in these areas. During my undergraduate studies,
+      I have been working at the Hunan Provincial Key Laboratory of Service Computing and
+      New Software Technology under the supervision of Prof. Guosheng Kang.
     </p>
   </section>
 
