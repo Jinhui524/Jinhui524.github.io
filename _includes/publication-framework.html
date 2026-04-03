@@ -1,5 +1,5 @@
 {% assign variant = page.framework_variant | default: "" %}
-{% if variant != "" %}
+{% if variant != "" or page.framework_image %}
 <section class="publication-framework" aria-labelledby="publication-framework-title">
   <div class="publication-framework__header">
     <span class="publication-framework__kicker">Method Snapshot</span>
@@ -9,6 +9,19 @@
     {% endif %}
   </div>
 
+  {% if page.framework_image %}
+    <figure class="publication-framework__figure">
+      <img
+        src="{{ page.framework_image | relative_url }}"
+        alt="{{ page.framework_alt | default: page.title | escape }}"
+        class="publication-framework__image">
+      {% if page.framework_figure_label or page.framework_caption %}
+        <figcaption class="publication-framework__figcaption">
+          {{ page.framework_figure_label | default: page.framework_caption }}
+        </figcaption>
+      {% endif %}
+    </figure>
+  {% else %}
   {% case variant %}
   {% when "llm4ppm" %}
     <div class="publication-framework__chips">
@@ -222,5 +235,6 @@
       </div>
     </div>
   {% endcase %}
+  {% endif %}
 </section>
 {% endif %}

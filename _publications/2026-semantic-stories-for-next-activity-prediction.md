@@ -11,6 +11,9 @@ level: "CCF C"
 status: "Under Review"
 framework_variant: "semantic-rag"
 framework_caption: "A retrieval-augmented framework that organizes event logs into semantic stories, retrieves historical context, and guides a fine-tuned LLM for next-activity prediction."
+framework_image: "/images/publications/frameworks/rag.png"
+framework_alt: "Framework of semantic stories with retrieval-augmented generation"
+framework_figure_label: "Original framework figure of the retrieval-augmented generation method."
 ---
 
 This work explores **retrieval-augmented generation and fine-tuning for next activity prediction**. Historical traces are rewritten as semantic stories, embedded into a searchable memory, and dynamically retrieved to support a fine-tuned predictive LLM during online inference. I am the second author of this paper.

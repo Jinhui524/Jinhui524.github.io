@@ -11,6 +11,9 @@ level: "CCF C"
 status: "Accept"
 framework_variant: "align"
 framework_caption: "A contrastive graph-sequence alignment framework that learns structural and sequential process representations in a mutually reinforcing manner."
+framework_image: "/images/publications/frameworks/gsca.png"
+framework_alt: "Framework of graph-sequence contrastive alignment"
+framework_figure_label: "Original framework figure of the graph-sequence contrastive learning approach."
 ---
 
 This paper investigates **next event prediction through graph-sequence alignment and contrastive learning**. The framework learns graph-based structural states and sequence-based prefix states in parallel, then aligns them through contrastive objectives for joint prediction. I am the second author of this work.
