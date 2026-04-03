@@ -1,0 +1,33 @@
+{% include base_path %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+{% assign citation_display = post.citation
+  | replace: 'Jinhui Luo', '<strong>Jinhui Luo</strong>'
+  | replace: '罗锦辉', '<strong>罗锦辉</strong>' %}
+
+<article class="cv-publication" itemscope itemtype="http://schema.org/CreativeWork">
+  <h4 class="cv-publication__title" itemprop="headline">
+    <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+  </h4>
+
+  <p class="cv-publication__citation" itemprop="description">
+    {{ citation_display }}
+    {% if post.shortvenue or post.level or post.status %}
+      <span class="publication-meta">
+        (
+        {% if post.shortvenue %}{{ post.shortvenue }}{% endif %}
+        {% if post.shortvenue and post.level %}, {% endif %}
+        {% if post.level %}{{ post.level }}{% endif %}
+        {% if post.shortvenue and post.status and post.level == nil %}, {% endif %}
+        {% if post.level and post.status %}, {% endif %}
+        {% if post.status %}{{ post.status }}{% endif %}
+        )
+      </span>
+    {% endif %}
+  </p>
+</article>

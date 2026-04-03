@@ -10,84 +10,154 @@ redirect_from:
 
 {% include base_path %}
 
-<div class="archive-note">
-  <p>
-    This CV page is meant for graduate outreach and research contact.
-    It focuses on my current interests, project accumulation, and public materials,
-    and will keep evolving alongside my publications, projects, and AI notes.
-  </p>
-</div>
+{% assign sorted_publications = site.publications | sort: "priority" %}
+{% assign sorted_projects = site.portfolio | sort: "priority" %}
 
-<div class="cv-grid">
-  <div class="cv-card">
-    <span class="cv-card__label">Name</span>
-    <strong>{{ site.author.name }}</strong>
+<section class="cv-page">
+  <section class="cv-hero">
+    <p class="cv-kicker">Graduate Outreach / Academic CV</p>
+    <h2>{{ site.author.name }}</h2>
+    <p class="cv-summary">
+      Undergraduate student at Hunan University of Science and Technology (2023-2027), currently
+      working at the Hunan Provincial Key Laboratory of Service Computing and New Software Technology
+      under the supervision of Prof. Guosheng Kang. My research focuses on artificial intelligence,
+      predictive process monitoring, graph learning, retrieval-augmented generation, and large
+      language models.
+    </p>
+
+    <div class="cv-actions">
+      <a class="cv-action" href="mailto:{{ site.author.email }}">Email</a>
+      <a class="cv-action" href="{{ base_path }}/publications/">Publications</a>
+      <a class="cv-action" href="{{ base_path }}/projects/">Projects</a>
+      <a class="cv-action" href="{{ base_path }}/notes/">AI Notes</a>
+    </div>
+  </section>
+
+  <div class="cv-grid">
+    <div class="cv-card">
+      <span class="cv-card__label">Affiliation</span>
+      <strong>
+        {% if site.author.employer_uri %}
+          <a href="{{ site.author.employer_uri }}" target="_blank" rel="noopener noreferrer">{{ site.author.employer }}</a>
+        {% else %}
+          {{ site.author.employer }}
+        {% endif %}
+      </strong>
+    </div>
+    <div class="cv-card">
+      <span class="cv-card__label">Laboratory</span>
+      <strong>Hunan Provincial Key Laboratory of Service Computing and New Software Technology</strong>
+    </div>
+    <div class="cv-card">
+      <span class="cv-card__label">Research Focus</span>
+      <strong>AI, Process Prediction, Graph Learning, RAG, LLMs</strong>
+    </div>
+    <div class="cv-card">
+      <span class="cv-card__label">Contact</span>
+      <strong><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></strong>
+    </div>
   </div>
-  <div class="cv-card">
-    <span class="cv-card__label">Affiliation</span>
-    <strong>{{ site.author.employer }}</strong>
-  </div>
-  <div class="cv-card">
-    <span class="cv-card__label">Location</span>
-    <strong>{{ site.author.location }}</strong>
-  </div>
-  <div class="cv-card">
-    <span class="cv-card__label">Contact</span>
-    <strong><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></strong>
-  </div>
-</div>
 
-Profile
-======
+  <section class="cv-section">
+    <div class="cv-section__head">
+      <p class="cv-section__eyebrow">Academic Focus</p>
+      <h3>Research Interests</h3>
+    </div>
+    <div class="cv-chip-list">
+      <span class="cv-chip">Natural Language Processing</span>
+      <span class="cv-chip">Large Language Models</span>
+      <span class="cv-chip">Deep Learning</span>
+      <span class="cv-chip">Computer Vision</span>
+      <span class="cv-chip">Time Series Forecasting</span>
+      <span class="cv-chip">Vision-Language Models</span>
+    </div>
+  </section>
 
-I want this homepage to show not only what I have already done, but also how I plan to keep learning, thinking, and growing.
-For me, AI is not a short-lived trend. It is a long path I want to keep walking.
+  <section class="cv-section">
+    <div class="cv-section__head">
+      <p class="cv-section__eyebrow">Research Output</p>
+      <h3>Selected Publications</h3>
+    </div>
+    {% if sorted_publications.size > 0 %}
+      <div class="cv-publication-list">
+        {% for post in sorted_publications %}
+          {% include archive-publication-compact.html %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="outreach-empty">
+        <p>There are no public publication entries here yet.</p>
+        <p>I will gradually add papers, course research, or preprints that can be shared openly.</p>
+      </div>
+    {% endif %}
+  </section>
 
-Research Interests
-======
+  <section class="cv-section">
+    <div class="cv-section__head">
+      <p class="cv-section__eyebrow">Implementation</p>
+      <h3>Selected Projects</h3>
+    </div>
+    {% if sorted_projects.size > 0 %}
+      <div class="cv-project-list">
+        {% for post in sorted_projects %}
+          <article class="cv-project-card">
+            <h4 class="cv-project__title">
+              <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>
+            </h4>
 
-- Artificial Intelligence
-- Large Language Models
-- Machine learning and intelligent systems
-- Project-based learning, note-taking, and research-oriented growth
+            {% if post.project_level or post.project_role %}
+              <p class="cv-project__meta">
+                {% if post.project_level %}
+                  <span class="project-summary__tag">{{ post.project_level }}</span>
+                {% endif %}
+                {% if post.project_role %}
+                  <span class="project-summary__tag">{{ post.project_role }}</span>
+                {% endif %}
+              </p>
+            {% endif %}
 
-Selected Publications
-======
+            {% if post.excerpt %}
+              <p class="cv-project__excerpt">{{ post.excerpt | strip_html | strip_newlines }}</p>
+            {% endif %}
 
-{% if site.publications.size > 0 %}
-  {% assign sorted_publications = site.publications | sort: "priority" %}
-  <ul>{% for post in sorted_publications %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-{% else %}
-  <div class="outreach-empty">
-    <p>There are no public publication entries here yet.</p>
-    <p>I will gradually add papers, course research, or preprints that can be shared openly.</p>
-  </div>
-{% endif %}
+            {% if post.tech_keywords %}
+              <p class="cv-project__keywords">
+                <strong>Keywords:</strong> {{ post.tech_keywords }}
+              </p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="outreach-empty">
+        <p>Project entries are still being curated.</p>
+        <p>I will gradually add the projects, implementation process, and stage-by-stage reflections that represent me best.</p>
+      </div>
+    {% endif %}
+  </section>
 
-Selected Projects
-======
-
-{% if site.portfolio.size > 0 %}
-  <ul class="cv-links">
-    {% for post in site.portfolio reversed %}
-      <li>
-        <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>
-        {% if post.excerpt %} - {{ post.excerpt | strip_html | strip_newlines }}{% endif %}
+  <section class="cv-section">
+    <div class="cv-section__head">
+      <p class="cv-section__eyebrow">Recognition</p>
+      <h3>Awards</h3>
+    </div>
+    <ul class="cv-award-list">
+      <li class="cv-award-item">
+        <span class="cv-award__title">Second Prize, Programming Challenge, 7th Chuanzhi Cup National IT Skills Competition</span>
+        <span class="cv-award__meta">National Level</span>
       </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <div class="outreach-empty">
-    <p>Project entries are still being curated.</p>
-    <p>I will gradually add the projects, implementation process, and stage-by-stage reflections that represent me best.</p>
-  </div>
-{% endif %}
-
-AI Notes and Direction
-======
-
-- I plan to keep writing about my understanding of AI, learning routes, paper reading, and method reflections.
-- I want this homepage to feel like a growing personal workspace, not just a static CV page.
-- Over time I also want to add hobbies, reading taste, and more personal expression so the site feels more human and more honest.
+      <li class="cv-award-item">
+        <span class="cv-award__title">Third Prize, Programming Skills Track, RAICOM Robotics Developer Competition</span>
+        <span class="cv-award__meta">National Level</span>
+      </li>
+      <li class="cv-award-item">
+        <span class="cv-award__title">First Prize, 21st Hunan Provincial Collegiate Programming Contest</span>
+        <span class="cv-award__meta">Provincial Level</span>
+      </li>
+      <li class="cv-award-item">
+        <span class="cv-award__title">Second Prize, 16th Lanqiao Cup Software and Information Technology Talent Competition</span>
+        <span class="cv-award__meta">Provincial Level</span>
+      </li>
+    </ul>
+  </section>
+</section>
