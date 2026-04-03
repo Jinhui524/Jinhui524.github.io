@@ -6,6 +6,8 @@ excerpt: "Co-first-author journal paper on multimodal fusion and multitask learn
 citation: 'Jiawei Chen, Jinhui Luo, Guosheng Kang*, Jianxun Liu, Yiping Wen, Hangyu Cheng, Jun Peng. "Predictive Business Process Monitoring Based on Multi-Modal Fusion and Multi-Task Learning." Elsevier Applied Soft Computing, 2026.'
 category: manuscripts
 priority: 3
+level: "CAS Q2 TOP / JCR Q1"
+status: "Under Review"
 ---
 
 I am a co-first author of this journal paper. It explores predictive business process monitoring through multi-modal fusion and multi-task learning, and this entry can later include the abstract, publication links, and supplementary materials.

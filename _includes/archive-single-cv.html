@@ -12,6 +12,10 @@
   {% assign title = post.title %}
 {% endif %}
 
+{% assign citation_display = post.citation
+  | replace: 'Jinhui Luo', '<strong>Jinhui Luo</strong>'
+  | replace: '罗锦辉', '<strong>罗锦辉</strong>' %}
+
 <div class="{{ include.type | default: "list" }}__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     <li>
@@ -36,7 +40,20 @@
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
-    {% if post.venue%}<p class="archive__item-excerpt" itemprop="description">{{ post.citation }}</p> {% endif %}
+    {% if post.venue %}
+      <p class="archive__item-excerpt" itemprop="description">
+        {{ citation_display }}
+        {% if post.level or post.status %}
+          <span class="publication-meta">
+            (
+            {% if post.level %}{{ post.level }}{% endif %}
+            {% if post.level and post.status %}, {% endif %}
+            {% if post.status %}{{ post.status }}{% endif %}
+            )
+          </span>
+        {% endif %}
+      </p>
+    {% endif %}
     </li>
  </article>
 </div>

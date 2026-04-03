@@ -6,6 +6,8 @@ excerpt: "Second-author conference paper on contrastive learning for next event 
 citation: 'Jiayi Long, Jinhui Luo, Jiawei Chen, Guosheng Kang*, Lifeng Yang, Wen Li, Jiayan Xiang. "Aligning Graphs and Sequences: A Contrastive Learning Approach for Next Event Prediction." IEEE International Conference on Computer Supported Cooperative Work in Design, 2026.'
 category: conferences
 priority: 4
+level: "CCF C"
+status: "Accept"
 ---
 
 I am the second author of this conference paper. The work studies next event prediction through graph-sequence alignment and contrastive learning, and this page can later be expanded with a fuller summary and links.
