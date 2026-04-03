@@ -28,10 +28,7 @@ redirect_from:
       New Software Technology under the supervision of Prof. Guosheng Kang.
     </p>
     <p>
-      So far, I have worked on topics including Transformers, graph neural networks (GNNs),
-      long short-term memory networks (LSTMs), graph convolutional networks (GCNs),
-      retrieval-augmented generation (RAG), and large language models (LLMs), and have produced
-      several preliminary research outputs in these areas. 
+      So far, I have worked on topics including Transformers, GNN, LSTM, RAG and LLM, and have produced several preliminary research outputs in these areas. 
     </p>
   </section>
 
@@ -64,7 +61,7 @@ redirect_from:
     </div>
   </section>
 
-  <section class="home-section">
+  <!-- <section class="home-section">
     <h3>News</h3>
     <ul class="home-news-list">
       <li>
@@ -80,7 +77,7 @@ redirect_from:
         You can also use one line here to mention what you are currently focusing on next.
       </li>
     </ul>
-  </section>
+  </section> -->
 
   <section class="home-section">
     <h3>Honors & Awards</h3>
