@@ -16,4 +16,10 @@ framework_alt: "Framework of semantic stories with retrieval-augmented generatio
 framework_figure_label: "Original framework figure of the retrieval-augmented generation method."
 ---
 
-This work explores **retrieval-augmented generation and fine-tuning for next activity prediction**. Historical traces are rewritten as semantic stories, embedded into a searchable memory, and dynamically retrieved to support a fine-tuned predictive LLM during online inference. I am the second author of this paper.
+### Overview
+
+This paper proposes **SAR-FT**, a semantic-story-based framework for next activity prediction using **retrieval-augmented generation** and **fine-tuning**. It addresses two practical issues in existing methods: the heavy training cost of prediction models and the hallucination problem of general-purpose LLMs when domain adaptation is insufficient. The paper is currently **under review at ICSS**.
+
+### My Contribution
+
+I participated in the design and discussion of the **retrieval-augmented generation module**, and later contributed to the domain literature review and the revision of the full manuscript.

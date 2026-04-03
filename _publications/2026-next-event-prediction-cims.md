@@ -16,4 +16,10 @@ framework_alt: "Framework of sequence semantics and attribute-association semant
 framework_figure_label: "Original framework figure of the semantic fusion method."
 ---
 
-This paper studies **next event prediction by integrating event-sequence semantics with attribute-association semantics**. Sequence-level semantic stories and attribute-level relational cues are modeled separately and then fused into a shared representation for downstream prediction. I am a co-first author of this work.
+### Overview
+
+This paper proposes a next-event prediction method for business processes by integrating **event-sequence semantics** with **attribute-association semantics**. It is designed to address the limitations of existing predictive business process monitoring methods in modeling both semantic event sequences and the implicit relations among event attributes. The paper has been **accepted by CIMS**.
+
+### My Contribution
+
+I implemented the component that uses **BERT** to encode transformed semantic stories, and then took responsibility for experimental design and the writing of the full paper.

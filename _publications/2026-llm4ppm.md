@@ -16,4 +16,10 @@ framework_alt: "Framework of LLM4PPM"
 framework_figure_label: "Original framework figure of LLM4PPM."
 ---
 
-This paper presents **LLM4PPM**, a predictive process monitoring framework that converts event traces into semantic stories, aligns them with task prompts, and then adapts a pre-trained large language model through continuous pre-training and instruction fine-tuning. As the first author, I mainly contributed to the overall method design, empirical validation, and the formulation of predictive tasks across multiple process domains.
+### Overview
+
+This paper proposes **LLM4PPM**, the first foundation large language model for predictive process monitoring with both **zero-shot prediction ability** and **multi-task support**. It addresses two key limitations of existing work: the inability to fully exploit the rich semantics hidden in event data, and the lack of a unified cross-domain large model for predictive process monitoring. The paper is currently **under review at ICWS**.
+
+### My Contribution
+
+I standardized **13 structured event-log datasets** and transformed them into semantic stories to build a large-scale cross-domain corpus. I then implemented the core foundation-model pipeline, including **continuous pre-training** and **multi-task fine-tuning with LoRA**, and further took responsibility for experimental design and the writing of the full paper.

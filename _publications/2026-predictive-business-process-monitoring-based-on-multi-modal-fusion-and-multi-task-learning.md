@@ -16,4 +16,10 @@ framework_alt: "Framework of the multimodal fusion and multi-task learning metho
 framework_figure_label: "Original framework figure of the multi-modal fusion and multi-task learning method."
 ---
 
-This journal paper studies **predictive business process monitoring with multi-modal fusion and multi-task learning**. It integrates semantic stories, trace-order features, and attribute-aware representations into a shared embedding space, and then optimizes multiple predictive targets together. I am a co-first author of this work.
+### Overview
+
+This paper proposes **MFML**, a framework for predictive business process monitoring based on **multi-modal fusion** and **multi-task learning**. Existing methods are often trained for a single task and therefore cannot fully exploit the collaborative value of cross-task knowledge, while also overlooking the intrinsic correlations among different data modalities. This work is currently **under review at Applied Soft Computing**.
+
+### My Contribution
+
+I implemented the branch that uses a **hybrid Transformer-LSTM encoder** to model sequential features and a **Residual CNN** to capture dependencies among event attributes. I also designed the **loss-driven multi-task learning framework**, and contributed to experimental design as well as the method and experiment sections of the manuscript.

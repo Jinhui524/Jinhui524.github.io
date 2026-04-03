@@ -16,4 +16,10 @@ framework_alt: "Framework of FHGSN"
 framework_figure_label: "Original framework figure of FHGSN."
 ---
 
-This paper proposes a **frequency-based heterogeneous graph-sequence fusion network** for next activity prediction. The model combines heterogeneous graph learning with Transformer-LSTM sequence encoding so that structural relations and temporal signals are fused into a unified representation for downstream prediction. I am the first author of this work.
+### Overview
+
+This paper presents **FHGSN**, a **frequency-based heterogeneous graph-sequence fusion network** for next activity prediction. It is motivated by a key gap in prior work: purely sequential models often fail to capture complex structural relations among process attributes, while graph-based approaches usually struggle to jointly model interaction frequency and contextual dependency. The paper has been **accepted by IJCNN**.
+
+### My Contribution
+
+I proposed an event-log **heterogeneous graph construction strategy** and designed the concrete implementation of a **two-stage GraphSAGE-based representation framework** with two aggregation mechanisms. This model effectively captures both temporal interaction frequency and contextual dependency strength. I also completed the experimental design and wrote the full paper.
