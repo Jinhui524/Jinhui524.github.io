@@ -23,15 +23,15 @@ redirect_from:
     <p class="home-story__lead">
       Hello! I am Jinhui Luo, an undergraduate student at Hunan University of Science and Technology
       (2023-2027). My current academic interests center on artificial intelligence and its related
-      research directions.
+      research directions. During my undergraduate studies,
+      I have been working at the Hunan Provincial Key Laboratory of Service Computing and
+      New Software Technology under the supervision of Prof. Guosheng Kang.
     </p>
     <p>
       So far, I have worked on topics including Transformers, graph neural networks (GNNs),
       long short-term memory networks (LSTMs), graph convolutional networks (GCNs),
       retrieval-augmented generation (RAG), and large language models (LLMs), and have produced
-      several preliminary research outputs in these areas. During my undergraduate studies,
-      I have been working at the Hunan Provincial Key Laboratory of Service Computing and
-      New Software Technology under the supervision of Prof. Guosheng Kang.
+      several preliminary research outputs in these areas. 
     </p>
   </section>
 
