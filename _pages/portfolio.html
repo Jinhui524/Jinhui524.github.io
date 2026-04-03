@@ -10,17 +10,10 @@ redirect_from:
 
 {% include base_path %}
 
-<div class="archive-note">
-  <p>
-    This page is for the projects that represent me best.
-    More than just listing outputs, I want it to show how I break down problems,
-    turn ideas into working results, and grow through implementation.
-  </p>
-</div>
-
 {% if site.portfolio.size > 0 %}
-  {% for post in site.portfolio reversed %}
-    {% include archive-single.html %}
+  {% assign sorted_projects = site.portfolio | sort: "priority" %}
+  {% for post in sorted_projects %}
+    {% include archive-project-summary.html %}
   {% endfor %}
 {% else %}
   <div class="outreach-empty">

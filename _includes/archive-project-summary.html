@@ -1,0 +1,47 @@
+{% include base_path %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+<section class="project-summary" aria-labelledby="project-{{ post.slug | default: post.title | slugify }}">
+  <article class="archive__item project-summary__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <h2 id="project-{{ post.slug | default: post.title | slugify }}" class="archive__item-title project-summary__title" itemprop="headline">
+      {{ title }}
+    </h2>
+
+    {% if post.project_level or post.project_role %}
+      <p class="project-summary__meta">
+        {% if post.project_level %}
+          <span class="project-summary__tag">{{ post.project_level }}</span>
+        {% endif %}
+        {% if post.project_role %}
+          <span class="project-summary__tag">{{ post.project_role }}</span>
+        {% endif %}
+      </p>
+    {% endif %}
+
+    {% if post.overview %}
+      <p class="project-summary__section">
+        <strong>Project Overview:</strong>
+        {{ post.overview }}
+      </p>
+    {% endif %}
+
+    {% if post.contribution %}
+      <p class="project-summary__section">
+        <strong>My Contribution:</strong>
+        {{ post.contribution }}
+      </p>
+    {% endif %}
+
+    {% if post.tech_keywords %}
+      <p class="project-summary__keywords">
+        <strong>Keywords:</strong>
+        {{ post.tech_keywords }}
+      </p>
+    {% endif %}
+  </article>
+</section>

@@ -459,6 +459,66 @@ img.author__avatar {
   border-radius: 18px;
 }
 
+.project-summary {
+  padding: 0.95rem 0 1.1rem;
+  border-top: 1px solid var(--outreach-line);
+}
+
+.project-summary:first-of-type {
+  padding-top: 0.15rem;
+  border-top: 0;
+}
+
+.project-summary__title {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  font-family: "Poppins", "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.project-summary__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+  margin: 0 0 0.7rem;
+}
+
+.project-summary__tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--outreach-line);
+  border-radius: 999px;
+  background: var(--outreach-accent-soft);
+  color: var(--outreach-accent-deep);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.project-summary__section,
+.project-summary__keywords {
+  margin: 0 0 0.62rem;
+  font-size: 0.94rem;
+  line-height: 1.76;
+}
+
+.project-summary__section:last-child,
+.project-summary__keywords:last-child {
+  margin-bottom: 0;
+}
+
+.project-summary__section strong,
+.project-summary__keywords strong {
+  color: var(--outreach-accent-deep);
+  font-family: "Poppins", "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
 .cv-card__label {
   display: block;
   margin-bottom: 0.35rem;
@@ -840,6 +900,7 @@ html[data-theme="dark"] .sidebar .author__name,
 html[data-theme="dark"] .home-story h2,
 html[data-theme="dark"] .home-story h3,
 html[data-theme="dark"] .home-story h4,
+html[data-theme="dark"] .project-summary__title,
 html[data-theme="dark"] .page__title,
 html[data-theme="dark"] .archive__item-title a {
   color: var(--outreach-ink);
