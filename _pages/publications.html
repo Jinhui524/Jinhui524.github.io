@@ -10,39 +10,10 @@ show_page_title: false
 
 {% assign sorted_publications = site.publications | sort: "priority" %}
 
-<div class="archive-note">
-  <p>
-    This page collects research papers, course-related studies, preprints, and formal writing that I can share publicly.
-    I treat it as the more research-facing side of the homepage, and it will keep growing over time.
-  </p>
-</div>
-
-{% assign publication_count = site.publications | size %}
-
-{% if publication_count > 0 %}
-  {% if site.author.googlescholar %}
-    <div class="wordwrap">You can also find my articles on <a href="{{ site.author.googlescholar }}">my Google Scholar profile</a>.</div>
-  {% endif %}
-
-  {% if site.publication_category %}
-    {% for category in site.publication_category %}
-      {% assign title_shown = false %}
-      {% for post in sorted_publications %}
-        {% if post.category != category[0] %}
-          {% continue %}
-        {% endif %}
-        {% unless title_shown %}
-          <h2>{{ category[1].title }}</h2><hr />
-          {% assign title_shown = true %}
-        {% endunless %}
-        {% include archive-single.html %}
-      {% endfor %}
-    {% endfor %}
-  {% else %}
-    {% for post in sorted_publications %}
-      {% include archive-single.html %}
-    {% endfor %}
-  {% endif %}
+{% if site.publications.size > 0 %}
+  <ul>{% for post in sorted_publications %}
+    {% include archive-single-cv.html %}
+  {% endfor %}</ul>
 {% else %}
   <div class="outreach-empty">
     <p>There are no public publication entries here yet.</p>
