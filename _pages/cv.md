@@ -55,7 +55,8 @@ Selected Publications
 ======
 
 {% if site.publications.size > 0 %}
-  <ul>{% for post in site.publications reversed %}
+  {% assign sorted_publications = site.publications | sort: "priority" %}
+  <ul>{% for post in sorted_publications %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
 {% else %}

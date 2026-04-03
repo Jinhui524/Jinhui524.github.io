@@ -8,6 +8,8 @@ show_page_title: false
 
 {% include base_path %}
 
+{% assign sorted_publications = site.publications | sort: "priority" %}
+
 <div class="archive-note">
   <p>
     This page collects research papers, course-related studies, preprints, and formal writing that I can share publicly.
@@ -25,7 +27,7 @@ show_page_title: false
   {% if site.publication_category %}
     {% for category in site.publication_category %}
       {% assign title_shown = false %}
-      {% for post in site.publications reversed %}
+      {% for post in sorted_publications %}
         {% if post.category != category[0] %}
           {% continue %}
         {% endif %}
@@ -37,7 +39,7 @@ show_page_title: false
       {% endfor %}
     {% endfor %}
   {% else %}
-    {% for post in site.publications reversed %}
+    {% for post in sorted_publications %}
       {% include archive-single.html %}
     {% endfor %}
   {% endif %}
