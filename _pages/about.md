@@ -56,8 +56,88 @@ redirect_from:
         I work in
         <a href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97%E4%B8%8E%E8%BD%AF%E4%BB%B6%E6%9C%8D%E5%8A%A1%E6%96%B0%E6%8A%80%E6%9C%AF%E6%B9%96%E5%8D%97%E7%9C%81%E9%87%8D%E7%82%B9%E5%AE%9E%E9%AA%8C%E5%AE%A4/61317819" target="_blank" rel="noopener">Hunan Provincial Key Laboratory of Service Computing and
       New Software Technology</a>
-        as an undergraduate member.
+        as an undergraduate member, where my recent work focuses on predictive process monitoring.
       </p>
+
+      <details class="ppm-disclosure">
+        <summary>
+          <span class="ppm-disclosure__label">Research Note</span>
+          <span class="ppm-disclosure__title">What is Predictive Process Monitoring?</span>
+          <span class="ppm-disclosure__hint">click to unfold</span>
+        </summary>
+
+        <div class="ppm-disclosure__body">
+          <p class="ppm-disclosure__lead">
+            In business process management (BPM), predictive process monitoring (PPM) asks a forward-looking
+            question: given the event trace that has already happened in an ongoing case, what is likely to
+            happen next? In practice, this means learning from historical process logs to estimate future
+            activities, remaining time, outcomes, or risks before the case is completed.
+          </p>
+
+          <div class="ppm-figure-grid">
+            <figure class="ppm-figure">
+              <figcaption>From BPM to prediction</figcaption>
+              <div class="ppm-flow">
+                <span>Business Process</span>
+                <span class="ppm-arrow" aria-hidden="true">→</span>
+                <span>Event Log</span>
+                <span class="ppm-arrow" aria-hidden="true">→</span>
+                <span>Running Prefix</span>
+                <span class="ppm-arrow" aria-hidden="true">→</span>
+                <span>Future State</span>
+              </div>
+            </figure>
+
+            <figure class="ppm-figure">
+              <figcaption>Typical prediction targets</figcaption>
+              <ul class="ppm-mini-list">
+                <li>Next activity</li>
+                <li>Remaining time</li>
+                <li>Outcome and risk</li>
+              </ul>
+            </figure>
+
+            <figure class="ppm-figure">
+              <figcaption>Method evolution</figcaption>
+              <div class="ppm-method-track">
+                <span>Rules</span>
+                <span>ML</span>
+                <span>LSTM</span>
+                <span>GNN</span>
+                <span>Transformer / LLM</span>
+              </div>
+            </figure>
+          </div>
+
+          <div class="ppm-topic-grid">
+            <section class="ppm-topic">
+              <h4>Problem Definition</h4>
+              <p>
+                Given a partially executed case, predict a future attribute of that case from its observed
+                prefix, event sequence, timestamps, and contextual information.
+              </p>
+            </section>
+
+            <section class="ppm-topic">
+              <h4>Classic Methods</h4>
+              <p>
+                Representative approaches include process-mining features, statistical learning, sequence
+                models such as LSTM, graph-based models for richer structural relations, and more recent
+                Transformer-, RAG-, and LLM-enhanced methods.
+              </p>
+            </section>
+
+            <section class="ppm-topic">
+              <h4>Why It Matters</h4>
+              <p>
+                PPM turns process data into early signals for intervention. It can help organizations
+                anticipate delays, optimize resources, improve service quality, and support more proactive
+                decision-making in BPM systems.
+              </p>
+            </section>
+          </div>
+        </div>
+      </details>
     </div>
   </section>
 
