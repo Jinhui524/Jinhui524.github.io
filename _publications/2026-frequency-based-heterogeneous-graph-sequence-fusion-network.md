@@ -6,6 +6,7 @@ excerpt: "First-author conference paper on next activity prediction using hetero
 citation: 'Jinhui Luo, Jiayi Long, Ziyi Niu, Jiawei Chen, Guosheng Kang*, Ye Cao, Xinci Qiu. "Frequency-Based Heterogeneous Graph-Sequence Fusion Network for Next Activity Prediction." IEEE International Joint Conference on Neural Networks, 2026.'
 category: conferences
 priority: 2
+shortvenue: "IJCNN"
 level: "CCF C"
 status: "Accept"
 ---

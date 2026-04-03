@@ -46,7 +46,10 @@
         {% if post.level or post.status %}
           <span class="publication-meta">
             (
+            {% if post.shortvenue %}{{ post.shortvenue }}{% endif %}
+            {% if post.shortvenue and post.level %}, {% endif %}
             {% if post.level %}{{ post.level }}{% endif %}
+            {% if post.shortvenue and post.status and post.level == nil %}, {% endif %}
             {% if post.level and post.status %}, {% endif %}
             {% if post.status %}{{ post.status }}{% endif %}
             )

@@ -6,6 +6,7 @@ excerpt: "Co-first-author journal paper on next event prediction with event-sequ
 citation: '谌佳伟, 罗锦辉, 康国胜*, 刘英博, 刘建勋. "融合事件序列语义与属性关联语义的业务流程下一事件预测." 计算机集成制造系统, 2026.'
 category: manuscripts
 priority: 6
+shortvenue: "CIMS"
 level: "Chinese Core / CNKI Q1"
 status: "Accept"
 ---

@@ -6,6 +6,7 @@ excerpt: "Second-author conference paper on next activity prediction with retrie
 citation: 'Xinyao Yan, Jinhui Luo, Jiayi Long, Guosheng Kang*, Jianxun Liu, Yiping Wen, Xiaoxong Xiao. "Semantic Stories for Next Activity Prediction with Retrieval-Augmented Generation and Fine-Tuning." CCF International Conference on Service Science, 2026.'
 category: conferences
 priority: 5
+shortvenue: "ICSS"
 level: "CCF C"
 status: "Under Review"
 ---

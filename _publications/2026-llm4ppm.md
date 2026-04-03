@@ -6,6 +6,7 @@ excerpt: "First-author conference paper on predictive process monitoring with la
 citation: 'Jinhui Luo, Jiayi Long, Jiawei Chen, Guosheng Kang*, Yiping Wen, Buqing Cao. "LLM4PPM: Pre-Trained and Fine-Tuned Large Language Model for Predictive Process Monitoring." IEEE World Congress on Services, 2026.'
 category: conferences
 priority: 1
+shortvenue: "ICWS"
 level: "CCF B"
 status: "Under Review"
 ---
