@@ -21,11 +21,15 @@ redirect_from:
   <section class="home-story__hero home-text-block">
     <h2>About Me</h2>
     <p class="home-story__lead">
-      Hello! I am Jinhui Luo, an undergraduate student at Hunan University of Science and Technology
+      Hello! I am Jinhui Luo, an undergraduate student at
+      <a href="https://www.hnust.edu.cn/" target="_blank" rel="noopener">Hunan University of Science and Technology</a>
       (2023-2027). My current academic interests center on artificial intelligence and its related
       research directions. During my undergraduate studies,
-      I have been working at the Hunan Provincial Key Laboratory of Service Computing and
-      New Software Technology under the supervision of Prof. Guosheng Kang.
+      I have been working at the
+      <a href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97%E4%B8%8E%E8%BD%AF%E4%BB%B6%E6%9C%8D%E5%8A%A1%E6%96%B0%E6%8A%80%E6%9C%AF%E6%B9%96%E5%8D%97%E7%9C%81%E9%87%8D%E7%82%B9%E5%AE%9E%E9%AA%8C%E5%AE%A4/61317819" target="_blank" rel="noopener">Hunan Provincial Key Laboratory of Service Computing and
+      New Software Technology</a>
+      under the supervision of
+      <a href="https://guoshengkang.github.io/" target="_blank" rel="noopener">Prof. Guosheng Kang</a>.
     </p>
     <p>
       So far, I have worked on topics including Transformers, GNN, LSTM, RAG and LLM, and have produced several preliminary research outputs in these areas. 
@@ -63,7 +67,7 @@ redirect_from:
         <summary>
           <span class="ppm-disclosure__label">Research Note</span>
           <span class="ppm-disclosure__title">What is Predictive Process Monitoring?</span>
-          <span class="ppm-disclosure__hint">click to unfold</span>
+          <span class="ppm-disclosure__hint"></span>
         </summary>
 
         <div class="ppm-disclosure__body">
