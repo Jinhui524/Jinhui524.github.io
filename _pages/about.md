@@ -101,7 +101,7 @@ redirect_from:
     </ul>
   </section>
 
-  <section class="home-section">
+  <!-- <section class="home-section">
     <h3>Notes & Writing</h3>
     <div class="home-text-block">
       <p>
@@ -113,9 +113,9 @@ redirect_from:
         so I prefer to keep the homepage itself cleaner and more introduction-oriented.
       </p>
     </div>
-  </section>
+  </section> -->
 
-  <section class="home-section">
+  <!-- <section class="home-section">
     <h3>Interests</h3>
     <div class="home-text-block">
       <p>
@@ -123,9 +123,9 @@ redirect_from:
         reading taste, aesthetics, and the small details that make a homepage feel human.
       </p>
     </div>
-  </section>
+  </section> -->
 
-  <section class="home-section home-section--last">
+  <!-- <section class="home-section home-section--last">
     <h3>More Coming Soon</h3>
     <div class="home-text-block">
       <p>
@@ -134,4 +134,4 @@ redirect_from:
       </p>
     </div>
   </section>
-</section>
+</section> -->
