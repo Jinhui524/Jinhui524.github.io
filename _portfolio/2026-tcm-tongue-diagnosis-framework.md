@@ -1,53 +1,57 @@
 ---
-title: "望舌观体: A Multi-Platform TCM Tongue Diagnosis Framework Based on ESP32 and Deep Learning"
+title: "望舌观体: A Multi-Platform Intelligent TCM Tongue Diagnosis Framework"
 permalink: /projects/tcm-tongue-diagnosis-framework/
-excerpt: "A national-level undergraduate innovation project on intelligent tongue diagnosis using ESP32 and deep learning."
+excerpt: "A national-level undergraduate innovation project on intelligent TCM tongue diagnosis with D-FINE, SAM2, and feature-guided constitution analysis."
 project_level: "National Undergraduate Innovation Project"
 project_role: "Core Member"
 priority: 1
-tech_keywords: "YOLOv11, U²-Net, ResNet50, Optuna, ESP32, Deep Learning, TCM Tongue Diagnosis"
+tech_keywords: "D-FINE, SAM2, Posture Rectification, Attention Mechanism, Multi-Branch Network, Multi-Label Classification, Five-Fold Cross Validation, TCM Tongue Diagnosis"
 overview: >-
-  This project focuses on tongue diagnosis in traditional Chinese medicine and develops a
-  multi-platform intelligent framework that integrates constitution theory with deep learning.
-  To address the limitations of traditional tongue inspection, including strong dependence on
-  practitioner experience, inconsistent standards, and sensitivity to lighting conditions,
-  the system combines YOLOv11-based tongue detection, U²-Net image segmentation, and
-  ResNet50-based constitution classification. It also builds a standardized dataset of 3,000
-  tongue images collected under different lighting conditions across nine constitution types,
-  providing a practical path toward more objective and standardized tongue diagnosis and
-  exploring its potential for mobile-assisted diagnostic applications.
+  This project develops a multi-platform intelligent tongue diagnosis system for traditional
+  Chinese medicine by integrating constitution theory with deep learning techniques. To address
+  the practical limitations of traditional tongue inspection, including dependence on human
+  experience as well as interference from lighting conditions and pose variations, the framework
+  employs D-FINE for tongue detection, SAM2 for tongue-image segmentation, and an upright
+  rectification algorithm for posture normalization. It further introduces a multi-branch,
+  symptom-guided network with attention-based cross-region feature fusion for automatic tongue
+  analysis. The system also constructs a standardized dataset of more than 5,109 tongue images
+  collected under different lighting conditions across eight constitution types, providing a
+  feasible path toward more objective and standardized tongue diagnosis while exploring its
+  potential in mobile-assisted diagnostic scenarios.
 contribution: >-
-  I was mainly responsible for the core deep learning component of the project. I completed
-  tongue-image annotation and classification, defined the labeling scheme, and split the
-  3,000 samples into training and test sets. I then applied YOLOv11, U²-Net, and ResNet50
-  to the three major modules of detection, segmentation, and constitution classification,
-  respectively, and further improved performance through automated hyperparameter tuning
-  with Optuna. In addition, I conducted systematic experimental evaluation using metrics
-  such as mAP50, Precision, and Recall to validate the overall framework under complex scenarios.
+  I led the design and development of the project's core deep learning algorithms. I independently
+  implemented the three major modules of tongue detection, tongue segmentation, and constitution
+  classification, and further designed an upright rectification algorithm to standardize tongue-image
+  posture. I organized the dataset into training and test sets for model development and completed
+  multi-label classification over eight tongue-related attributes. Finally, I established a five-fold
+  cross-validation pipeline and conducted rigorous ablation studies using core metrics such as
+  F1-score and Jaccard Index, which improved the robustness of diagnosis in complex scenarios.
 ---
 
 ## Project Overview
 
-This project focuses on tongue diagnosis in traditional Chinese medicine and develops a
-multi-platform intelligent framework that integrates constitution theory with deep learning.
-To address the limitations of traditional tongue inspection, including strong dependence on
-practitioner experience, inconsistent standards, and sensitivity to lighting conditions,
-the system combines YOLOv11-based tongue detection, U²-Net image segmentation, and
-ResNet50-based constitution classification.
+This project develops a multi-platform intelligent tongue diagnosis system for traditional
+Chinese medicine by integrating constitution theory with deep learning techniques. To address
+the practical limitations of traditional tongue inspection, including dependence on human
+experience as well as interference from lighting conditions and pose variations, the framework
+employs D-FINE for tongue detection, SAM2 for tongue-image segmentation, and an upright
+rectification algorithm for posture normalization.
 
-It also builds a standardized dataset of 3,000 tongue images collected under different
-lighting conditions across nine constitution types, providing a practical path toward more
-objective and standardized tongue diagnosis and exploring its potential for mobile-assisted
-diagnostic applications.
+It further introduces a multi-branch, symptom-guided network with attention-based cross-region
+feature fusion for automatic tongue analysis. The system also constructs a standardized dataset
+of more than 5,109 tongue images collected under different lighting conditions across eight
+constitution types, providing a feasible path toward more objective and standardized tongue
+diagnosis while exploring its potential in mobile-assisted diagnostic scenarios.
 
 ## My Contribution
 
-I was mainly responsible for the core deep learning component of the project. I completed
-tongue-image annotation and classification, defined the labeling scheme, and split the
-3,000 samples into training and test sets.
+I led the design and development of the project's core deep learning algorithms. I independently
+implemented the three major modules of tongue detection, tongue segmentation, and constitution
+classification, and further designed an upright rectification algorithm to standardize tongue-image
+posture.
 
-I then applied YOLOv11, U²-Net, and ResNet50 to the three major modules of detection,
-segmentation, and constitution classification, respectively, and further improved performance
-through automated hyperparameter tuning with Optuna. In addition, I conducted systematic
-experimental evaluation using metrics such as mAP50, Precision, and Recall to validate the
-overall framework under complex scenarios.
+I organized the dataset into training and test sets for model development and completed
+multi-label classification over eight tongue-related attributes. Finally, I established a
+five-fold cross-validation pipeline and conducted rigorous ablation studies using core metrics
+such as F1-score and Jaccard Index, which improved the robustness of diagnosis in complex
+scenarios.
