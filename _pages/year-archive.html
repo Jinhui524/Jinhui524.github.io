@@ -11,6 +11,8 @@ redirect_from:
 
 {% include base_path %}
 
+{% assign roadmap_post = site.posts | where: "title", "AI学习路线" | first %}
+
 <div class="archive-note">
   <p>
     This is not a traditional blog so much as an AI learning log.
@@ -18,6 +20,25 @@ redirect_from:
     and my evolving understanding of artificial intelligence.
   </p>
 </div>
+
+{% if roadmap_post %}
+  <section class="notes-feature">
+    <div class="notes-feature__content">
+      <p class="notes-feature__eyebrow">精选笔记</p>
+      <h2>AI学习路线</h2>
+      <p class="notes-feature__lead">
+        一份面向从零起步读者的人工智能学习路线图，覆盖数学基础、计算机基础、
+        学习工具、Python、机器学习、深度学习与大模型。
+      </p>
+      <div class="notes-feature__tags">
+        <span>学习路线</span>
+        <span>从零到AI</span>
+        <span>长期规划</span>
+      </div>
+      <a class="notes-feature__link" href="{{ base_path }}{{ roadmap_post.url }}">进入学习路线</a>
+    </div>
+  </section>
+{% endif %}
 
 {% if site.posts.size > 0 %}
   {% capture written_year %}'None'{% endcapture %}
