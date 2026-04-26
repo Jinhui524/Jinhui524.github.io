@@ -1,0 +1,70 @@
+{% assign publication_status = page.status | default: "" | downcase %}
+{% assign is_accepted_publication = false %}
+{% if publication_status contains "accept" or publication_status contains "published" %}
+  {% assign is_accepted_publication = true %}
+{% endif %}
+
+{% assign show_pdf_button = false %}
+{% if page.paperurl and is_accepted_publication %}
+  {% assign show_pdf_button = true %}
+{% endif %}
+
+{% assign show_slides_button = false %}
+{% if page.slidesurl and is_accepted_publication %}
+  {% assign show_slides_button = true %}
+{% endif %}
+
+{% assign show_bibtex_button = false %}
+{% if page.bibtexurl %}
+  {% assign show_bibtex_button = true %}
+{% endif %}
+
+{% if show_pdf_button or show_slides_button or show_bibtex_button or page.citation %}
+  <section class="publication-access" aria-label="Publication resources">
+    <div class="publication-access__row">
+      <div class="publication-access__meta">
+        {% if page.shortvenue %}
+          <span class="publication-access__badge">{{ page.shortvenue }}</span>
+        {% endif %}
+        {% if page.level %}
+          <span class="publication-access__badge">{{ page.level }}</span>
+        {% endif %}
+        {% if page.status %}
+          <span class="publication-access__badge publication-access__badge--status">{{ page.status }}</span>
+        {% endif %}
+      </div>
+
+      {% if show_pdf_button or show_slides_button or show_bibtex_button %}
+        <div class="publication-access__actions">
+          {% if show_pdf_button %}
+            <a class="publication-access__action publication-access__action--primary" href="{{ page.paperurl | relative_url }}" target="_blank" rel="noopener">
+              <i class="fa-regular fa-file-pdf" aria-hidden="true"></i>
+              <span>PDF</span>
+            </a>
+          {% endif %}
+
+          {% if show_slides_button %}
+            <a class="publication-access__action" href="{{ page.slidesurl | relative_url }}" target="_blank" rel="noopener">
+              <i class="fa-regular fa-file-powerpoint" aria-hidden="true"></i>
+              <span>Slides</span>
+            </a>
+          {% endif %}
+
+          {% if show_bibtex_button %}
+            <a class="publication-access__action" href="{{ page.bibtexurl | relative_url }}" target="_blank" rel="noopener">
+              <i class="fa-solid fa-quote-right" aria-hidden="true"></i>
+              <span>BibTeX</span>
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if page.citation %}
+      <p class="publication-access__citation">
+        <strong>Recommended citation:</strong>
+        {{ page.citation }}
+      </p>
+    {% endif %}
+  </section>
+{% endif %}

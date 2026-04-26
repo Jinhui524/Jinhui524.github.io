@@ -55,9 +55,13 @@ layout: default
         {% if page.collection == 'publications' and page.framework_variant %}
           {% include publication-framework.html %}
         {% endif %}
+        {% if page.collection == 'publications' %}
+          {% include publication-access.html %}
+        {% endif %}
         {{ content }}
 
-        {% if page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}
+        {% if page.collection == 'publications' %}
+        {% elsif page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a> | <a href="{{ page.bibtexurl }}">Download Bibtex</a></p>
         {% elsif page.citation and page.paperurl and page.slidesurl %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a></p>

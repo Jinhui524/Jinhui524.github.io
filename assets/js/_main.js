@@ -79,8 +79,8 @@ const siteTranslations = {
     zh: `我设计了基于<strong>DFG 构建</strong>与<strong>GCN 图表征学习</strong>的模块实现，参与了对比学习框架的讨论与构建；随后完成了实验设计、摘要与引言撰写，并对最终论文进行了细节层面的完善。`
   },
   "pub.sarft.overview": {
-    en: `This paper proposes <strong>SAR-FT</strong>, a semantic-story-based framework for next activity prediction using <strong>retrieval-augmented generation</strong> and <strong>fine-tuning</strong>. It addresses two practical issues in existing methods: the heavy training cost of prediction models and the hallucination problem of general-purpose LLMs when domain adaptation is insufficient. The paper is currently <strong>under review at ICSS</strong>.`,
-    zh: `针对现有下一活动预测方法训练成本较高，以及通用大语言模型在领域适应不足时容易产生幻觉的问题，本文提出基于语义故事的<strong>检索增强生成</strong>与<strong>微调</strong>框架 <strong>SAR-FT</strong>。该成果目前<strong>已投稿至 ICSS</strong>。`
+    en: `This paper proposes <strong>SAR-FT</strong>, a semantic-story-based framework for next activity prediction using <strong>retrieval-augmented generation</strong> and <strong>fine-tuning</strong>. It addresses two practical issues in existing methods: the heavy training cost of prediction models and the hallucination problem of general-purpose LLMs when domain adaptation is insufficient. The paper has been <strong>accepted by ICSS</strong>.`,
+    zh: `针对现有下一活动预测方法训练成本较高，以及通用大语言模型在领域适应不足时容易产生幻觉的问题，本文提出基于语义故事的<strong>检索增强生成</strong>与<strong>微调</strong>框架 <strong>SAR-FT</strong>。该成果目前<strong>已被 ICSS 录用</strong>。`
   },
   "pub.sarft.contribution": {
     en: `I participated in the design and discussion of the <strong>retrieval-augmented generation module</strong>, and later contributed to the domain literature review and the revision of the full manuscript.`,
