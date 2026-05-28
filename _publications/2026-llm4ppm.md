@@ -1,9 +1,9 @@
 ---
-title: "LLM4PPM: Pre-Trained and Fine-Tuned Large Language Model for Predictive Process Monitoring"
+title: "LLM4PPM: Learning Transferable Semantics for Cross-Domain Predictive Process Monitoring"
 date: 2026-01-01
 venue: "International Conference on Web Information Systems Engineering (WISE)"
 excerpt: "First-author conference paper on predictive process monitoring with large language models."
-citation: 'Jinhui Luo, Jiayi Long, Jiawei Chen, Guosheng Kang*, Yiping Wen, Buqing Cao. "LLM4PPM: Pre-Trained and Fine-Tuned Large Language Model for Predictive Process Monitoring." International Conference on Web Information Systems Engineering, 2026.'
+citation: 'Jinhui Luo, Jiayi Long, Jiawei Chen, Guosheng Kang*, Yiping Wen, Buqing Cao. "LLM4PPM: Learning Transferable Semantics for Cross-Domain Predictive Process Monitoring." International Conference on Web Information Systems Engineering, 2026.'
 category: conferences
 priority: 1
 shortvenue: "WISE"
