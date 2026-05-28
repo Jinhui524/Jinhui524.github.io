@@ -47,8 +47,8 @@ const siteTranslations = {
     zh: `我目前在 <a href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97%E4%B8%8E%E8%BD%AF%E4%BB%B6%E6%9C%8D%E5%8A%A1%E6%96%B0%E6%8A%80%E6%9C%AF%E6%B9%96%E5%8D%97%E7%9C%81%E9%87%8D%E7%82%B9%E5%AE%9E%E9%AA%8C%E5%AE%A4/61317819" target="_blank" rel="noopener">湖南省服务计算与软件新技术重点实验室</a> 以本科成员身份参与研究，近期主要聚焦于预测性流程监控。`
   },
   "pub.llm4ppm.overview": {
-    en: `This paper proposes <strong>LLM4PPM</strong>, the first foundation large language model for predictive process monitoring with both <strong>zero-shot prediction ability</strong> and <strong>multi-task support</strong>. It addresses two key limitations of existing work: the inability to fully exploit the rich semantics hidden in event data, and the lack of a unified cross-domain large model for predictive process monitoring. The paper is currently <strong>under review at ICWS</strong>.`,
-    zh: `针对现有预测性流程监控方法无法充分利用事件数据中隐含的丰富语义，且当前尚无统一的跨域多任务基础大模型，本文提出首个面向预测性流程监控、具备<strong>零样本预测能力</strong>与<strong>多任务支持</strong>的基础大语言模型 <strong>LLM4PPM</strong>。该成果目前<strong>已投稿至 ICWS</strong>。`
+    en: `This paper proposes <strong>LLM4PPM</strong>, the first foundation large language model for predictive process monitoring with both <strong>zero-shot prediction ability</strong> and <strong>multi-task support</strong>. It addresses two key limitations of existing work: the inability to fully exploit the rich semantics hidden in event data, and the lack of a unified cross-domain large model for predictive process monitoring. The paper is currently <strong>under review at WISE</strong>.`,
+    zh: `针对现有预测性流程监控方法无法充分利用事件数据中隐含的丰富语义，且当前尚无统一的跨域多任务基础大模型，本文提出首个面向预测性流程监控、具备<strong>零样本预测能力</strong>与<strong>多任务支持</strong>的基础大语言模型 <strong>LLM4PPM</strong>。该成果目前<strong>已投稿至 WISE</strong>。`
   },
   "pub.llm4ppm.contribution": {
     en: `I standardized <strong>13 structured event-log datasets</strong> and transformed them into semantic stories to build a large-scale cross-domain corpus. I then implemented the core foundation-model pipeline, including <strong>continuous pre-training</strong> and <strong>multi-task fine-tuning with LoRA</strong>, and further took responsibility for experimental design and the writing of the full paper.`,
@@ -191,7 +191,7 @@ const exactTextTranslations = {
   "China": "中国",
   "Method Snapshot": "方法框架",
   "Framework Overview": "框架概览",
-  "Original framework figure of LLM4PPM.": "LLM4PPM 的原始方法框架图。",
+  "Framework figure of LLM4PPM.": "LLM4PPM 的方法框架图。",
   "Original framework figure of FHGSN.": "FHGSN 的原始方法框架图。",
   "Original framework figure of the multi-modal fusion and multi-task learning method.": "多模态融合与多任务学习方法的原始框架图。",
   "Original framework figure of the graph-sequence contrastive learning approach.": "图与序列对比学习方法的原始框架图。",
