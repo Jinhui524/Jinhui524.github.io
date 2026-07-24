@@ -268,7 +268,15 @@ redirect_from:
       </li>
       <li>
         <span class="home-news-item__accent">[National]</span>
-        Third Prize, Programming Skills Track, RAICOM Robotics Developer Competition.
+        Third Prize, Programming Skills Track, 2025 RAICOM Robotics Developer Competition.
+      </li>
+      <li>
+        <span class="home-news-item__accent">[Provincial]</span>
+        First Prize, Zhihai Algorithm Optimization Track, 2026 RAICOM Robotics Developer Competition.
+      </li>
+      <li>
+        <span class="home-news-item__accent">[Provincial]</span>
+        First Prize, Hunan Division, 28th China Robot and Artificial Intelligence Competition.
       </li>
       <li>
         <span class="home-news-item__accent">[Provincial]</span>
@@ -276,7 +284,35 @@ redirect_from:
       </li>
       <li>
         <span class="home-news-item__accent">[Provincial]</span>
+        First Prize, Zhihai Algorithm Optimization Track, 2026 RAICOM Robotics Developer Competition.
+      </li>
+      <li>
+        <span class="home-news-item__accent">[Provincial]</span>
+        Second Prize, Central South Regional Contest, 19th Chinese Collegiate Computing Competition.
+      </li>
+      <li>
+        <span class="home-news-item__accent">[Provincial]</span>
         Second Prize, 16th Lanqiao Cup Software and Information Technology Talent Competition.
+      </li>
+      <li>
+        <span class="home-news-item__accent">[Provincial]</span>
+        Second Prize, Hunan Division, 28th China Robot and Artificial Intelligence Competition.
+      </li>
+      <li>
+        <span class="home-news-item__accent">[Provincial]</span>
+        Second Prize, 17th Lanqiao Cup Software and Information Technology Talent Competition.
+      </li>
+      <li>
+        <span class="home-news-item__accent">[Provincial]</span>
+        Third Prize, Central South Regional Contest, 19th Chinese Collegiate Computing Competition.
+      </li>
+      <li>
+        <span class="home-news-item__accent">[Provincial]</span>
+        Third Prize, Central South Regional Contest, 19th Chinese Collegiate Computing Competition.
+      </li>
+      <li>
+        <span class="home-news-item__accent">[Provincial]</span>
+        Third Prize, Central China Regional Contest, 2026 C4-Network Technology Challenge.
       </li>
     </ul>
   </section>

@@ -147,15 +147,51 @@ redirect_from:
         <span class="cv-award__meta">National Level</span>
       </li>
       <li class="cv-award-item">
-        <span class="cv-award__title">Third Prize, Programming Skills Track, RAICOM Robotics Developer Competition</span>
+        <span class="cv-award__title">Third Prize, Programming Skills Track, 2025 RAICOM Robotics Developer Competition</span>
         <span class="cv-award__meta">National Level</span>
+      </li>
+      <li class="cv-award-item">
+        <span class="cv-award__title">First Prize, Zhihai Algorithm Optimization Track, 2026 RAICOM Robotics Developer Competition</span>
+        <span class="cv-award__meta">Provincial Level</span>
+      </li>
+      <li class="cv-award-item">
+        <span class="cv-award__title">First Prize, Hunan Division, 28th China Robot and Artificial Intelligence Competition</span>
+        <span class="cv-award__meta">Provincial Level</span>
       </li>
       <li class="cv-award-item">
         <span class="cv-award__title">First Prize, 21st Hunan Provincial Collegiate Programming Contest</span>
         <span class="cv-award__meta">Provincial Level</span>
       </li>
       <li class="cv-award-item">
+        <span class="cv-award__title">First Prize, Zhihai Algorithm Optimization Track, 2026 RAICOM Robotics Developer Competition</span>
+        <span class="cv-award__meta">Provincial Level</span>
+      </li>
+      <li class="cv-award-item">
+        <span class="cv-award__title">Second Prize, Central South Regional Contest, 19th Chinese Collegiate Computing Competition</span>
+        <span class="cv-award__meta">Provincial Level</span>
+      </li>
+      <li class="cv-award-item">
         <span class="cv-award__title">Second Prize, 16th Lanqiao Cup Software and Information Technology Talent Competition</span>
+        <span class="cv-award__meta">Provincial Level</span>
+      </li>
+      <li class="cv-award-item">
+        <span class="cv-award__title">Second Prize, Hunan Division, 28th China Robot and Artificial Intelligence Competition</span>
+        <span class="cv-award__meta">Provincial Level</span>
+      </li>
+      <li class="cv-award-item">
+        <span class="cv-award__title">Second Prize, 17th Lanqiao Cup Software and Information Technology Talent Competition</span>
+        <span class="cv-award__meta">Provincial Level</span>
+      </li>
+      <li class="cv-award-item">
+        <span class="cv-award__title">Third Prize, Central South Regional Contest, 19th Chinese Collegiate Computing Competition</span>
+        <span class="cv-award__meta">Provincial Level</span>
+      </li>
+      <li class="cv-award-item">
+        <span class="cv-award__title">Third Prize, Central South Regional Contest, 19th Chinese Collegiate Computing Competition</span>
+        <span class="cv-award__meta">Provincial Level</span>
+      </li>
+      <li class="cv-award-item">
+        <span class="cv-award__title">Third Prize, Central China Regional Contest, 2026 C4-Network Technology Challenge</span>
         <span class="cv-award__meta">Provincial Level</span>
       </li>
     </ul>
