@@ -8,7 +8,7 @@ category: conferences
 priority: 1
 shortvenue: "WISE"
 level: "CCF B"
-status: "Under Review"
+status: "Accept"
 framework_variant: "llm4ppm"
 framework_caption: "A multi-domain LLM framework that transforms event logs into semantic stories, performs continuous pre-training and LoRA-based instruction fine-tuning, and supports next-activity, remaining-time, and outcome prediction."
 framework_image: "/images/publications/frameworks/llm4ppm.png"
@@ -17,7 +17,7 @@ framework_figure_label: "Framework figure of LLM4PPM."
 ---
 
 <h3>Overview</h3>
-<p data-i18n-html="pub.llm4ppm.overview">This paper proposes <strong>LLM4PPM</strong>, the first foundation large language model for predictive process monitoring with both <strong>zero-shot prediction ability</strong> and <strong>multi-task support</strong>. It addresses two key limitations of existing work: the inability to fully exploit the rich semantics hidden in event data, and the lack of a unified cross-domain large model for predictive process monitoring. The paper is currently <strong>under review at WISE</strong>.</p>
+<p data-i18n-html="pub.llm4ppm.overview">This paper proposes <strong>LLM4PPM</strong>, the first foundation large language model for predictive process monitoring with both <strong>zero-shot prediction ability</strong> and <strong>multi-task support</strong>. It addresses two key limitations of existing work: the inability to fully exploit the rich semantics hidden in event data, and the lack of a unified cross-domain large model for predictive process monitoring. The paper has been <strong>accepted by WISE</strong>.</p>
 
 <h3>My Contribution</h3>
 <p data-i18n-html="pub.llm4ppm.contribution">I standardized <strong>13 structured event-log datasets</strong> and transformed them into semantic stories to build a large-scale cross-domain corpus. I then implemented the core foundation-model pipeline, including <strong>continuous pre-training</strong> and <strong>multi-task fine-tuning with LoRA</strong>, and further took responsibility for experimental design and the writing of the full paper.</p>
