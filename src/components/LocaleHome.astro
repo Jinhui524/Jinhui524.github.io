@@ -22,8 +22,8 @@ const featured = featuredSlugs.map((slug) => publications.find((entry) => entry.
   <div class="axi-content">
     <AxiSection title={text.aboutTitle} id="about">
       <div class="axi-copy">
-        <p>{locale === 'zh' ? `我目前就读于${profile.affiliationZh}，专业为数据科学与大数据技术（2023—2027），并在${profile.labZh}开展人工智能研究。` : `I study Data Science and Big Data Technology at ${profile.affiliation} and conduct AI research with the ${profile.lab}.`}</p>
-        <p>{locale === 'zh' ? '我的研究关注如何从事件日志中学习结构、语义和时间信息，让预测结果能够被理解、验证并真正帮助流程决策。' : 'My work studies how to learn structural, semantic, and temporal information from event logs so predictions can be understood, validated, and used for better decisions.'}</p>
+        <p>{locale === 'zh' ? `我目前是${profile.affiliationZh}数据科学与大数据技术专业大四学生，并进入${profile.graduateAffiliationZh}硕士阶段（研0）。` : `I am a senior in Data Science and Big Data Technology at ${profile.affiliation} and a graduate student at ${profile.graduateAffiliation}.`}</p>
+        <p>{locale === 'zh' ? '我的研究关注图数据挖掘、图神经网络、大语言模型、Agent 与事件序列预测，探索结构化数据与语义建模之间的连接。' : 'My work connects graph data mining, graph neural networks, large language models, AI agents, and event sequence prediction through structured and semantic modeling.'}</p>
       </div>
     </AxiSection>
 
@@ -52,7 +52,7 @@ const featured = featuredSlugs.map((slug) => publications.find((entry) => entry.
     </AxiSection>
 
     <AxiSection title={text.contact} id="contact">
-      <div class="axi-contact"><p>{locale === 'zh' ? '欢迎围绕人工智能、预测性流程监控和科研合作与我交流。' : 'I welcome conversations about AI, predictive process monitoring, and research collaboration.'}</p><a class="button button-primary" href={`mailto:${profile.email}`}>{profile.email} ↗</a></div>
+      <div class="axi-contact"><p>{locale === 'zh' ? '欢迎围绕图学习、事件序列预测、大模型、Agent 与科研合作交流。' : 'I welcome conversations about graph learning, event sequence prediction, foundation models, agents, and research collaboration.'}</p><a class="button button-primary" href={`mailto:${profile.email}`}>{profile.email} ↗</a></div>
     </AxiSection>
   </div>
 </Layout>

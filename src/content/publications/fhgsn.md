@@ -18,7 +18,7 @@ contributionZh: "我提出事件日志异构图构建策略，设计两阶段 Gr
 contributionEn: "I proposed the heterogeneous graph construction strategy, designed the two-stage GraphSAGE framework, and completed the experiments and manuscript."
 frameworkImage: "/images/publications/frameworks/fhgsn.png"
 frameworkAlt: "FHGSN framework"
-tags: ["GNN", "GraphSAGE", "PPM"]
+tags: ["GNN", "GraphSAGE", "Event Sequences"]
 links: {}
 ---
 

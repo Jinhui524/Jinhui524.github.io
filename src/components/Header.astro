@@ -12,7 +12,7 @@ const currentPath = Astro.url.pathname.replace(/^\/en/, '') || '/';
 const localePrefix = locale === 'en' ? '/en' : '';
 ---
 
-<header class="site-header">
+<header class="site-header" data-header data-show="true">
   <div class="header-inner">
     <a class="brand" href={`${localePrefix}/`} aria-label="Jinhui Luo home">
       <span class="brand-copy"><strong>Jinhui Luo</strong><small>{locale === 'zh' ? '学术主页' : 'Academic homepage'}</small></span>
@@ -27,7 +27,7 @@ const localePrefix = locale === 'en' ? '/en' : '';
         return <a class:list={{ active }} href={href}>{item[locale]}</a>;
       })}
       <a class="language-link" href={localizedPath} aria-label={text.switchLanguage}>{text.switchLanguage}</a>
-      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme"><span aria-hidden="true">◐</span></button>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span aria-hidden="true">◐</span></button>
     </nav>
   </div>
 </header>

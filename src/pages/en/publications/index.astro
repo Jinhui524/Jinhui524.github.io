@@ -9,7 +9,7 @@ const text = i18n[locale];
 const publications = (await getCollection('publications')).sort((a, b) => a.data.date.localeCompare(b.data.date));
 ---
 <Layout locale={locale} title={text.selectedPubs} description={profile.bio.en} wide>
-  <section class="page-intro reveal"><p class="hero-eyebrow"><span class="pulse-dot"></span>Research output</p><h2>{text.selectedPubs}</h2><p>Research on predictive process monitoring, graph learning, and large language models.</p></section>
+  <section class="page-intro reveal"><p class="hero-eyebrow"><span class="pulse-dot"></span>Research output</p><h2>{text.selectedPubs}</h2><p>Research on event sequence prediction, graph data mining, graph neural networks, and large language models.</p></section>
   <section class="content-section reveal"><SectionHeading index="01" eyebrow="Archive" title={`${publications.length} research outputs`} /><div class="filter-row" data-publication-filters><button class="filter-button is-active" data-filter="all">All</button><button class="filter-button" data-filter="conference">Conference</button><button class="filter-button" data-filter="journal">Journal</button></div><div class="publication-grid" data-publication-grid>{publications.map((publication) => <PublicationCard publication={publication} locale={locale} />)}</div></section>
   <script is:inline>
     document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => {

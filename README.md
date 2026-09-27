@@ -41,5 +41,4 @@ git push origin master
 - `/publications/` — publication archive with category filters
 - `/projects/` — project portfolio
 - `/notes/` — AI learning notes
-- `/cv/` — academic CV
 - `/links/` — academic and development links

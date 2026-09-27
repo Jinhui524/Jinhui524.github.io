@@ -25,7 +25,7 @@ const localizedPath = isNotFound ? (otherLocale === 'en' ? '/en/' : '/') : (othe
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f7f9fa" />
+    <meta name="theme-color" content="hsl(210 33% 99%)" />
     <meta name="description" content={pageDescription} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
@@ -35,9 +35,10 @@ const localizedPath = isNotFound ? (otherLocale === 'en' ? '/en/' : '/') : (othe
     <title>{pageTitle}</title>
     <script is:inline>
       (() => {
-        const saved = localStorage.getItem('theme');
-        const dark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        document.documentElement.classList.toggle('dark', dark);
+        let saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (_) {}
+        const dark = saved === 'dark' || (!saved && window.matchMedia?.('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.toggle('dark', Boolean(dark));
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
       })();
     </script>
@@ -55,24 +56,101 @@ const localizedPath = isNotFound ? (otherLocale === 'en' ? '/en/' : '/') : (othe
     </div>
     <script is:inline>
       (() => {
+        if (document.documentElement.dataset.axiInteractions === 'true') return;
+        document.documentElement.dataset.axiInteractions = 'true';
+
         const pageRoot = document.documentElement;
+        const header = document.querySelector('[data-header]');
+        const menuButton = document.querySelector('[data-menu-toggle]');
+        const menu = document.querySelector('[data-mobile-nav]');
         const themeButton = document.querySelector('[data-theme-toggle]');
-        const setTheme = (theme) => {
-          pageRoot.classList.toggle('dark', theme === 'dark');
-          pageRoot.dataset.theme = theme;
-          localStorage.setItem('theme', theme);
+        const themeMeta = document.querySelector('meta[name="theme-color"]');
+        const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+        let previousY = window.scrollY;
+        let ticking = false;
+
+        const showToast = (message) => {
+          document.querySelector('.site-toast')?.remove();
+          const toast = document.createElement('div');
+          toast.className = 'site-toast';
+          toast.setAttribute('role', 'status');
+          toast.textContent = message;
+          document.body.appendChild(toast);
+          window.setTimeout(() => toast.remove(), 2200);
         };
-        themeButton?.addEventListener('click', () => setTheme(pageRoot.classList.contains('dark') ? 'light' : 'dark'));
-        const header = document.querySelector('.site-header');
-        const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 16);
-        onScroll();
+
+        const setTheme = (theme, announce = false) => {
+          const dark = theme === 'dark';
+          pageRoot.classList.toggle('dark', dark);
+          pageRoot.dataset.theme = dark ? 'dark' : 'light';
+          themeButton?.setAttribute('aria-pressed', String(dark));
+          themeMeta?.setAttribute('content', dark ? 'hsl(240 20% 5%)' : 'hsl(210 33% 99%)');
+          try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (_) {}
+          if (announce) showToast(`Set theme to ${dark ? 'dark' : 'light'}`);
+        };
+
+        const setMenu = (open) => {
+          menu?.classList.toggle('is-open', open);
+          header?.classList.toggle('is-menu-open', open);
+          menuButton?.setAttribute('aria-expanded', String(open));
+          if (open) header?.setAttribute('data-show', 'true');
+        };
+
+        const updateHeader = () => {
+          const y = window.scrollY;
+          const movingUp = y < previousY;
+          header?.classList.toggle('is-scrolled', y > 20);
+          if (!header?.classList.contains('is-menu-open')) {
+            header?.setAttribute('data-show', String(y < 600 || movingUp));
+          }
+          previousY = y;
+          ticking = false;
+        };
+
+        const onScroll = () => {
+          if (!ticking) {
+            window.requestAnimationFrame(updateHeader);
+            ticking = true;
+          }
+        };
+
+        const addRipple = (event) => {
+          const target = event.target.closest('a, button');
+          if (!target || reducedMotion) return;
+          target.classList.add('is-pressed');
+          window.setTimeout(() => target.classList.remove('is-pressed'), 140);
+          const rect = target.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          ripple.className = 'click-ripple';
+          ripple.style.left = `${event.clientX - rect.left}px`;
+          ripple.style.top = `${event.clientY - rect.top}px`;
+          target.appendChild(ripple);
+          window.setTimeout(() => ripple.remove(), 520);
+        };
+
+        const onLinkClick = (event) => {
+          const link = event.target.closest('a');
+          if (!link || reducedMotion || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          if (link.target === '_blank' || link.href.startsWith('mailto:') || link.origin !== window.location.origin) return;
+          const nextUrl = new URL(link.href);
+          if (nextUrl.pathname === window.location.pathname && nextUrl.hash) return;
+          document.body.classList.add('is-leaving');
+        };
+
+        setTheme(pageRoot.classList.contains('dark') ? 'dark' : 'light');
+        updateHeader();
         window.addEventListener('scroll', onScroll, { passive: true });
-        document.querySelector('[data-menu-toggle]')?.addEventListener('click', () => {
-          const button = document.querySelector('[data-menu-toggle]');
-          const nav = document.querySelector('[data-mobile-nav]');
-          const open = nav?.classList.toggle('is-open');
-          button?.setAttribute('aria-expanded', String(Boolean(open)));
+        themeButton?.addEventListener('click', () => setTheme(pageRoot.classList.contains('dark') ? 'light' : 'dark', true));
+        menuButton?.addEventListener('click', () => setMenu(!menu?.classList.contains('is-open')));
+        menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
+        document.addEventListener('focusin', (event) => { if (header?.contains(event.target)) header.setAttribute('data-show', 'true'); });
+        document.addEventListener('pointerdown', addRipple, { passive: true });
+        document.addEventListener('click', onLinkClick);
+        document.addEventListener('click', (event) => {
+          if (!header?.contains(event.target) && menu?.classList.contains('is-open')) setMenu(false);
         });
+        document.addEventListener('astro:page-load', () => { document.body.classList.remove('is-leaving'); updateHeader(); });
       })();
     </script>
   </body>

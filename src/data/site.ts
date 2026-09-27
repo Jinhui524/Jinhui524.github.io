@@ -3,15 +3,17 @@ export type Locale = 'zh' | 'en';
 export const profile = {
   name: 'Jinhui Luo',
   nameZh: '罗锦辉',
-  role: { zh: '数据科学与大数据技术本科生', en: 'Undergraduate researcher in Data Science' },
-  motto: { zh: '让过程数据成为可解释、可行动的智能。', en: 'Turning process data into interpretable, actionable intelligence.' },
+  role: { zh: '东南大学硕士阶段（研0） · 湖南科技大学大四', en: 'Graduate student at Southeast University · Senior at HNUST' },
+  motto: { zh: '从图数据与事件序列中学习结构化智能。', en: 'Learning structured intelligence from graphs and event sequences.' },
   bio: {
-    zh: '你好，我是罗锦辉，就读于湖南科技大学计算机科学与工程学院，主要研究人工智能、预测性业务流程监控、图学习、检索增强生成与大语言模型。',
-    en: 'Hi, I am Jinhui Luo, an undergraduate student at Hunan University of Science and Technology. I work on AI, predictive process monitoring, graph learning, retrieval-augmented generation, and large language models.',
+    zh: '你好，我是罗锦辉，目前是湖南科技大学大四学生，并进入东南大学硕士阶段（研0）。我的研究聚焦图数据挖掘、图神经网络、大语言模型、Agent 与事件序列预测。',
+    en: 'Hi, I am Jinhui Luo, currently a senior at Hunan University of Science and Technology and a graduate student at Southeast University. I work on graph data mining, graph neural networks, large language models, AI agents, and event sequence prediction.',
   },
   location: { zh: '中国 · 湖南', en: 'Hunan, China' },
   affiliation: 'Hunan University of Science and Technology',
   affiliationZh: '湖南科技大学',
+  graduateAffiliation: 'Southeast University',
+  graduateAffiliationZh: '东南大学',
   lab: 'Hunan Provincial Key Laboratory of Service Computing and New Software Technology',
   labZh: '湖南省服务计算与软件服务新技术重点实验室',
   email: 'Luojh0524@163.com',
@@ -26,20 +28,25 @@ export const navItems = [
   { href: '/publications/', zh: '论文', en: 'Publications' },
   { href: '/projects/', zh: '项目', en: 'Projects' },
   { href: '/notes/', zh: 'AI 笔记', en: 'AI Notes' },
-  { href: '/cv/', zh: '简历', en: 'CV' },
   { href: '/links/', zh: '链接', en: 'Links' },
 ];
 
 export const researchInterests = [
-  { zh: '预测性业务流程监控', en: 'Predictive Process Monitoring' },
-  { zh: '大语言模型', en: 'Large Language Models' },
+  { zh: '图数据挖掘', en: 'Graph Data Mining' },
   { zh: '图神经网络', en: 'Graph Neural Networks' },
-  { zh: '检索增强生成', en: 'Retrieval-Augmented Generation' },
-  { zh: '深度学习', en: 'Deep Learning' },
-  { zh: '计算机视觉', en: 'Computer Vision' },
+  { zh: '大语言模型', en: 'Large Language Models' },
+  { zh: '智能体 Agent', en: 'AI Agents' },
+  { zh: '事件序列预测', en: 'Event Sequence Prediction' },
+  { zh: '结构化语义建模', en: 'Structured Semantic Modeling' },
 ];
 
 export const education = [
+  {
+    period: '研0 · 2026',
+    title: { zh: '东南大学 · 硕士阶段', en: 'Southeast University · Graduate stage' },
+    detail: { zh: '东南大学研0，研究方向聚焦图数据与智能系统', en: 'Graduate student, focusing on graph data and intelligent systems' },
+    link: 'https://www.seu.edu.cn/',
+  },
   {
     period: '2023 — 2027',
     title: { zh: '湖南科技大学 · 数据科学与大数据技术', en: 'Hunan University of Science and Technology · Data Science and Big Data Technology' },
@@ -73,7 +80,6 @@ export const stats = [
 export const quickLinks = [
   { label: 'GitHub', href: profile.github, icon: '↗', note: { zh: '代码与开源项目', en: 'Code and open source' } },
   { label: 'Email', href: `mailto:${profile.email}`, icon: '@', note: { zh: '欢迎学术交流', en: 'For academic contact' } },
-  { label: 'CV', href: '/cv/', icon: 'CV', note: { zh: '查看学术简历', en: 'Academic resume' } },
   { label: 'Scholar', href: profile.scholar, icon: 'S', note: { zh: '论文与引用', en: 'Papers and citations' } },
 ];
 
@@ -102,7 +108,7 @@ export const i18n = {
     switchLanguage: 'English',
     menu: '菜单',
     close: '关闭',
-    introEyebrow: 'Undergraduate Researcher · AI & Process Intelligence',
+    introEyebrow: 'Graph Learning · LLMs · Agents · Event Sequences',
     aboutTitle: '关于我',
     researchTitle: '研究方向',
     educationTitle: '教育与经历',
@@ -121,14 +127,14 @@ export const i18n = {
     back: '返回',
     contact: '联系我',
     updated: '持续更新中',
-    footer: '用 Astro 构建 · 研究、代码与长期主义',
+    footer: '用 Astro 构建 · 图学习、智能体与事件序列',
   },
   en: {
     language: 'English',
     switchLanguage: '中文',
     menu: 'Menu',
     close: 'Close',
-    introEyebrow: 'Undergraduate Researcher · AI & Process Intelligence',
+    introEyebrow: 'Graph Learning · LLMs · Agents · Event Sequences',
     aboutTitle: 'About',
     researchTitle: 'Research interests',
     educationTitle: 'Education & experience',
@@ -147,6 +153,6 @@ export const i18n = {
     back: 'Back',
     contact: 'Contact',
     updated: 'Always evolving',
-    footer: 'Built with Astro · research, code, and long-term thinking',
+    footer: 'Built with Astro · graphs, agents, and event sequences',
   },
 } as const;
