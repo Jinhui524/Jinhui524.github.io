@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../components/Layout.astro';
+import AxiSection from '../../components/AxiSection.astro';
+import PublicationCard from '../../components/PublicationCard.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { i18n } from '../../data/site';
+const locale = 'zh';
+const text = i18n[locale];
+const publications = await getCollection('publications');
+const projects = await getCollection('projects');
+const notes = await getCollection('notes');
+---
+<Layout locale={locale} title={text.allTitle} wide>
+  <AxiSection title={text.allTitle} id="all">
+    <p class="axi-page-lead">论文、项目和学习笔记的统一归档。</p>
+    <div class="filter-row" data-all-filters><button class="filter-button is-active" data-type="all">全部</button><button class="filter-button" data-type="academic">Academic</button><button class="filter-button" data-type="project">Projects</button><button class="filter-button" data-type="note">Notes</button></div>
+    <div class="axi-all-list">
+      <div data-type-card="academic">{publications.map((publication) => <PublicationCard publication={publication} locale={locale} compact />)}</div>
+      <div data-type-card="project">{projects.map((project) => <ProjectCard project={project} locale={locale} />)}</div>
+      <div data-type-card="note">{notes.map((note) => <a class="axi-archive-row" href={`/technical/${note.data.slug}/`}><span class="axi-archive-row__meta">{note.data.date} · Notes</span><strong>{note.data.titleZh}</strong><p>{note.data.excerptZh}</p><span class="text-link">阅读 ↗</span></a>)}</div>
+    </div>
+  </AxiSection>
+  <script is:inline>
+    document.querySelectorAll('[data-all-filters] [data-type]').forEach((button) => button.addEventListener('click', () => {
+      document.querySelectorAll('[data-all-filters] [data-type]').forEach((item) => item.classList.remove('is-active'));
+      button.classList.add('is-active');
+      const type = button.dataset.type;
+      document.querySelectorAll('[data-type-card]').forEach((card) => { card.hidden = type !== 'all' && card.dataset.typeCard !== type; });
+    }));
+  </script>
+</Layout>

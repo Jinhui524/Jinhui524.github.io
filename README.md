@@ -38,7 +38,9 @@ git push origin master
 ## Routes
 
 - `/` and `/en/` — bilingual homepage
-- `/publications/` — publication archive with category filters
+- `/all/`, `/research/`, `/technical/` — Axi-style content archives
+- `/academic/` — publication archive with category filters
 - `/projects/` — project portfolio
-- `/notes/` — AI learning notes
+- `/about/` — profile, education, and research interests
+- `/search/` — client-side content search
 - `/links/` — academic and development links

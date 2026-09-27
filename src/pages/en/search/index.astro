@@ -1,0 +1,183 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../components/Layout.astro';
+import AxiSection from '../../../components/AxiSection.astro';
+
+const locale = 'en';
+const [publications, projects, notes] = await Promise.all([
+  getCollection('publications'),
+  getCollection('projects'),
+  getCollection('notes'),
+]);
+
+const records = [
+  ...publications.map(({ data }) => ({
+    kind: 'academic',
+    kindLabel: 'Academic',
+    title: data.titleEn,
+    excerpt: data.excerptEn,
+    date: data.date,
+    tags: data.tags,
+    href: `/en/academic/${data.slug}/`,
+  })),
+  ...projects.map(({ data }) => ({
+    kind: 'projects',
+    kindLabel: 'Project',
+    title: data.titleEn,
+    excerpt: data.excerptEn,
+    date: '',
+    tags: data.tags,
+    href: `/en/projects/${data.slug}/`,
+  })),
+  ...notes.map(({ data }) => ({
+    kind: 'notes',
+    kindLabel: 'Note',
+    title: data.titleEn,
+    excerpt: data.excerptEn,
+    date: data.date,
+    tags: data.tags,
+    href: `/en/technical/${data.slug}/`,
+  })),
+].sort((a, b) => b.date.localeCompare(a.date));
+
+const copy = {
+  title: 'Search',
+  description: 'Find a topic across papers, projects, and AI notes.',
+  placeholder: 'Search titles, excerpts, or tags…',
+  all: 'All',
+  academic: 'Academic',
+  projects: 'Projects',
+  notes: 'Notes',
+  resultCount: 'results',
+  open: 'Open details',
+  empty: 'No matching content. Try another keyword or category.',
+};
+---
+
+<Layout locale={locale} title={copy.title} description={copy.description} wide>
+  <div class="search-page" data-search-page>
+    <AxiSection title={copy.title}>
+      <div class="search-intro">
+        <p>{copy.description}</p>
+        <span class="search-total" data-search-count>{records.length} {copy.resultCount}</span>
+      </div>
+
+      <form class="search-form" data-search-form role="search">
+        <label class="sr-only" for="site-search">{copy.title}</label>
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="site-search" data-search-input type="search" autocomplete="off" placeholder={copy.placeholder} />
+        <kbd>⌘ K</kbd>
+      </form>
+
+      <div class="search-filters" role="group" aria-label="Search categories">
+        <button type="button" class="filter-button is-active" data-search-filter="all" aria-pressed="true">{copy.all}</button>
+        <button type="button" class="filter-button" data-search-filter="academic" aria-pressed="false">{copy.academic}</button>
+        <button type="button" class="filter-button" data-search-filter="projects" aria-pressed="false">{copy.projects}</button>
+        <button type="button" class="filter-button" data-search-filter="notes" aria-pressed="false">{copy.notes}</button>
+      </div>
+
+      <div class="search-results" data-search-results>
+        {records.map((record) => (
+          <article
+            class="search-result"
+            data-search-result
+            data-kind={record.kind}
+            data-search={`${record.title} ${record.excerpt} ${record.tags.join(' ')}`}
+          >
+            <a class="search-result__link" href={record.href}>
+              <span class="search-result__meta"><span>{record.kindLabel}</span>{record.date && <time datetime={record.date}>{record.date}</time>}</span>
+              <span class="search-result__title">{record.title}</span>
+              <span class="search-result__excerpt">{record.excerpt}</span>
+              {record.tags.length > 0 && <span class="search-result__tags">{record.tags.map((tag) => <span>{tag}</span>)}</span>}
+              <span class="search-result__arrow" aria-hidden="true">↗</span>
+            </a>
+          </article>
+        ))}
+        <p class="search-empty" data-search-empty hidden>{copy.empty}</p>
+      </div>
+    </AxiSection>
+  </div>
+</Layout>
+
+<script is:inline>
+  (() => {
+    const initSearch = () => {
+      const root = document.querySelector('[data-search-page]');
+      if (!root || root.dataset.searchReady === 'true') return;
+      root.dataset.searchReady = 'true';
+
+      const input = root.querySelector('[data-search-input]');
+      const count = root.querySelector('[data-search-count]');
+      const empty = root.querySelector('[data-search-empty]');
+      const results = [...root.querySelectorAll('[data-search-result]')];
+      const filters = [...root.querySelectorAll('[data-search-filter]')];
+      let activeFilter = 'all';
+
+      const apply = () => {
+        const query = input?.value.trim().toLocaleLowerCase() ?? '';
+        let visible = 0;
+        results.forEach((result) => {
+          const matchesFilter = activeFilter === 'all' || result.dataset.kind === activeFilter;
+          const matchesQuery = !query || (result.dataset.search ?? '').toLocaleLowerCase().includes(query);
+          const show = matchesFilter && matchesQuery;
+          result.hidden = !show;
+          if (show) visible += 1;
+        });
+        if (count) count.textContent = `${visible} results`;
+        if (empty) empty.hidden = visible !== 0;
+      };
+
+      input?.addEventListener('input', apply);
+      filters.forEach((filter) => filter.addEventListener('click', () => {
+        activeFilter = filter.dataset.searchFilter ?? 'all';
+        filters.forEach((item) => {
+          const isActive = item === filter;
+          item.classList.toggle('is-active', isActive);
+          item.setAttribute('aria-pressed', String(isActive));
+        });
+        apply();
+      }));
+      document.addEventListener('keydown', (event) => {
+        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+          event.preventDefault();
+          input?.focus();
+        }
+      });
+      apply();
+    };
+
+    initSearch();
+    document.addEventListener('astro:page-load', initSearch);
+  })();
+</script>
+
+<style>
+  .search-page { padding-bottom: 35px; }
+  .search-intro { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--muted-strong); font-size: .82rem; }
+  .search-total { flex: 0 0 auto; color: var(--muted); font: .6rem var(--mono); white-space: nowrap; }
+  .search-form { position: relative; display: flex; align-items: center; gap: 10px; margin-top: 4px; padding: 0 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); transition: border-color .2s, box-shadow .2s; }
+  .search-form:focus-within { border-color: var(--border-strong); box-shadow: 0 0 0 3px var(--primary-soft); }
+  .search-icon { color: var(--primary-strong); font-size: 1.25rem; line-height: 1; transform: translateY(-1px); }
+  .search-form input { min-width: 0; flex: 1; padding: 13px 0; border: 0; outline: 0; color: var(--foreground); background: transparent; font: .79rem var(--sans); }
+  .search-form input::placeholder { color: var(--muted); }
+  .search-form kbd { padding: 3px 6px; border: 1px solid var(--border); border-radius: .35rem; color: var(--muted); font: .56rem var(--mono); }
+  .search-filters { display: flex; flex-wrap: wrap; gap: 6px; }
+  .search-results { display: flex; flex-direction: column; gap: 8px; }
+  .search-result { border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); transition: border-color .2s, box-shadow .2s, transform .2s; }
+  .search-result:hover { border-color: var(--border-strong); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .search-result[hidden] { display: none; }
+  .search-result__link { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 15px 42px 15px 16px; }
+  .search-result__meta { display: flex; align-items: center; gap: 9px; color: var(--primary-strong); font: .59rem var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+  .search-result__meta time { color: var(--muted); }
+  .search-result__title { font-size: .9rem; font-weight: 600; line-height: 1.45; }
+  .search-result__excerpt { color: var(--muted); font-size: .73rem; line-height: 1.65; }
+  .search-result__tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+  .search-result__tags span { padding: 2px 6px; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); font: .55rem var(--mono); }
+  .search-result__arrow { position: absolute; top: 50%; right: 17px; color: var(--primary-strong); font-size: .9rem; transform: translateY(-50%); transition: transform .2s; }
+  .search-result:hover .search-result__arrow { transform: translate(2px, -2px); }
+  .search-empty { padding: 30px 0; color: var(--muted); font-size: .78rem; text-align: center; }
+  @media (max-width: 560px) {
+    .search-intro { align-items: flex-start; flex-direction: column; gap: 5px; }
+    .search-form kbd { display: none; }
+  }
+</style>

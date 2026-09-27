@@ -25,10 +25,14 @@ export const profile = {
 
 export const navItems = [
   { href: '/', zh: '首页', en: 'Home' },
-  { href: '/publications/', zh: '论文', en: 'Publications' },
+  { href: '/all/', zh: '全部', en: 'All' },
+  { href: '/research/', zh: '研究', en: 'Research' },
+  { href: '/technical/', zh: '技术', en: 'Technical' },
+  { href: '/academic/', zh: '学术', en: 'Academic' },
   { href: '/projects/', zh: '项目', en: 'Projects' },
-  { href: '/notes/', zh: 'AI 笔记', en: 'AI Notes' },
   { href: '/links/', zh: '链接', en: 'Links' },
+  { href: '/about/', zh: '关于', en: 'About' },
+  { href: '/search/', zh: '搜索', en: 'Search' },
 ];
 
 export const researchInterests = [
@@ -114,6 +118,10 @@ export const i18n = {
     educationTitle: '教育与经历',
     selectedPubs: '代表性论文',
     selectedProjects: '代表性项目',
+    allTitle: '全部内容',
+    technicalTitle: '技术笔记',
+    academicTitle: '学术成果',
+    searchTitle: '站内搜索',
     awardsTitle: '荣誉与竞赛',
     statsTitle: '研究轨迹',
     noteTitle: '研究随笔',
@@ -140,6 +148,10 @@ export const i18n = {
     educationTitle: 'Education & experience',
     selectedPubs: 'Selected publications',
     selectedProjects: 'Selected project',
+    allTitle: 'All content',
+    technicalTitle: 'Technical notes',
+    academicTitle: 'Academic output',
+    searchTitle: 'Search',
     awardsTitle: 'Awards & recognition',
     statsTitle: 'Research in numbers',
     noteTitle: 'Research note',

@@ -1,0 +1,8 @@
+---
+import Layout from '../../../components/Layout.astro';
+import AxiSection from '../../../components/AxiSection.astro';
+import ProfileHeader from '../../../components/ProfileHeader.astro';
+import { education, profile, researchInterests } from '../../../data/site';
+const locale = 'en';
+---
+<Layout locale={locale} title="About" wide><ProfileHeader locale={locale} /><AxiSection title="About" id="about"><div class="axi-copy"><p>I am currently a senior in Data Science and Big Data Technology at Hunan University of Science and Technology and a graduate student at Southeast University.</p><p>My work connects graph data mining, graph neural networks, large language models, AI agents, and event sequence prediction through structured and semantic modeling.</p></div></AxiSection><AxiSection title="Education & experience" id="education"><div class="axi-education-list">{education.map((item) => <a class="axi-education-card" href={item.link} target="_blank" rel="noreferrer"><div><h3>{item.title[locale]}</h3><p>{item.detail[locale]}</p></div><time>{item.period}</time><span>↗</span></a>)}</div></AxiSection><AxiSection title="Research interests" id="research"><div class="axi-research-list">{researchInterests.map((item) => <span>{item[locale]}</span>)}</div></AxiSection><AxiSection title="Contact" id="contact"><div class="axi-contact"><p>I welcome conversations about graph learning, event sequence prediction, foundation models, agents, and research collaboration.</p><a class="button button-primary" href={`mailto:${profile.email}`}>{profile.email} ↗</a></div></AxiSection></Layout>

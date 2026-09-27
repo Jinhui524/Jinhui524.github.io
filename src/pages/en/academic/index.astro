@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../components/Layout.astro';
+import AxiSection from '../../../components/AxiSection.astro';
+import PublicationCard from '../../../components/PublicationCard.astro';
+import { i18n } from '../../../data/site';
+const locale = 'en';
+const text = i18n[locale];
+const publications = (await getCollection('publications')).sort((a, b) => a.data.date.localeCompare(b.data.date));
+---
+<Layout locale={locale} title={text.academicTitle} wide>
+  <AxiSection title={text.academicTitle} id="academic">
+    <p class="axi-page-lead">Research on event sequence prediction, graph data mining, graph neural networks, and large language models.</p>
+    <div class="filter-row" data-publication-filters><button class="filter-button is-active" data-filter="all">All</button><button class="filter-button" data-filter="conference">Conference</button><button class="filter-button" data-filter="journal">Journal</button></div>
+    <div class="publication-grid axi-archive-grid" data-publication-grid>{publications.map((publication) => <PublicationCard publication={publication} locale={locale} />)}</div>
+  </AxiSection>
+  <script is:inline>
+    document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => {
+      document.querySelectorAll('[data-filter]').forEach((item) => item.classList.remove('is-active'));
+      button.classList.add('is-active');
+      const filter = button.dataset.filter;
+      document.querySelectorAll('[data-publication-grid] .publication-card').forEach((card) => { card.hidden = filter !== 'all' && card.dataset.category !== filter; });
+    }));
+  </script>
+</Layout>

@@ -1,10 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../../components/Layout.astro';
-import { i18n } from '../../../data/site';
-export async function getStaticPaths() { return (await getCollection('publications')).map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } })); }
-const { entry } = Astro.props;
-const p = entry.data;
-const locale = 'en';
+export async function getStaticPaths() { return (await getCollection('publications')).map((entry) => ({ params: { slug: entry.data.slug }, props: { slug: entry.data.slug } })); }
+const target = `/en/academic/${Astro.props.slug}/`;
 ---
-<Layout locale={locale} title={p.titleEn} description={p.excerptEn} wide><article class="detail-page reveal"><a class="back-link" href="/en/publications/">← {i18n.en.back}</a><div class="detail-header"><div class="card-topline"><span class="paper-venue">{p.shortVenue}</span><span class="paper-status">{p.status}</span></div><h2>{p.titleEn}</h2><p class="detail-subtitle">{p.authors}</p><div class="detail-meta"><span>{p.venue}</span><span>{p.level}</span><span>{p.date}</span></div></div>{p.frameworkImage && <figure class="detail-figure"><img src={p.frameworkImage} alt={p.frameworkAlt} /><figcaption>{p.shortTitle} · framework overview</figcaption></figure>}<div class="detail-grid"><section><p class="detail-label">{i18n.en.overview}</p><p>{p.overviewEn}</p></section><section><p class="detail-label">{i18n.en.contribution}</p><p>{p.contributionEn}</p></section></div><div class="tag-row detail-tags">{p.tags.map((tag) => <span>{tag}</span>)}</div></article></Layout>
+<meta http-equiv="refresh" content={`0;url=${target}`} /><link rel="canonical" href={target} /><p>Redirecting to <a href={target}>academic output</a>…</p>

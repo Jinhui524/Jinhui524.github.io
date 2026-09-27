@@ -1,22 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../components/Layout.astro';
-import SectionHeading from '../../components/SectionHeading.astro';
-import PublicationCard from '../../components/PublicationCard.astro';
-import { i18n, profile } from '../../data/site';
-const locale = 'zh';
-const text = i18n[locale];
-const publications = (await getCollection('publications')).sort((a, b) => a.data.date.localeCompare(b.data.date));
+const target = '/academic/';
 ---
-<Layout locale={locale} title={text.selectedPubs} description={profile.bio.zh} wide>
-  <section class="page-intro reveal"><p class="hero-eyebrow"><span class="pulse-dot"></span>Research output</p><h2>{text.selectedPubs}</h2><p>{locale === 'zh' ? '围绕事件序列预测、图数据挖掘、图神经网络和大语言模型整理的研究成果。' : 'Research on event sequence prediction, graph data mining, graph neural networks, and large language models.'}</p></section>
-  <section class="content-section reveal"><SectionHeading index="01" eyebrow="Archive" title={`${publications.length} ${locale === 'zh' ? '项研究成果' : 'research outputs'}`} /><div class="filter-row" data-publication-filters><button class="filter-button is-active" data-filter="all">{text.all}</button><button class="filter-button" data-filter="conference">Conference</button><button class="filter-button" data-filter="journal">Journal</button></div><div class="publication-grid" data-publication-grid>{publications.map((publication) => <PublicationCard publication={publication} locale={locale} />)}</div></section>
-  <script is:inline>
-    document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => {
-      document.querySelectorAll('[data-filter]').forEach((item) => item.classList.remove('is-active'));
-      button.classList.add('is-active');
-      const filter = button.dataset.filter;
-      document.querySelectorAll('[data-publication-grid] .publication-card').forEach((card) => { card.hidden = filter !== 'all' && card.dataset.category !== filter; });
-    }));
-  </script>
-</Layout>
+<meta http-equiv="refresh" content={`0;url=${target}`} /><link rel="canonical" href={target} /><p>Redirecting to <a href={target}>academic output</a>…</p>
