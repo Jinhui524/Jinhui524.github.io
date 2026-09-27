@@ -1,7 +1,5 @@
 ---
 import { cn } from '@/utils'
-import Icon from './Icon.astro'
-import SimpleIcon from './SimpleIcon.astro'
 
 interface Props {
   class?: string
@@ -32,28 +30,6 @@ interface Props {
 }
 
 const { class: className, publication } = Astro.props
-
-const linkIconMap: Record<string, { type: 'simple' | 'builtin'; icon: string; color?: string }> = {
-  pdf: { type: 'builtin', icon: 'document' },
-  paper: { type: 'builtin', icon: 'document' },
-  arxiv: { type: 'simple', icon: 'arxiv', color: '#B31B1B' },
-  code: { type: 'simple', icon: 'github', color: '#181717' },
-  github: { type: 'simple', icon: 'github', color: '#181717' },
-  video: { type: 'simple', icon: 'youtube', color: '#FF0000' },
-  poster: { type: 'builtin', icon: 'image' },
-  slides: { type: 'builtin', icon: 'presentation' },
-  ieee: { type: 'simple', icon: 'ieee', color: '#00629B' },
-  acm: { type: 'simple', icon: 'acm', color: '#0085CA' },
-  springer: { type: 'simple', icon: 'springer', color: '#FFCC33' },
-  pytorch: { type: 'simple', icon: 'pytorch', color: '#EE4C2C' },
-  tensorflow: { type: 'simple', icon: 'tensorflow', color: '#FF6F00' },
-  model: { type: 'simple', icon: 'huggingface', color: '#FFD21E' },
-  huggingface: { type: 'simple', icon: 'huggingface', color: '#FFD21E' },
-  hf: { type: 'simple', icon: 'huggingface', color: '#FFD21E' },
-  website: { type: 'builtin', icon: 'earth' },
-  site: { type: 'builtin', icon: 'earth' },
-  dataset: { type: 'simple', icon: 'huggingface', color: '#FFD21E' },
-}
 
 const typeLabels = {
   conference: 'Conference',
@@ -101,7 +77,7 @@ const getLinkLabel = (type: string) => {
 const hasAuthorNotes = publication.authors.some((author) => author.isEqual || author.isCoreContributor || author.role)
 ---
 
-<article class={cn('publication-card group', className)}>
+<article class={cn('publication-card not-prose', className)}>
   <div class='publication-card__layout'>
     {
       publication.image && (
@@ -188,24 +164,12 @@ const hasAuthorNotes = publication.authors.some((author) => author.isEqual || au
             {publication.ranking && <span class='publication-badge publication-badge--ranking'>{publication.ranking}</span>}
             <div class='publication-card__actions'>
             {publication.links.map((link) => {
-              const normalizedType = link.type.toLowerCase()
-              const iconConfig = linkIconMap[normalizedType] || { type: 'builtin', icon: 'earth' }
               const label = getLinkLabel(link.type)
-              return (
-                <a href={link.href} target='_blank' rel='noopener noreferrer' class='publication-action-link'>
-                  {iconConfig.type === 'simple' ? (
-                    <SimpleIcon class='size-3.5' name={iconConfig.icon} color={iconConfig.color || 'currentColor'} />
-                  ) : (
-                    <Icon class='size-3.5 text-current' name={iconConfig.icon as any} />
-                  )}
-                  <span>{label}</span>
-                </a>
-              )
+              return <a href={link.href} target='_blank' rel='noopener noreferrer' class='publication-action-link'>[{label}]</a>
             })}
             {publication.detailHref && (
               <a href={publication.detailHref} class='publication-action-link publication-action-link--details'>
-                <span>{publication.detailLabel || 'Details'}</span>
-                <span aria-hidden='true'>↗</span>
+                [{publication.detailLabel || 'Details'}]
               </a>
             )}
             </div>
@@ -218,17 +182,14 @@ const hasAuthorNotes = publication.authors.some((author) => author.isEqual || au
 
 <style>
   .publication-card {
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    background: var(--color-card);
-    padding: 1rem;
-    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    border-bottom: 1px solid hsl(var(--border) / 0.72);
+    padding: 1.25rem 0 1.5rem;
+    transition: border-color 180ms ease, background-color 180ms ease;
   }
 
   .publication-card:hover {
-    border-color: color-mix(in srgb, var(--color-primary) 30%, var(--color-border));
-    box-shadow: 0 12px 30px rgb(15 23 42 / 0.07);
-    transform: translateY(-1px);
+    border-color: hsl(var(--primary) / 0.3);
+    background: hsl(var(--muted) / 0.18);
   }
 
   .publication-card__layout {
@@ -246,9 +207,9 @@ const hasAuthorNotes = publication.authors.some((author) => author.isEqual || au
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+    border: 1px solid hsl(var(--border) / 0.8);
     border-radius: 0.75rem;
-    background: color-mix(in srgb, var(--color-muted) 42%, transparent);
+    background: hsl(var(--muted) / 0.42);
   }
 
   .publication-card__media img {
@@ -271,10 +232,10 @@ const hasAuthorNotes = publication.authors.some((author) => author.isEqual || au
     width: 1.75rem;
     height: 1.75rem;
     place-items: center;
-    border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+    border: 1px solid hsl(var(--border) / 0.75);
     border-radius: 9999px;
-    background: color-mix(in srgb, var(--color-card) 88%, transparent);
-    color: var(--color-muted-foreground);
+    background: hsl(var(--card) / 0.88);
+    color: hsl(var(--muted-foreground));
     font-size: 0.75rem;
     opacity: 0;
     transform: translateY(-0.25rem);
@@ -301,24 +262,24 @@ const hasAuthorNotes = publication.authors.some((author) => author.isEqual || au
     white-space: nowrap;
   }
 
-  .publication-badge--conference, .publication-badge--accepted { border-color: color-mix(in srgb, #0ea5e9 22%, var(--color-border)); background: color-mix(in srgb, #0ea5e9 10%, transparent); color: color-mix(in srgb, #0284c7 85%, var(--color-foreground)); }
-  .publication-badge--journal, .publication-badge--published { border-color: color-mix(in srgb, #10b981 22%, var(--color-border)); background: color-mix(in srgb, #10b981 10%, transparent); color: color-mix(in srgb, #059669 85%, var(--color-foreground)); }
-  .publication-badge--workshop, .publication-badge--review { border-color: color-mix(in srgb, #f59e0b 24%, var(--color-border)); background: color-mix(in srgb, #f59e0b 11%, transparent); color: color-mix(in srgb, #b45309 85%, var(--color-foreground)); }
-  .publication-badge--preprint { border-color: color-mix(in srgb, var(--color-muted-foreground) 25%, var(--color-border)); background: color-mix(in srgb, var(--color-muted) 75%, transparent); color: var(--color-muted-foreground); }
-  .publication-badge--ranking { border-color: color-mix(in srgb, var(--color-primary) 30%, var(--color-border)); background: color-mix(in srgb, var(--color-primary) 10%, transparent); color: var(--color-primary); }
+  .publication-badge--conference, .publication-badge--accepted { border-color: hsl(199 89% 48% / 0.24); background: hsl(199 89% 48% / 0.1); color: hsl(199 89% 38%); }
+  .publication-badge--journal, .publication-badge--published { border-color: hsl(160 84% 39% / 0.24); background: hsl(160 84% 39% / 0.1); color: hsl(160 84% 30%); }
+  .publication-badge--workshop, .publication-badge--review { border-color: hsl(38 92% 50% / 0.25); background: hsl(38 92% 50% / 0.11); color: hsl(32 85% 35%); }
+  .publication-badge--preprint { border-color: hsl(var(--muted-foreground) / 0.25); background: hsl(var(--muted) / 0.75); color: hsl(var(--muted-foreground)); }
+  .publication-badge--ranking { border-color: hsl(var(--primary) / 0.3); background: hsl(var(--primary) / 0.1); color: hsl(var(--primary)); }
 
-  .publication-card__title { margin: 0; color: var(--color-foreground); font-size: clamp(1.05rem, 1.8vw, 1.28rem); font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
-  .publication-card__title-link { text-decoration: none; transition: color 180ms ease; }
-  .publication-card__title-link:hover, .publication-card__title-link:focus-visible { color: var(--color-primary); }
-  .publication-card__authors { margin: 0.6rem 0 0; color: var(--color-muted-foreground); font-size: 0.82rem; line-height: 1.65; }
-  .author-name--me { color: var(--color-foreground); font-weight: 650; }
-  .author-name:hover, .author-name:focus-visible { color: var(--color-primary); text-decoration: underline; text-underline-offset: 0.15em; }
+  .publication-card__title { margin: 0; color: hsl(var(--foreground)) !important; font-size: clamp(1.05rem, 1.8vw, 1.28rem); font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+  .publication-card__title-link { color: hsl(var(--foreground)) !important; text-decoration: none; transition: color 180ms ease; }
+  .publication-card__title-link:hover, .publication-card__title-link:focus-visible { color: hsl(var(--primary)) !important; }
+  .publication-card__authors { margin: 0.6rem 0 0; color: hsl(var(--muted-foreground)); font-size: 0.82rem; line-height: 1.65; }
+  .author-name--me { color: hsl(var(--foreground)); font-weight: 650; }
+  .author-name:hover, .author-name:focus-visible { color: hsl(var(--primary)); text-decoration: underline; text-underline-offset: 0.15em; }
   .publication-card__notes { display: flex; flex-wrap: wrap; gap: 0.35rem 0.8rem; margin-top: 0.4rem; font-size: 0.68rem; line-height: 1.5; }
-  .publication-card__abstract { max-width: 72ch; margin: 0.8rem 0 0; color: var(--color-muted-foreground); font-size: 0.84rem; line-height: 1.7; }
-  .publication-card__venue { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; margin-top: 0.8rem; color: var(--color-muted-foreground); font-size: 0.78rem; }
-  .publication-card__venue-name { color: var(--color-foreground); font-weight: 600; }
+  .publication-card__abstract { max-width: 72ch; margin: 0.8rem 0 0; color: hsl(var(--muted-foreground)); font-size: 0.84rem; line-height: 1.7; }
+  .publication-card__venue { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; margin-top: 0.8rem; color: hsl(var(--muted-foreground)); font-size: 0.78rem; }
+  .publication-card__venue-name { color: hsl(var(--foreground)); font-weight: 600; }
   .publication-card__topics { margin-top: 0.7rem; }
-  .publication-card__topics span { border-radius: 9999px; background: color-mix(in srgb, var(--color-muted) 72%, transparent); color: var(--color-muted-foreground); font-size: 0.66rem; line-height: 1; padding: 0.3rem 0.5rem; }
+  .publication-card__topics span { border-radius: 9999px; background: hsl(var(--muted) / 0.72); color: hsl(var(--muted-foreground)); font-size: 0.66rem; line-height: 1; padding: 0.3rem 0.5rem; }
   .publication-card__footer { margin-top: 1rem; justify-content: space-between; gap: 0.7rem; }
   .publication-card__actions { margin-top: 0; gap: 0.45rem; }
 
@@ -326,10 +287,10 @@ const hasAuthorNotes = publication.authors.some((author) => author.isEqual || au
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    border: 1px solid var(--color-border);
+    border: 0;
     border-radius: 0.5rem;
-    background: color-mix(in srgb, var(--color-muted) 45%, transparent);
-    color: var(--color-muted-foreground);
+    background: transparent;
+    color: hsl(var(--muted-foreground));
     font-size: 0.7rem;
     font-weight: 600;
     line-height: 1;
@@ -338,12 +299,12 @@ const hasAuthorNotes = publication.authors.some((author) => author.isEqual || au
     transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, transform 180ms ease;
   }
 
-  .publication-action-link:hover, .publication-action-link:focus-visible { border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border)); background: color-mix(in srgb, var(--color-primary) 10%, transparent); color: var(--color-primary); transform: translateY(-1px); }
-  .publication-action-link--details { border-color: color-mix(in srgb, var(--color-primary) 25%, var(--color-border)); background: color-mix(in srgb, var(--color-primary) 10%, transparent); color: var(--color-primary); }
-  .publication-card :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+  .publication-action-link:hover, .publication-action-link:focus-visible { color: hsl(var(--primary)); text-decoration: underline; text-underline-offset: 0.2em; transform: none; }
+  .publication-action-link--details { color: hsl(var(--primary)); }
+  .publication-card :focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 2px; }
 
   @media (min-width: 640px) {
-    .publication-card { padding: 1.25rem; }
+    .publication-card { padding: 1.35rem 0 1.7rem; }
     .publication-card__layout { grid-template-columns: minmax(13.75rem, 15rem) minmax(0, 1fr); gap: 1.5rem; }
     .publication-card__media-link { min-height: 12rem; height: 100%; }
     .publication-card__media img { max-height: 15rem; }
