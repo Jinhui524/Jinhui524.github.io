@@ -1,0 +1,84 @@
+---
+import Header from './Header.astro';
+import Sidebar from './Sidebar.astro';
+import { i18n, profile, type Locale } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+  locale?: Locale;
+  title?: string;
+  description?: string;
+  wide?: boolean;
+}
+
+const { locale = 'zh', title, description, wide = false } = Astro.props;
+const text = i18n[locale];
+const pageTitle = title ? `${title} · ${profile.name}` : `${profile.name} · ${profile.nameZh}`;
+const pageDescription = description ?? profile.bio[locale];
+const otherLocale = locale === 'zh' ? 'en' : 'zh';
+const path = Astro.url.pathname.replace(/^\/en(?=\/|$)/, '') || '/';
+const localizedPath = otherLocale === 'en' ? `/en${path === '/' ? '/' : path}` : path;
+---
+
+<!doctype html>
+<html lang={locale} data-locale={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f9fa" />
+    <meta name="description" content={pageDescription} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/images/favicon.svg" />
+    <link rel="alternate" hreflang={otherLocale} href={localizedPath} />
+    <title>{pageTitle}</title>
+    <script is:inline>
+      (() => {
+        const saved = localStorage.getItem('theme');
+        const dark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.toggle('dark', dark);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+    <div class="site-shell">
+      <Header locale={locale} localizedPath={localizedPath} />
+      <div class:list={['page-grid', { 'page-grid--wide': wide }] }>
+        <Sidebar locale={locale} />
+        <main id="main-content" class="main-content">
+          <slot />
+        </main>
+      </div>
+      <footer class="site-footer">
+        <span>© {new Date().getFullYear()} {profile.name} · {text.footer}</span>
+        <a href="https://github.com/Jinhui524/Jinhui524.github.io" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </footer>
+    </div>
+    <script is:inline>
+      (() => {
+        const pageRoot = document.documentElement;
+        const themeButton = document.querySelector('[data-theme-toggle]');
+        const setTheme = (theme) => {
+          pageRoot.classList.toggle('dark', theme === 'dark');
+          pageRoot.dataset.theme = theme;
+          localStorage.setItem('theme', theme);
+        };
+        themeButton?.addEventListener('click', () => setTheme(pageRoot.classList.contains('dark') ? 'light' : 'dark'));
+        const header = document.querySelector('.site-header');
+        const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 16);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        document.querySelector('[data-menu-toggle]')?.addEventListener('click', () => {
+          const button = document.querySelector('[data-menu-toggle]');
+          const nav = document.querySelector('[data-mobile-nav]');
+          const open = nav?.classList.toggle('is-open');
+          button?.setAttribute('aria-expanded', String(Boolean(open)));
+        });
+      })();
+    </script>
+  </body>
+</html>

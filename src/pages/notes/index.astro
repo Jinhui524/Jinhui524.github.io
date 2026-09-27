@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../components/Layout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { i18n } from '../../data/site';
+const locale = 'zh';
+const notes = await getCollection('notes');
+---
+<Layout locale={locale} title={i18n[locale].noteTitle} wide><section class="page-intro reveal"><p class="hero-eyebrow"><span class="pulse-dot"></span>Notes & learning</p><h2>AI Notes</h2><p>把阅读、实验和阶段性思考整理成可复用的知识路径。</p></section><section class="content-section reveal"><SectionHeading index="01" eyebrow="Archive" title="Notes" /><div class="note-list">{notes.map((note) => <a class="note-card" href={`/notes/${note.data.slug}/`}><span class="note-date">{note.data.date}</span><strong>{note.data.titleZh}</strong><p>{note.data.excerptZh}</p><span class="text-link">阅读笔记 ↗</span></a>)}</div></section></Layout>

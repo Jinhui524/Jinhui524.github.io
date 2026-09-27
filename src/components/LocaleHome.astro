@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from './Layout.astro';
+import SectionHeading from './SectionHeading.astro';
+import PublicationCard from './PublicationCard.astro';
+import ProjectCard from './ProjectCard.astro';
+import { awards, education, i18n, profile, researchInterests, stats, type Locale } from '../data/site';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const text = i18n[locale];
+const prefix = locale === 'en' ? '/en' : '';
+const publications = (await getCollection('publications')).sort((a, b) => a.data.date.localeCompare(b.data.date) || a.data.slug.localeCompare(b.data.slug));
+const projects = await getCollection('projects');
+const featured = publications.slice(0, 3);
+---
+
+<Layout locale={locale} description={profile.bio[locale]}>
+  <section class="hero-block reveal">
+    <p class="hero-eyebrow"><span class="pulse-dot"></span>{text.introEyebrow}</p>
+    <h2>{profile.motto[locale]}</h2>
+    <p class="hero-lead">{profile.bio[locale]} <a href={`${prefix}/cv/`}>{locale === 'zh' ? '了解我的研究路径' : 'Explore my research path'} ↗</a></p>
+    <div class="hero-actions"><a class="button button-primary" href={`mailto:${profile.email}`}>{text.contact} <span>↗</span></a><a class="button button-quiet" href={`${prefix}/publications/`}>{text.selectedPubs} <span>↗</span></a></div>
+    <div class="hero-formula" aria-hidden="true"><span>GNN</span><i>→</i><span>LLM</span><i>→</i><span>PPM</span></div>
+  </section>
+
+  <section class="content-section reveal">
+    <SectionHeading index="01" eyebrow="Profile" title={text.aboutTitle} />
+    <div class="about-grid"><p>{locale === 'zh' ? `我目前就读于${profile.affiliationZh}，专业为数据科学与大数据技术（2023—2027）。本科阶段，我在${profile.labZh}开展研究，在康国胜教授指导下关注事件日志中的结构、语义与时间信息。` : `I am studying Data Science and Big Data Technology at ${profile.affiliation}. I work with the ${profile.lab} under the supervision of Prof. Guosheng Kang, focusing on structural, semantic, and temporal information in event logs.`}</p><p>{locale === 'zh' ? '我的长期目标是让模型不仅给出预测，还能说明预测从何而来、如何被验证，以及怎样帮助真实流程做出更好的决定。' : 'My long-term goal is to build models that explain where a prediction comes from, how it can be validated, and how it can improve real decisions.'}</p></div>
+  </section>
+
+  <section class="content-section reveal">
+    <SectionHeading index="02" eyebrow="Focus" title={text.researchTitle} />
+    <div class="interest-grid">{researchInterests.map((item, index) => <div class="interest-item"><span>0{index + 1}</span><strong>{item[locale]}</strong></div>)}</div>
+  </section>
+
+  <section class="content-section reveal">
+    <SectionHeading index="03" eyebrow="Timeline" title={text.educationTitle} />
+    <div class="timeline">{education.map((item) => <a class="timeline-item" href={item.link} target="_blank" rel="noreferrer"><span class="timeline-period">{item.period}</span><span class="timeline-dot"></span><span class="timeline-copy"><strong>{item.title[locale]}</strong><small>{item.detail[locale]}</small></span><span class="timeline-arrow">↗</span></a>)}</div>
+  </section>
+
+  <section class="content-section reveal">
+    <SectionHeading index="04" eyebrow="Research output" title={text.selectedPubs} action={text.viewAll} href={`${prefix}/publications/`} />
+    <div class="publication-list">{featured.map((publication) => <PublicationCard publication={publication} locale={locale} compact />)}</div>
+  </section>
+
+  <section class="content-section reveal">
+    <SectionHeading index="05" eyebrow="Build" title={text.selectedProjects} action={text.viewAll} href={`${prefix}/projects/`} />
+    <div class="project-list">{projects.map((project) => <ProjectCard project={project} locale={locale} />)}</div>
+  </section>
+
+  <section class="content-section reveal">
+    <SectionHeading index="06" eyebrow="Recognition" title={text.awardsTitle} />
+    <div class="award-list">{awards.map((award, index) => <div class="award-item"><span class="award-index">{String(index + 1).padStart(2, '0')}</span><span class="award-title">{award[locale]}</span><span class="award-level">{award.level}</span></div>)}</div>
+  </section>
+
+  <section class="content-section research-note reveal">
+    <SectionHeading index="07" eyebrow="Field note" title={text.noteTitle} action={text.readMore} href={`${prefix}/notes/`} />
+    <details class="note-disclosure"><summary><span class="note-summary-title">{locale === 'zh' ? '什么是预测性业务流程监控？' : 'What is Predictive Process Monitoring?'}</span><span class="note-summary-hint">{locale === 'zh' ? '展开研究说明' : 'Open research explainer'} <span>＋</span></span></summary><div class="note-content"><p>{locale === 'zh' ? '给定一个正在执行的流程及其已经发生的事件前缀，模型预测接下来最可能发生的活动、剩余时间或最终结果。' : 'Given a running case and its observed event prefix, a model predicts the next activity, remaining time, or likely outcome.'}</p><div class="flow-row"><span>Business process</span><i>→</i><span>Event log</span><i>→</i><span>Running prefix</span><i>→</i><span>Future state</span></div><div class="note-columns"><div><b>Methods</b><p>Rules → ML → LSTM → GNN → Transformer / LLM</p></div><div><b>Why it matters</b><p>{locale === 'zh' ? '提前发现延迟、风险和资源瓶颈，帮助流程做出主动干预。' : 'It surfaces delays, risks, and resource bottlenecks early enough for intervention.'}</p></div></div></div></details>
+  </section>
+
+  <section class="content-section reveal">
+    <SectionHeading index="08" eyebrow="Snapshot" title={text.statsTitle} />
+    <div class="stats-grid">{stats.map((stat) => <div class="stat-card"><strong>{stat.value}</strong><span>{stat[locale]}</span></div>)}</div>
+  </section>
+</Layout>

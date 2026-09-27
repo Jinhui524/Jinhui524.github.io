@@ -1,0 +1,5 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "talkmap", "markdown_generator", "assets", "_sass", "_includes", "_layouts", "_pages", "_publications", "_portfolio", "_posts"]
+}

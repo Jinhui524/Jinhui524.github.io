@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../components/Layout.astro';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import { i18n } from '../../../data/site';
+const locale = 'en';
+const notes = await getCollection('notes');
+---
+<Layout locale={locale} title={i18n[locale].noteTitle} wide><section class="page-intro reveal"><p class="hero-eyebrow"><span class="pulse-dot"></span>Notes & learning</p><h2>AI Notes</h2><p>Reading, experiments, and long-term learning paths in one place.</p></section><section class="content-section reveal"><SectionHeading index="01" eyebrow="Archive" title="Notes" /><div class="note-list">{notes.map((note) => <a class="note-card" href={`/en/notes/${note.data.slug}/`}><span class="note-date">{note.data.date}</span><strong>{note.data.titleEn}</strong><p>{note.data.excerptEn}</p><span class="text-link">Read note ↗</span></a>)}</div></section></Layout>

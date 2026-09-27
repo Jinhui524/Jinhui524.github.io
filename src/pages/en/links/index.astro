@@ -1,0 +1,7 @@
+---
+import Layout from '../../../components/Layout.astro';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import { linkGroups, i18n } from '../../../data/site';
+const locale = 'en';
+---
+<Layout locale={locale} title={i18n[locale].linksTitle} wide><section class="page-intro reveal"><p class="hero-eyebrow"><span class="pulse-dot"></span>People, places & tools</p><h2>Links</h2><p>A small directory of academic, development, and learning paths.</p></section><section class="content-section reveal">{linkGroups.map((group, index) => <div class="link-group"><SectionHeading index={String(index + 1).padStart(2, '0')} eyebrow="Directory" title={group.title[locale]} /><div class="link-grid">{group.items.map((item) => <a class="link-card" href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noreferrer' : undefined}><span class="link-card-mark">↗</span><strong>{item.name}</strong><p>{item.description[locale]}</p></a>)}</div></div>)}</section></Layout>

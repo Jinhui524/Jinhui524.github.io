@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../components/Layout.astro';
+import { i18n } from '../../data/site';
+export async function getStaticPaths() { return (await getCollection('projects')).map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } })); }
+const { entry } = Astro.props;
+const p = entry.data;
+---
+<Layout locale="zh" title={p.titleZh} description={p.excerptZh} wide><article class="detail-page reveal"><a class="back-link" href="/projects/">← {i18n.zh.back}</a><div class="detail-header"><div class="card-topline"><span class="paper-venue">{p.levelZh}</span><span class="project-role">{p.roleZh}</span></div><h2>{p.titleZh}</h2><p class="detail-subtitle">{p.excerptZh}</p></div><div class="detail-grid"><section><p class="detail-label">{i18n.zh.overview}</p><p>{p.overviewZh}</p></section><section><p class="detail-label">{i18n.zh.contribution}</p><p>{p.contributionZh}</p></section></div><div class="tag-row detail-tags">{p.tags.map((tag) => <span>{tag}</span>)}</div></article></Layout>

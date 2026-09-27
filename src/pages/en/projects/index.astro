@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../components/Layout.astro';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import { i18n } from '../../../data/site';
+const locale = 'en';
+const text = i18n[locale];
+const projects = await getCollection('projects');
+---
+<Layout locale={locale} title={text.selectedProjects} wide><section class="page-intro reveal"><p class="hero-eyebrow"><span class="pulse-dot"></span>Build & experiment</p><h2>{text.selectedProjects}</h2><p>From research prototypes to usable systems, this is where I document experiments that became tangible.</p></section><section class="content-section reveal"><SectionHeading index="01" eyebrow="Portfolio" title="Projects" /><div class="project-list">{projects.map((project) => <ProjectCard project={project} locale={locale} />)}</div></section></Layout>
