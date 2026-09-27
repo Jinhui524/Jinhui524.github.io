@@ -1,5 +1,5 @@
 ---
-import { i18n, navItems, type Locale } from '../data/site';
+import { blogCategories, i18n, navItems, profile, type Locale } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -10,24 +10,63 @@ const { locale, localizedPath } = Astro.props;
 const text = i18n[locale];
 const currentPath = Astro.url.pathname.replace(/^\/en/, '') || '/';
 const localePrefix = locale === 'en' ? '/en' : '';
+const withLocale = (href: string) => `${localePrefix}${href}`;
+const isActive = (href: string) => currentPath === href || (href !== '/' && currentPath.startsWith(href));
 ---
 
 <header class="site-header" data-header data-show="true">
   <div class="header-inner">
-    <a class="brand" href={`${localePrefix}/`} aria-label="Jinhui Luo home">
-      <span class="brand-copy"><strong>Jinhui Luo</strong><small>{locale === 'zh' ? '学术主页' : 'Academic homepage'}</small></span>
+    <a class="brand" href={`${localePrefix}/`} aria-label={`${profile.name} home`}>
+      <span class="brand-copy">
+        <strong>{profile.name}</strong>
+        <small>{locale === 'zh' ? '学术主页' : 'Academic homepage'}</small>
+      </span>
     </a>
+
     <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-nav">
       <span class="sr-only">{text.menu}</span><span class="menu-lines" aria-hidden="true"></span>
     </button>
+
     <nav id="primary-nav" class="primary-nav" data-mobile-nav aria-label="Primary navigation">
-      {navItems.map((item) => {
-        const href = item.href === '/' ? `${localePrefix}/` : `${localePrefix}${item.href}`;
-        const active = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
-        return <a class:list={{ active }} href={href}>{item[locale]}</a>;
-      })}
+      <div class:list={['nav-dropdown', { active: blogCategories.some((item) => isActive(item.href)) }]}>
+        <button class="nav-dropdown-toggle" type="button" aria-expanded="false" data-dropdown-toggle>
+          Blog <span aria-hidden="true">⌄</span>
+        </button>
+        <div class="nav-dropdown-menu" data-dropdown-menu>
+          {blogCategories.map((item) => <a class:list={{ active: isActive(item.href) }} href={withLocale(item.href)}>{item[locale]}</a>)}
+        </div>
+      </div>
+
+      {navItems.map((item) => <a class:list={{ active: isActive(item.href) }} href={withLocale(item.href)}>{item[locale]}</a>)}
       <a class="language-link" href={localizedPath} aria-label={text.switchLanguage}>{text.switchLanguage}</a>
       <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle color theme" aria-pressed="false"><span aria-hidden="true">◐</span></button>
     </nav>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const bindDropdowns = () => {
+      document.querySelectorAll('[data-dropdown-toggle]').forEach((button) => {
+        if (button.dataset.bound === 'true') return;
+        button.dataset.bound = 'true';
+        button.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const parent = button.closest('.nav-dropdown');
+          const expanded = parent?.classList.toggle('is-open') ?? false;
+          button.setAttribute('aria-expanded', String(expanded));
+        });
+      });
+    };
+    document.addEventListener('click', (event) => {
+      document.querySelectorAll('.nav-dropdown.is-open').forEach((dropdown) => {
+        if (!dropdown.contains(event.target)) {
+          dropdown.classList.remove('is-open');
+          dropdown.querySelector('[data-dropdown-toggle]')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+    document.addEventListener('astro:page-load', bindDropdowns);
+    bindDropdowns();
+  })();
+</script>

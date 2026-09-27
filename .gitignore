@@ -17,8 +17,11 @@ dist/
 /vendor/
 .bundle/
 
-# Ignore folders related to IDEs
-.vscode/
+# Ignore folders related to IDEs, while keeping shared extension
+# recommendations versioned for contributors.
+.vscode/*
+!.vscode/
+!.vscode/extensions.json
 
 # Ignore files created by MacOS
 .DS_Store

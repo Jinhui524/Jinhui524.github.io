@@ -21,19 +21,25 @@ export const profile = {
   scholar: 'https://scholar.google.com/',
   university: 'https://www.hnust.edu.cn/',
   avatar: '/images/kiyana.jpg',
+  scholarProfile: 'https://scholar.google.com/citations',
 };
 
 export const navItems = [
-  { href: '/', zh: '首页', en: 'Home' },
-  { href: '/all/', zh: '全部', en: 'All' },
-  { href: '/research/', zh: '研究', en: 'Research' },
-  { href: '/technical/', zh: '技术', en: 'Technical' },
   { href: '/academic/', zh: '学术', en: 'Academic' },
   { href: '/projects/', zh: '项目', en: 'Projects' },
   { href: '/links/', zh: '链接', en: 'Links' },
   { href: '/about/', zh: '关于', en: 'About' },
   { href: '/search/', zh: '搜索', en: 'Search' },
 ];
+
+export const blogCategories = [
+  { href: '/all/', zh: '全部', en: 'All' },
+  { href: '/research/', zh: '研究', en: 'Research' },
+  { href: '/technical/', zh: '技术', en: 'Technical' },
+  { href: '/notes/', zh: '随笔', en: 'Notes' },
+];
+
+export const siteStartDate = '2026-04-14';
 
 export const researchInterests = [
   { zh: '图数据挖掘', en: 'Graph Data Mining' },

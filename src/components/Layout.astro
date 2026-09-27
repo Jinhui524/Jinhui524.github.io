@@ -19,6 +19,7 @@ const otherLocale = locale === 'zh' ? 'en' : 'zh';
 const path = Astro.url.pathname.replace(/^\/en(?=\/|$)/, '') || '/';
 const isNotFound = path.startsWith('/404');
 const localizedPath = isNotFound ? (otherLocale === 'en' ? '/en/' : '/') : (otherLocale === 'en' ? `/en${path === '/' ? '/' : path}` : path);
+const socialImage = Astro.site ? new URL('/images/profile.png', Astro.site).href : '/images/profile.png';
 ---
 
 <!doctype html>
@@ -31,8 +32,11 @@ const localizedPath = isNotFound ? (otherLocale === 'en' ? '/en/' : '/') : (othe
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Jinhui Luo · Academic Homepage" />
+    <meta property="og:image" content={socialImage} />
     <link rel="icon" href="/images/favicon.svg" />
     <link rel="alternate" hreflang={otherLocale} href={localizedPath} />
+    <link rel="canonical" href={Astro.url.href} />
     <title>{pageTitle}</title>
     <ClientRouter />
     <script is:inline>
@@ -52,8 +56,14 @@ const localizedPath = isNotFound ? (otherLocale === 'en' ? '/en/' : '/') : (othe
         <slot />
       </main>
       <footer class="site-footer">
-        <span>© {new Date().getFullYear()} {profile.name} · {text.footer}</span>
-        <a href="https://github.com/Jinhui524/Jinhui524.github.io" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <div class="site-footer__copy">
+          <span>© {new Date().getFullYear()} {profile.name} · {text.footer}</span>
+          <span>Based on <a href="https://github.com/Axi404/Axi-Theme" target="_blank" rel="noreferrer">Axi-Theme</a> · Apache-2.0</span>
+        </div>
+        <div class="site-footer__links">
+          <a href="https://github.com/Jinhui524/Jinhui524.github.io" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="/links/">Links ↗</a>
+        </div>
       </footer>
     </div>
     <script is:inline>

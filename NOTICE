@@ -1,0 +1,31 @@
+Axi-Theme attribution
+=====================
+
+This website includes a substantial visual and structural adaptation of
+**Axi-Theme**, an Astro theme by Axi404:
+
+<https://github.com/Axi404/Axi-Theme>
+
+Axi-Theme is licensed under the Apache License, Version 2.0. The canonical
+license text is preserved in [`Axi-Theme.Apache-2.0.txt`](Axi-Theme.Apache-2.0.txt)
+and is also available at:
+
+<https://www.apache.org/licenses/LICENSE-2.0>
+
+The Axi-Theme license terms apply to the upstream-derived portions of this
+adaptation. This project does not redistribute Axi404's personal profile,
+articles, avatar, or other personal assets. Those materials were replaced with
+the profile and research content of Jinhui Luo.
+
+Local modifications in this repository include:
+
+* adapting the Astro layout and interactions for a bilingual academic homepage;
+* replacing the upstream profile, navigation labels, publications, projects,
+  education, links, and statistics with Jinhui Luo's information;
+* adding academic archive, project, search, compatibility routes, and GitHub
+  contribution fallbacks; and
+* adding accessibility, responsive behavior, and GitHub Pages integration
+  specific to this repository.
+
+The repository's pre-existing MIT license is retained in `LICENSE`. Nothing in
+this notice changes the terms of that license or of the Apache License 2.0.

@@ -2,10 +2,11 @@
 import { getCollection } from 'astro:content';
 import Layout from './Layout.astro';
 import AxiSection from './AxiSection.astro';
+import GitHubActivityCalendar from './GitHubActivityCalendar.astro';
 import ProfileHeader from './ProfileHeader.astro';
 import PublicationCard from './PublicationCard.astro';
 import ProjectCard from './ProjectCard.astro';
-import { education, i18n, profile, researchInterests, stats, type Locale } from '../data/site';
+import { education, i18n, profile, researchInterests, siteStartDate, type Locale } from '../data/site';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -13,8 +14,20 @@ const text = i18n[locale];
 const prefix = locale === 'en' ? '/en' : '';
 const publications = await getCollection('publications');
 const projects = await getCollection('projects');
+const notes = await getCollection('notes');
 const featuredSlugs = ['llm4ppm', 'fhgsn', 'aligning-graphs'];
 const featured = featuredSlugs.map((slug) => publications.find((entry) => entry.data.slug === slug)).filter(Boolean);
+const contentBodies = [...publications, ...projects, ...notes].map((entry) => entry.body ?? '');
+const totalWords = contentBodies.reduce((total, body) => total + (body.match(/[A-Za-z0-9_'-]+|[\u4e00-\u9fff]/g)?.length ?? 0), 0);
+const datedEntries = [...publications, ...notes].map((entry) => entry.data.date).filter(Boolean).sort();
+const latestDate = datedEntries.at(-1) ?? siteStartDate;
+const daysOnline = Math.max(1, Math.floor((Date.now() - new Date(siteStartDate).getTime()) / 86400000));
+const formattedDate = new Intl.DateTimeFormat(locale === 'zh' ? 'zh-CN' : 'en-US', { dateStyle: 'medium' }).format(new Date(latestDate));
+const statsCards = [
+  { value: String(daysOnline), label: locale === 'zh' ? '在线天数' : 'Days online' },
+  { value: formattedDate, label: locale === 'zh' ? '最近更新' : 'Last updated' },
+  { value: String(totalWords), label: locale === 'zh' ? '内容字数' : 'Total words' },
+];
 ---
 
 <Layout locale={locale} description={profile.bio[locale]}>
@@ -25,6 +38,7 @@ const featured = featuredSlugs.map((slug) => publications.find((entry) => entry.
         <p>{locale === 'zh' ? `我目前是${profile.affiliationZh}数据科学与大数据技术专业大四学生，并进入${profile.graduateAffiliationZh}硕士阶段（研0）。` : `I am a senior in Data Science and Big Data Technology at ${profile.affiliation} and a graduate student at ${profile.graduateAffiliation}.`}</p>
         <p>{locale === 'zh' ? '我的研究关注图数据挖掘、图神经网络、大语言模型、Agent 与事件序列预测，探索结构化数据与语义建模之间的连接。' : 'My work connects graph data mining, graph neural networks, large language models, AI agents, and event sequence prediction through structured and semantic modeling.'}</p>
       </div>
+      <a class="button button-quiet" href={`${prefix}/about/`}>{text.viewAll} <span aria-hidden="true">↗</span></a>
     </AxiSection>
 
     <AxiSection title={text.educationTitle} id="education">
@@ -39,7 +53,7 @@ const featured = featuredSlugs.map((slug) => publications.find((entry) => entry.
 
     <AxiSection title={text.selectedPubs} id="publications">
       <div class="publication-list axi-publication-list">{featured.map((publication) => publication && <PublicationCard publication={publication} locale={locale} compact />)}</div>
-      <a class="axi-more-link" href={`${prefix}/publications/`}>{text.viewAll} <span aria-hidden="true">↗</span></a>
+      <a class="axi-more-link" href={`${prefix}/academic/`}>{text.viewAll} <span aria-hidden="true">↗</span></a>
     </AxiSection>
 
     <AxiSection title={text.selectedProjects} id="projects">
@@ -48,7 +62,9 @@ const featured = featuredSlugs.map((slug) => publications.find((entry) => entry.
     </AxiSection>
 
     <AxiSection title={text.statsTitle} id="statistics">
-      <div class="stats-grid axi-stats-grid">{stats.slice(0, 3).map((stat) => <div class="stat-card"><strong>{stat.value}</strong><span>{stat[locale]}</span></div>)}</div>
+      <div class="stats-grid axi-stats-grid">{statsCards.map((stat) => <div class="stat-card"><strong>{stat.value}</strong><span>{stat.label}</span></div>)}</div>
+      <div class="stats-posts-row"><span>{locale === 'zh' ? '研究笔记与文章' : 'Research notes and posts'}</span><strong>{notes.length}</strong></div>
+      <GitHubActivityCalendar username="Jinhui524" locale={locale} />
     </AxiSection>
 
     <AxiSection title={text.contact} id="contact">
