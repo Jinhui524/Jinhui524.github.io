@@ -80,7 +80,7 @@ const symbolMutedClass = "text-muted-foreground/80 dark:text-slate-400/80";
   <div class='flex flex-col gap-4 sm:flex-row'>
     {
       publication.image && (
-        <div class='publication-figure shrink-0 sm:w-36 md:w-44'>
+        <div class='publication-figure shrink-0 sm:w-44 md:w-56'>
           {
             publication.detailHref ? (
               <a href={publication.detailHref} aria-label={`View details for ${publication.title}`} class='block overflow-hidden rounded-lg border border-border/70 bg-muted/30'>
@@ -233,10 +233,10 @@ const symbolMutedClass = "text-muted-foreground/80 dark:text-slate-400/80";
 </div>
 
 <style>
-  .publication-figure img { max-height: 8.25rem; }
+  .publication-figure img { max-height: 11rem; }
   @media (max-width: 640px) {
     .publication-figure { width: 100%; }
-    .publication-figure img { max-height: 11rem; }
+    .publication-figure img { max-height: 13rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     .publication-figure img { transition: none; }

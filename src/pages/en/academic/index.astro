@@ -20,8 +20,8 @@ const education = [
 const publications = getLocalizedPublications('en')
 
 const awards = [
-  { title: 'Competitions and engineering', items: ['Second Prize, Chuanzhi Cup National IT Skills Competition.', 'Third Prize, 2025 RAICOM Robotics Developer Competition.', 'First Prize, 2026 RAICOM Algorithm Optimization Competition.'] },
-  { title: 'Algorithms and AI', items: ['First Prize, China Robot and Artificial Intelligence Competition, Hunan.', 'First Prize, Hunan Provincial Collegiate Programming Contest.', 'Second Prize, Lanqiao Cup Software and Information Technology Competition.'] }
+  { title: 'National Awards', items: [['2026.07.15', 'Second Prize, 2026 RAICOM Robotics Developer Competition · Algorithm Optimization.'], ['2026.07.28', 'Second Prize, 28th China Robot and Artificial Intelligence Competition.'], ['2025.05.08', 'Second Prize, 7th Chuanzhi Cup National IT Skills Competition.'], ['2025.08.27', 'Third Prize, 2025 RAICOM Robotics Developer Competition · Programming.'], ['2026.07.28', 'Third Prize, 28th China Robot and Artificial Intelligence Competition.']] },
+  { title: 'Provincial Awards', items: [['2025.11.02', 'First Prize, 21st Hunan Provincial Collegiate Programming Contest.'], ['2026.06.12', 'Second Prize, 19th China Collegiate Computer Design Competition · Central South Region.'], ['2025.05.26', 'Second Prize, 16th Lanqiao Cup Software and Information Technology Competition.'], ['2026.06.22', 'Third Prize, 2026 China Collegiate Computer Contest · Network Challenge, Central China.']] }
 ]
 ---
 
@@ -47,7 +47,7 @@ const awards = [
   <div id='academic-toast' class='academic-toast' aria-live='polite' aria-atomic='true'></div>
 
   <h2 id='awards'>Awards<a class='anchor' href='#awards'>#</a></h2>
-  <div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>{awards.map((group, index) => <section class='rounded-xl border border-border bg-card p-5'><div class='mb-4 flex items-center gap-3'><span class='academic-award-index'>{String(index + 1).padStart(2, '0')}</span><h3 class='m-0 text-lg font-semibold text-foreground'>{group.title}</h3></div><ul class='m-0 space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground'>{group.items.map((item) => <li>{item}</li>)}</ul></section>)}</div>
+  <div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>{awards.map((group, index) => <section class='rounded-xl border border-border bg-card p-5'><div class='mb-4 flex items-center gap-3'><span class='academic-award-index'>{String(index + 1).padStart(2, '0')}</span><h3 class='m-0 text-lg font-semibold text-foreground'>{group.title}</h3></div><ul class='m-0 space-y-2 text-sm leading-relaxed text-muted-foreground'>{group.items.map(([date, item]) => <li class='flex gap-3'><time class='shrink-0 font-mono text-xs text-muted-foreground/80'>{date}</time><span>{item}</span></li>)}</ul></section>)}</div>
 </PageLayout>
 
 <script is:inline>

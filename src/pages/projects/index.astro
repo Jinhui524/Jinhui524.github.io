@@ -26,11 +26,15 @@ const headings = [
   />
   <SponsorshipSection
     title='赞助'
-    description='如果我的研究与开源工作对你有所帮助，欢迎留下支持。二维码会在后续更新。'
+    description='如果我的研究与开源工作对你有所帮助，欢迎留下支持。'
     emptyMessage='目前还没有赞助记录，感谢每一份关注与支持。'
     methods={[
-      { name: '微信', label: '微信赞助', placeholder: '二维码待补充' },
-      { name: '支付宝', label: '支付宝赞助', placeholder: '二维码待补充' }
+      { name: '微信', label: '微信赞助', image: '/images/sponsors/wechat.png' },
+      { name: '支付宝', label: '支付宝赞助', image: '/images/sponsors/alipay.png' }
+    ]}
+    sponsors={[
+      { name: '牢自', amount: '¥100.00', date: '2026-09-24' },
+      { name: '牢记', amount: '¥100.00', date: '2026-09-24' }
     ]}
   />
 </PageLayout>

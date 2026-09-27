@@ -33,6 +33,11 @@ const {
   emptyMessage = '目前还没有赞助记录，感谢每一份关注与支持。',
   sponsorTitle = 'Sponsors'
 } = Astro.props
+
+const totalAmount = sponsors.reduce((total, sponsor) => {
+  const amount = Number.parseFloat((sponsor.amount || '').replace(/[^0-9.]/g, ''))
+  return total + (Number.isFinite(amount) ? amount : 0)
+}, 0)
 ---
 
 <section id='sponsorship' class={cn('mt-12 flex flex-col gap-y-6', className)} aria-labelledby='sponsorship-title'>
@@ -76,7 +81,7 @@ const {
   <div class='mt-2 rounded-2xl border border-border bg-card'>
     <div class='flex items-center justify-between gap-4 border-b border-border px-5 py-4'>
       <h3 class='m-0 text-base font-semibold'>{sponsorTitle} ({sponsors.length})</h3>
-      {sponsors.length > 0 && <span class='text-sm text-muted-foreground'>Thank you for your support</span>}
+      {sponsors.length > 0 ? <span class='text-sm text-muted-foreground'>Total: ¥{totalAmount.toFixed(2)}</span> : <span class='text-sm text-muted-foreground'>Total: ¥0.00</span>}
     </div>
     {
       sponsors.length > 0 ? (

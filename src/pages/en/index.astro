@@ -8,6 +8,8 @@ import avatar from '@/assets/avatar.png'
 import config from '@/site-config'
 import GitHubActivityCalendar from '@/components/home/GitHubActivityCalendar.astro'
 import { newsItems } from '@/data/news'
+
+const newsSlides = Array.from({ length: Math.ceil(Math.min(newsItems.length, 6) / 4) }, (_, index) => newsItems.slice(0, 6).slice(index * 4, index * 4 + 4))
 ---
 
 <PageLayout meta={{ title: 'Home' }} highlightColor='#659EB966'>
@@ -44,24 +46,31 @@ import { newsItems } from '@/data/news'
 
       <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
         <Section title='About' class='home-section reveal-section'>
-          <p class='text-muted-foreground'>I am Jinhui Luo, a data science student at Hunan University of Science and Technology and a graduate student at Southeast University. My work connects graph data, graph neural networks, foundation models, agents, and event sequence prediction.</p>
+          <p class='about-intro text-muted-foreground'><strong>Hi, I’m Jinhui Luo <span class='wave-hand' aria-hidden='true'>👋</span></strong>, a data science student at Hunan University of Science and Technology and an incoming graduate student at Southeast University’s School of Computer Science and Engineering. My work connects graph data, graph neural networks, foundation models, agents, and event sequence prediction.</p>
           <Button title='More about me' class='w-fit self-end' href='/en/about' style='ahead' />
         </Section>
         <Section title='🔥 News' class='home-section reveal-section'>
-          <div class='home-news' aria-label='News'>
-            {newsItems.map((item) => {
-              const href = item.href?.startsWith('/') ? `/en${item.href}` : item.href || '/en/academic'
-              const external = href.startsWith('http')
-              return <a class='home-news-row group' href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
-                <time class='home-news-date' datetime={item.date.replace('.', '-')}>{item.date}</time>
-                <span class='home-news-emoji' aria-hidden='true'>{item.emoji}</span>
-                <span class='home-news-content'>
-                  <span class='home-news-meta'><span class='home-news-status'>{item.statusEn}</span><span class='home-news-label'>{item.labelEn}</span></span>
-                  <span class='home-news-title'>{item.titleEn}</span>
-                </span>
-                <span class='home-news-arrow' aria-hidden='true'>↗</span>
-              </a>
-            })}
+          <div class='home-news-carousel' data-news-carousel aria-label='News timeline'>
+            <div class='home-news-track' data-news-track tabindex='0'>
+              {newsSlides.map((slide, slideIndex) => (
+                <div class='home-news-slide' data-news-slide aria-label={`News page ${slideIndex + 1} of ${newsSlides.length}`}>
+                  {slide.map((item) => {
+                    const href = item.href?.startsWith('/') ? `/en${item.href}` : item.href || '/en/academic'
+                    const external = href.startsWith('http')
+                    return <a class='home-news-row group' href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+                      <time class='home-news-date' datetime={item.date.replace('.', '-')}>{item.date}</time>
+                      <span class='home-news-emoji' aria-hidden='true'>{item.emoji}</span>
+                      <span class='home-news-content'>
+                        <span class='home-news-meta'><span class='home-news-status'>{item.statusEn}</span><span class='home-news-label'>{item.labelEn}</span></span>
+                        <span class='home-news-title'>{item.titleEn}</span>
+                      </span>
+                      <span class='home-news-arrow' aria-hidden='true'>↗</span>
+                    </a>
+                  })}
+                </div>
+              ))}
+            </div>
+            {newsSlides.length > 1 && <div class='home-news-controls'><button type='button' data-news-prev aria-label='Previous news'>←</button><span data-news-page>1 / {newsSlides.length}</span><button type='button' data-news-next aria-label='Next news'>→</button></div>}
           </div>
         </Section>
         <Section title='Education' class='home-section reveal-section'>
@@ -109,6 +118,23 @@ import { newsItems } from '@/data/news'
   }
   updateWatermark()
   window.addEventListener('scroll', updateWatermark, { passive: true })
+
+  const newsTrack = document.querySelector<HTMLElement>('[data-news-track]')
+  const newsSlidesEl = newsTrack ? Array.from(newsTrack.querySelectorAll<HTMLElement>('[data-news-slide]')) : []
+  const pageLabel = document.querySelector<HTMLElement>('[data-news-page]')
+  let newsIndex = 0
+  const showNewsSlide = (index: number) => {
+    if (!newsTrack || newsSlidesEl.length < 2) return
+    newsIndex = (index + newsSlidesEl.length) % newsSlidesEl.length
+    newsTrack.scrollTo({ left: newsIndex * newsTrack.clientWidth, behavior: reducedMotion.matches ? 'auto' : 'smooth' })
+    if (pageLabel) pageLabel.textContent = `${newsIndex + 1} / ${newsSlidesEl.length}`
+  }
+  document.querySelector('[data-news-prev]')?.addEventListener('click', () => showNewsSlide(newsIndex - 1))
+  document.querySelector('[data-news-next]')?.addEventListener('click', () => showNewsSlide(newsIndex + 1))
+  newsTrack?.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') showNewsSlide(newsIndex - 1)
+    if (event.key === 'ArrowRight') showNewsSlide(newsIndex + 1)
+  })
 </script>
 
 <style>
@@ -125,6 +151,15 @@ import { newsItems } from '@/data/news'
     transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, transform 180ms ease;
   }
 
+  .wave-hand { display: inline-block; transform-origin: 72% 80%; animation: wave-hand 2.8s ease-in-out infinite; }
+  @keyframes wave-hand {
+    0%, 62%, 100% { transform: rotate(0deg); }
+    68% { transform: rotate(12deg); }
+    74% { transform: rotate(-8deg); }
+    80% { transform: rotate(10deg); }
+    86% { transform: rotate(-4deg); }
+  }
+
   .quick-link:hover,
   .quick-link:focus-visible {
     border-color: hsl(var(--primary) / 0.45);
@@ -133,7 +168,10 @@ import { newsItems } from '@/data/news'
     transform: translateY(-1px);
   }
 
-  .home-news { overflow: hidden; border-top: 1px solid hsl(var(--border) / 0.7); }
+  .home-news-carousel { overflow: hidden; border-top: 1px solid hsl(var(--border) / 0.7); }
+  .home-news-track { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; scroll-snap-type: x mandatory; }
+  .home-news-track::-webkit-scrollbar { display: none; }
+  .home-news-slide { min-width: 100%; scroll-snap-align: start; }
   .home-news-row { display: flex; align-items: flex-start; gap: 0.75rem; border-bottom: 1px solid hsl(var(--border) / 0.7); border-left: 2px solid transparent; padding: 0.8rem 0.65rem; color: inherit; text-decoration: none; transition: background-color 180ms ease, padding-left 180ms ease, border-color 180ms ease; }
   .home-news-row:hover, .home-news-row:focus-visible { background: hsl(var(--muted) / 0.46); border-left-color: hsl(var(--primary) / 0.7); padding-left: 0.9rem; }
   .home-news-date { min-width: 4.4rem; padding-top: 0.2rem; color: hsl(var(--muted-foreground) / 0.82); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.72rem; }
@@ -146,13 +184,16 @@ import { newsItems } from '@/data/news'
   .group:hover .home-news-title, .group:focus-visible .home-news-title { color: hsl(var(--primary)); }
   .home-news-arrow { align-self: center; color: hsl(var(--muted-foreground)); opacity: 0.65; transition: color 180ms ease, transform 180ms ease; }
   .group:hover .home-news-arrow, .group:focus-visible .home-news-arrow { color: hsl(var(--primary)); transform: translate(2px, -2px); }
+  .home-news-controls { display: flex; align-items: center; justify-content: flex-end; gap: 0.6rem; border-top: 1px solid hsl(var(--border) / 0.7); padding: 0.55rem 0.65rem 0; color: hsl(var(--muted-foreground)); font: 0.7rem ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .home-news-controls button { border: 1px solid hsl(var(--border) / 0.7); border-radius: 9999px; padding: 0.15rem 0.5rem; color: hsl(var(--muted-foreground)); transition: border-color 180ms ease, color 180ms ease; }
+  .home-news-controls button:hover, .home-news-controls button:focus-visible { border-color: hsl(var(--primary) / 0.55); color: hsl(var(--primary)); }
   .home-scroll-cue { display: flex; align-items: center; gap: 0.45rem; color: hsl(var(--muted-foreground) / 0.72); font-size: 0.68rem; letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase; }
   .home-scroll-cue-line { display: inline-block; width: 1.9rem; height: 1px; background: hsl(var(--primary) / 0.6); }
   .reveal-section { opacity: 0; transform: translateY(12px); transition: opacity 500ms ease, transform 500ms ease; }
   .reveal-section.is-visible { opacity: 1; transform: translateY(0); }
 
   @media (prefers-reduced-motion: reduce) {
-    .quick-link { transition: none; }
+    .quick-link, .wave-hand { transition: none; animation: none; }
   }
 
   .research-watermark {
