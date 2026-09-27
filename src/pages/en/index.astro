@@ -37,10 +37,10 @@ import { newsItems } from '@/data/news'
         </div>
       </div>
 
-      <div class='home-scroll-cue' aria-hidden='true'>
+      <a class='home-scroll-cue' href='#content' aria-label='Scroll to content'>
         <span class='home-scroll-cue-line'></span>
         <span>Scroll to explore</span>
-      </div>
+      </a>
 
       <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
         <Section title='About' class='home-section reveal-section'>
@@ -146,7 +146,7 @@ import { newsItems } from '@/data/news'
   .group:hover .home-news-title, .group:focus-visible .home-news-title { color: hsl(var(--primary)); }
   .home-news-arrow { align-self: center; color: hsl(var(--muted-foreground)); opacity: 0.65; transition: color 180ms ease, transform 180ms ease; }
   .group:hover .home-news-arrow, .group:focus-visible .home-news-arrow { color: hsl(var(--primary)); transform: translate(2px, -2px); }
-  .home-scroll-cue { display: flex; align-items: center; gap: 0.45rem; color: hsl(var(--muted-foreground) / 0.72); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .home-scroll-cue { display: flex; align-items: center; gap: 0.45rem; color: hsl(var(--muted-foreground) / 0.72); font-size: 0.68rem; letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase; }
   .home-scroll-cue-line { display: inline-block; width: 1.9rem; height: 1px; background: hsl(var(--primary) / 0.6); }
   .reveal-section { opacity: 0; transform: translateY(12px); transition: opacity 500ms ease, transform 500ms ease; }
   .reveal-section.is-visible { opacity: 1; transform: translateY(0); }
