@@ -21,7 +21,6 @@ export const profile = {
   scholar: 'https://scholar.google.com/',
   university: 'https://www.hnust.edu.cn/',
   avatar: '/images/kiyana.jpg',
-  scholarProfile: 'https://scholar.google.com/citations',
 };
 
 export const navItems = [
