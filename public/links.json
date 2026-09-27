@@ -1,0 +1,28 @@
+{
+  "friends": [
+    {
+      "id_name": "academic-links",
+      "desc": "学术与开发入口",
+      "link_list": [
+        {
+          "name": "Hunan University of Science and Technology",
+          "link": "https://www.hnust.edu.cn/",
+          "avatar": "https://www.hnust.edu.cn/favicon.ico",
+          "intro": "湖南科技大学"
+        },
+        {
+          "name": "Service Computing Lab",
+          "link": "https://guoshengkang.github.io/",
+          "avatar": "https://guoshengkang.github.io/favicon.ico",
+          "intro": "湖南省服务计算与软件服务新技术重点实验室"
+        },
+        {
+          "name": "Jinhui Luo on GitHub",
+          "link": "https://github.com/Jinhui524",
+          "avatar": "https://github.com/Jinhui524.png",
+          "intro": "实验代码与开源项目"
+        }
+      ]
+    }
+  ]
+}

@@ -1,10 +1,23 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../components/Layout.astro';
-import AxiSection from '../../components/AxiSection.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
-import { i18n } from '../../data/site';
-const locale = 'zh';
-const projects = await getCollection('projects');
+import PageLayout from '@/layouts/CommonPage.astro'
+import ProjectSection from '@/components/projects/ProjectSection.astro'
+
+const headings = [{ depth: 2, slug: 'projects', text: 'Projects' }]
 ---
-<Layout locale={locale} title={i18n[locale].selectedProjects} wide><AxiSection title={i18n[locale].selectedProjects} id="projects"><p class="axi-page-lead">从研究原型到可复现系统，记录我如何把想法变成实验。</p><div class="project-list axi-archive-projects">{projects.map((project) => <ProjectCard project={project} locale={locale} />)}</div></AxiSection></Layout>
+
+<PageLayout title='Projects' {headings} info={{ slug: '/projects', hideComment: true }}>
+  <p class='text-muted-foreground'>从研究原型到可复现系统，记录我如何把想法变成实验。</p>
+  <h2 id='projects' class='mb-8 text-2xl font-semibold'>Projects</h2>
+  <ProjectSection
+    project={[
+      {
+        name: '望舌观体：多平台智能中医舌诊框架',
+        description: '结合 D-FINE、SAM2 和特征引导体质分析，探索移动辅助中医舌诊。',
+        links: [
+          { type: 'site', href: 'https://github.com/Jinhui524' },
+          { type: 'github', href: 'https://github.com/Jinhui524' }
+        ]
+      }
+    ]}
+  />
+</PageLayout>

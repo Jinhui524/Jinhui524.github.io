@@ -1,77 +1,60 @@
-# Jinhui Luo · Academic Homepage
+# Jinhui Luo · Axi-Theme Academic Homepage
 
-Astro-powered bilingual research homepage for [Jinhui524.github.io](https://jinhui524.github.io/).
-
-The visual system is adapted from [Axi-Theme](https://github.com/Axi404/Axi-Theme)
-by [Axi404](https://github.com/Axi404), an Astro theme released under the
-Apache License 2.0. This repository replaces the upstream profile, content,
-assets, and data with Jinhui Luo's academic materials. See [`NOTICE`](NOTICE)
-for the third-party attribution and the scope of local changes.
+This site is built from [Axi-Theme](https://github.com/Axi404/Axi-Theme) at
+commit `c6470e7308bad839489932601e2be08f9b542e70`, with the upstream layout,
+components, styles, animations, fonts, and Astro integration retained. Axi's
+demo profile and content are replaced with Jinhui Luo's academic materials.
 
 ## Local development
 
-```bash
-npm install
-npm run dev
-```
-
-Open the local URL printed by Astro. Before committing, run:
+The project uses Node.js 22, Corepack, pnpm, Astro 5.16.8, Tailwind, MDX,
+Pagefind, and the Axi integration.
 
 ```bash
-npm run check
-npm run build
+cd /Users/jin/githubio
+corepack enable
+pnpm install --frozen-lockfile
+DEPLOYMENT_PLATFORM=github pnpm run dev
 ```
 
-The project uses Node.js 22 or newer. A GitHub Pages workflow is included at `.github/workflows/deploy-astro.yml` and deploys the `dist/` directory after pushes to `master`.
+Run the checks used by GitHub Pages before committing:
+
+```bash
+DEPLOYMENT_PLATFORM=github pnpm run check
+DEPLOYMENT_PLATFORM=github pnpm run build:github
+```
 
 ## Git and VSCode
 
-The repository remote is already configured as:
+The checkout is `/Users/jin/githubio` and the remote is already configured:
 
 ```text
 https://github.com/Jinhui524/Jinhui524.github.io.git
 ```
 
-The local checkout is `/Users/jin/githubio`. Open that folder in VSCode, sign
-in to GitHub through the Accounts menu, and use the Source Control panel for
-pull, commit, and push. The first pull can be performed from the integrated
-terminal so that the branch is explicitly rebased on `origin/master`:
+Open `/Users/jin/githubio` in VSCode, sign in through the GitHub Accounts menu,
+and use Source Control for pull, commit, and push. The terminal equivalent is:
 
 ```bash
 cd /Users/jin/githubio
-git remote -v
 git pull --rebase origin master
-```
-
-After reviewing the changes in the Source Control panel, stage and commit them,
-then push the `master` branch:
-
-```bash
 git add .
 git commit -m "Update academic homepage"
 git push origin master
 ```
 
-VSCode's GitHub Accounts integration stores authentication outside this
-repository; do not add a personal access token or credential file to the
-workspace. If Git asks for credentials in the terminal, use the same GitHub
-account that owns `Jinhui524/Jinhui524.github.io`.
-
 ## Routes
 
-- `/` and `/en/` — bilingual homepage
-- `/all/`, `/research/`, `/technical/` — Axi-style content archives
-- `/academic/` — publication archive with category filters
-- `/projects/` — project portfolio
-- `/about/` — profile, education, and research interests
-- `/search/` — client-side content search
-- `/links/` — academic and development links
+- `/` and `/en/` — Axi home page in Chinese and English
+- `/blog/` — research and technical notes
+- `/academic` — research interests, publications, and awards
+- `/projects` — research projects
+- `/links` — academic and development links
+- `/about` — education, research, awards, and copyright
+- `/search`, `/archives`, `/tags`, `/collection`, `/terms` — Axi utilities
 
 ## Attribution
 
-The Axi-inspired layout, navigation, theme toggle, profile presentation, and
-related interaction patterns are maintained as a local adaptation. Original
-academic content, copy, data collections, assets, and accessibility fixes are
-Jinhui Luo's changes. The upstream Apache 2.0 notice is preserved in
-[`NOTICE`](NOTICE); the repository's original MIT license remains in
-[`LICENSE`](LICENSE).
+The upstream Axi-Theme source is licensed under Apache-2.0. The fixed upstream
+commit and local content changes are recorded in [`NOTICE`](NOTICE) and
+[`Axi-Theme.Apache-2.0.txt`](Axi-Theme.Apache-2.0.txt).

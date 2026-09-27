@@ -1,8 +1,0 @@
----
-import { getCollection, render } from 'astro:content';
-import Layout from '../../../components/Layout.astro';
-export async function getStaticPaths() { return (await getCollection('notes')).map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } })); }
-const { entry } = Astro.props;
-const { Content } = await render(entry);
----
-<Layout locale="en" title={entry.data.titleEn} description={entry.data.excerptEn} wide><article class="detail-page article-page reveal"><a class="back-link" href="/en/technical/">← Back to notes</a><div class="detail-header"><p class="hero-eyebrow"><span class="pulse-dot"></span>{entry.data.date}</p><h2>{entry.data.titleEn}</h2><p class="detail-subtitle">{entry.data.excerptEn}</p></div><div class="markdown-content"><Content /></div></article></Layout>

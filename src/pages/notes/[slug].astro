@@ -1,6 +1,0 @@
----
-import { getCollection } from 'astro:content';
-export async function getStaticPaths() { return (await getCollection('notes')).map((entry) => ({ params: { slug: entry.data.slug }, props: { slug: entry.data.slug } })); }
-const target = `/technical/${Astro.props.slug}/`;
----
-<meta http-equiv="refresh" content={`0;url=${target}`} /><link rel="canonical" href={target} /><p>Redirecting to <a href={target}>technical note</a>…</p>

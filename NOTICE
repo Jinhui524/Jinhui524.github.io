@@ -1,31 +1,26 @@
 Axi-Theme attribution
 =====================
 
-This website includes a substantial visual and structural adaptation of
-**Axi-Theme**, an Astro theme by Axi404:
+This repository includes the upstream Axi-Theme source at commit
+`c6470e7308bad839489932601e2be08f9b542e70`:
 
 <https://github.com/Axi404/Axi-Theme>
 
-Axi-Theme is licensed under the Apache License, Version 2.0. The canonical
-license text is preserved in [`Axi-Theme.Apache-2.0.txt`](Axi-Theme.Apache-2.0.txt)
-and is also available at:
+The upstream source is licensed under the Apache License, Version 2.0. The
+complete license text is preserved in `Axi-Theme.Apache-2.0.txt`.
 
-<https://www.apache.org/licenses/LICENSE-2.0>
+Local modifications in this repository are limited to:
 
-The Axi-Theme license terms apply to the upstream-derived portions of this
-adaptation. This project does not redistribute Axi404's personal profile,
-articles, avatar, or other personal assets. Those materials were replaced with
-the profile and research content of Jinhui Luo.
+* replacing the upstream author, title, description, avatar, favicon, domain,
+  links, blog content, academic profile, publications, projects, education,
+  awards, and statistics with Jinhui Luo's information;
+* configuring the upstream Astro integration for GitHub Pages and the
+  `jinhui524.github.io` domain;
+* removing Axi demo-only personal assets, sponsorship content, analytics,
+  comments, and friend-circle services; and
+* updating README, VSCode recommendations, deployment workflow, and GitHub
+  Pages documentation for this repository.
 
-Local modifications in this repository include:
-
-* adapting the Astro layout and interactions for a bilingual academic homepage;
-* replacing the upstream profile, navigation labels, publications, projects,
-  education, links, and statistics with Jinhui Luo's information;
-* adding academic archive, project, search, compatibility routes, and GitHub
-  contribution fallbacks; and
-* adding accessibility, responsive behavior, and GitHub Pages integration
-  specific to this repository.
-
-The repository's pre-existing MIT license is retained in `LICENSE`. Nothing in
-this notice changes the terms of that license or of the Apache License 2.0.
+The repository's existing MIT license remains in `LICENSE` for the original
+project material. The Apache-2.0 terms continue to apply to the upstream
+Axi-Theme portions.

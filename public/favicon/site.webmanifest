@@ -1,0 +1,11 @@
+{
+  "name": "Jinhui Luo · 罗锦辉",
+  "short_name": "Jinhui Luo",
+  "icons": [
+    { "src": "/favicon/favicon-256x256.png", "sizes": "256x256", "type": "image/png" },
+    { "src": "/favicon/favicon-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#f7fafc",
+  "background_color": "#f7fafc",
+  "display": "standalone"
+}

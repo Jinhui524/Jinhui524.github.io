@@ -1,6 +1,0 @@
----
-import { getCollection } from 'astro:content';
-export async function getStaticPaths() { return (await getCollection('publications')).map((entry) => ({ params: { slug: entry.data.slug }, props: { slug: entry.data.slug } })); }
-const target = `/en/academic/${Astro.props.slug}/`;
----
-<meta http-equiv="refresh" content={`0;url=${target}`} /><link rel="canonical" href={target} /><p>Redirecting to <a href={target}>academic output</a>…</p>

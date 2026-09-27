@@ -1,25 +1,152 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../components/Layout.astro';
-import AxiSection from '../../components/AxiSection.astro';
-import PublicationCard from '../../components/PublicationCard.astro';
-import { i18n } from '../../data/site';
-const locale = 'zh';
-const text = i18n[locale];
-const publications = (await getCollection('publications')).sort((a, b) => a.data.date.localeCompare(b.data.date));
+import PageLayout from '@/layouts/CommonPage.astro'
+import { Button, Icon, PublicationSection, SimpleIcon } from '@/components/user'
+
+const headings = [
+  { depth: 2, slug: 'about-me', text: 'About Me' },
+  { depth: 2, slug: 'research-interests', text: 'Research Interests' },
+  { depth: 2, slug: 'publications', text: 'Publications' },
+  { depth: 2, slug: 'awards', text: 'Awards' }
+]
+
+const publications = [
+  {
+    title: 'LLM4PPM：面向预测性业务流程监控的可迁移流程语义学习',
+    authors: [
+      { name: 'Jinhui Luo', isMe: true },
+      { name: 'Jiayi Long' },
+      { name: 'Jiawei Chen' },
+      { name: 'Guosheng Kang', isCoreContributor: true }
+    ],
+    venue: 'WISE',
+    year: '2026',
+    type: 'conference' as const,
+    abstract: '将事件日志转换为语义故事，通过持续预训练与 LoRA 指令微调学习可迁移流程语义。',
+    links: [],
+    status: 'accepted' as const
+  },
+  {
+    title: '基于频率的异构图序列融合网络用于下一活动预测',
+    authors: [
+      { name: 'Jinhui Luo', isMe: true },
+      { name: 'Jiayi Long' },
+      { name: 'Ziyi Niu' },
+      { name: 'Guosheng Kang', isCoreContributor: true }
+    ],
+    venue: 'IJCNN',
+    year: '2026',
+    type: 'conference' as const,
+    abstract: '通过异构图和序列融合，同时建模事件日志中的交互频率与上下文依赖。',
+    links: [],
+    status: 'accepted' as const
+  },
+  {
+    title: '对齐图与序列：用于下一事件预测的对比学习方法',
+    authors: [
+      { name: 'Jiayi Long' },
+      { name: 'Jinhui Luo', isMe: true },
+      { name: 'Jiawei Chen' },
+      { name: 'Guosheng Kang', isCoreContributor: true }
+    ],
+    venue: 'CSCWD',
+    year: '2026',
+    type: 'conference' as const,
+    abstract: '通过对比学习让流程图结构表征与事件序列表征互相增强。',
+    links: [],
+    status: 'accepted' as const
+  },
+  {
+    title: '融合事件序列语义与属性关联语义的业务流程下一事件预测',
+    authors: [
+      { name: 'Jiawei Chen' },
+      { name: 'Jinhui Luo', isMe: true },
+      { name: 'Guosheng Kang', isCoreContributor: true }
+    ],
+    venue: '计算机集成制造系统',
+    year: '2026',
+    type: 'journal' as const,
+    abstract: '融合事件序列语义与属性关联语义，提升业务流程下一事件预测。',
+    links: [],
+    status: 'accepted' as const
+  },
+  {
+    title: '基于多模态融合与多任务学习的预测性业务流程监控',
+    authors: [
+      { name: 'Jiawei Chen' },
+      { name: 'Jinhui Luo', isMe: true },
+      { name: 'Guosheng Kang', isCoreContributor: true }
+    ],
+    venue: 'Applied Soft Computing',
+    year: '2026',
+    type: 'journal' as const,
+    abstract: '以多模态融合和多任务优化共同建模语义、序列与属性特征。',
+    links: [],
+    status: 'under-review' as const
+  },
+  {
+    title: '结合检索增强生成与微调的下一活动预测语义故事',
+    authors: [
+      { name: 'Xinyao Yan' },
+      { name: 'Jinhui Luo', isMe: true },
+      { name: 'Jiayi Long' },
+      { name: 'Guosheng Kang', isCoreContributor: true }
+    ],
+    venue: 'ICSS',
+    year: '2026',
+    type: 'conference' as const,
+    abstract: '将事件日志组织为语义故事，检索历史上下文并引导大模型预测下一活动。',
+    links: [],
+    status: 'accepted' as const
+  }
+]
 ---
-<Layout locale={locale} title={text.academicTitle} wide>
-  <AxiSection title={text.academicTitle} id="academic">
-    <p class="axi-page-lead">围绕事件序列预测、图数据挖掘、图神经网络和大语言模型整理的学术成果。</p>
-    <div class="filter-row" data-publication-filters><button class="filter-button is-active" data-filter="all">全部</button><button class="filter-button" data-filter="conference">Conference</button><button class="filter-button" data-filter="journal">Journal</button></div>
-    <div class="publication-grid axi-archive-grid" data-publication-grid>{publications.map((publication) => <PublicationCard publication={publication} locale={locale} />)}</div>
-  </AxiSection>
-  <script is:inline>
-    document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => {
-      document.querySelectorAll('[data-filter]').forEach((item) => item.classList.remove('is-active'));
-      button.classList.add('is-active');
-      const filter = button.dataset.filter;
-      document.querySelectorAll('[data-publication-grid] .publication-card').forEach((card) => { card.hidden = filter !== 'all' && card.dataset.category !== filter; });
-    }));
-  </script>
-</Layout>
+
+<PageLayout title='Academic' {headings} info={{ slug: '/academic', hideComment: true }}>
+  <h2 id='about-me'>About Me<a class='anchor' href='#about-me'>#</a></h2>
+  <p>
+    我是湖南科技大学数据科学与大数据技术专业本科生，并进入东南大学硕士阶段（研0）。目前在湖南省服务计算与软件服务新技术重点实验室开展研究，导师为康国胜教授。
+  </p>
+  <p>
+    我的研究关注图数据挖掘、图神经网络、大语言模型、智能体与事件序列预测，探索结构化数据与语义建模之间的连接。
+  </p>
+  <Button title='GitHub profile' class='w-fit' href='https://github.com/Jinhui524' target='_blank'>
+    <Icon class='size-5' name='github' slot='before' />
+  </Button>
+
+  <h2 id='research-interests'>Research Interests<a class='anchor' href='#research-interests'>#</a></h2>
+  <div class='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+    {[
+      ['图数据挖掘', 'Graph data mining', 'ros'],
+      ['图神经网络', 'Graph neural networks', 'pytorch'],
+      ['大语言模型', 'Large language models', 'chatgpt'],
+      ['智能体 Agent', 'AI agents', 'openai'],
+      ['事件序列预测', 'Event sequence prediction', 'timeline'],
+      ['结构化语义建模', 'Structured semantic modeling', 'document']
+    ].map(([title, description, icon]) => (
+      <div class='group relative overflow-hidden rounded-xl border border-border bg-card p-4 transition-all hover:border-foreground/25 hover:shadow-md'>
+        <div class='flex items-start gap-4'>
+          <div class='flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20'>
+            <SimpleIcon class='size-5 text-primary transition-transform duration-300 group-hover:scale-110' name={icon} />
+          </div>
+          <div class='flex-1'>
+            <p class='text-xl font-medium leading-tight text-foreground transition-colors group-hover:text-primary'>{title}</p>
+            <p class='text-sm leading-relaxed text-muted-foreground'>{description}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <h2 id='publications'>Publications<a class='anchor' href='#publications'>#</a></h2>
+  <PublicationSection {publications} />
+
+  <h2 id='awards'>Awards<a class='anchor' href='#awards'>#</a></h2>
+  <ul>
+    <li>第七届传智杯全国 IT 技能大赛编程挑战赛二等奖。</li>
+    <li>2025 RAICOM 机器人开发者大赛编程技能赛道三等奖。</li>
+    <li>2026 RAICOM 机器人开发者大赛智海算法优化赛道一等奖。</li>
+    <li>第二十八届中国机器人及人工智能大赛湖南赛区一等奖。</li>
+    <li>第二十一届湖南省大学生程序设计竞赛一等奖。</li>
+    <li>第十六届蓝桥杯软件和信息技术人才大赛二等奖。</li>
+  </ul>
+</PageLayout>

@@ -1,8 +1,46 @@
 ---
-import Layout from '../../components/Layout.astro';
-import AxiSection from '../../components/AxiSection.astro';
-import ProfileHeader from '../../components/ProfileHeader.astro';
-import { education, profile, researchInterests } from '../../data/site';
-const locale = 'zh';
+import PageLayout from '@/layouts/CommonPage.astro'
+import config from '@/site-config'
+
+const headings = [
+  { depth: 2, slug: 'education', text: 'Education' },
+  { depth: 2, slug: 'research', text: 'Research Interests' },
+  { depth: 2, slug: 'awards', text: 'Awards' },
+  { depth: 2, slug: 'copyright', text: 'Copyright' }
+]
 ---
-<Layout locale={locale} title="关于我" wide><ProfileHeader locale={locale} /><AxiSection title="关于我" id="about"><div class="axi-copy"><p>我目前是湖南科技大学数据科学与大数据技术专业大四学生，并进入东南大学硕士阶段（研0）。</p><p>我的研究关注图数据挖掘、图神经网络、大语言模型、Agent 与事件序列预测，探索结构化数据与语义建模之间的连接。</p></div></AxiSection><AxiSection title="教育与经历" id="education"><div class="axi-education-list">{education.map((item) => <a class="axi-education-card" href={item.link} target="_blank" rel="noreferrer"><div><h3>{item.title[locale]}</h3><p>{item.detail[locale]}</p></div><time>{item.period}</time><span>↗</span></a>)}</div></AxiSection><AxiSection title="研究方向" id="research"><div class="axi-research-list">{researchInterests.map((item) => <span>{item[locale]}</span>)}</div></AxiSection><AxiSection title="联系我" id="contact"><div class="axi-contact"><p>欢迎围绕图学习、事件序列预测、大模型、Agent 与科研合作交流。</p><a class="button button-primary" href={`mailto:${profile.email}`}>{profile.email} ↗</a></div></AxiSection></Layout>
+
+<PageLayout title='About' {headings} info='/about'>
+  <p>数据科学与大数据技术学生 / 图学习与事件序列研究者</p>
+  <p>
+    我是罗锦辉，目前就读于湖南科技大学，并进入东南大学硕士阶段（研0）。我在湖南省服务计算与软件服务新技术重点实验室开展研究，关注图数据、事件日志和大语言模型之间的结构化连接。
+  </p>
+  <p>
+    我的工作围绕图数据挖掘、图神经网络、大语言模型、智能体与事件序列预测展开，重视可复现的实验、清晰的研究问题和能够落地的系统。
+  </p>
+
+  <h2 id='education'>教育与经历<a class='anchor' href='#education'>#</a></h2>
+  <ul>
+    <li><strong>东南大学</strong> · 硕士阶段（研0），2026</li>
+    <li><strong>湖南科技大学</strong> · 数据科学与大数据技术，2023—2027</li>
+    <li><strong>湖南省服务计算与软件服务新技术重点实验室</strong> · 本科生研究成员，2024—至今</li>
+  </ul>
+
+  <h2 id='research'>研究方向<a class='anchor' href='#research'>#</a></h2>
+  <p>图数据挖掘 · 图神经网络 · 大语言模型 · 智能体 Agent · 事件序列预测 · 结构化语义建模</p>
+
+  <h2 id='awards'>荣誉与竞赛<a class='anchor' href='#awards'>#</a></h2>
+  <ul>
+    <li>传智杯全国 IT 技能大赛编程挑战赛二等奖。</li>
+    <li>RAICOM 机器人开发者大赛相关赛道一等奖、三等奖。</li>
+    <li>中国机器人及人工智能大赛湖南赛区一等奖。</li>
+    <li>湖南省大学生程序设计竞赛一等奖。</li>
+    <li>蓝桥杯软件和信息技术人才大赛二等奖。</li>
+  </ul>
+
+  <h2 id='copyright'>版权<a class='anchor' href='#copyright'>#</a></h2>
+  <p>
+    本站的布局和主题基于 <a href='https://github.com/Axi404/Axi-Theme'>Axi-Theme</a>（Apache-2.0）修改，个人文字、研究资料和图片属于罗锦辉。第三方素材的权利归其原作者所有。
+  </p>
+  <p>联系邮箱：<a href={`mailto:${config.personal?.email}`}>{config.personal?.email}</a></p>
+</PageLayout>

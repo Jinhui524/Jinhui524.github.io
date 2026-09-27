@@ -1,25 +1,85 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../../components/Layout.astro';
-import AxiSection from '../../../components/AxiSection.astro';
-import PublicationCard from '../../../components/PublicationCard.astro';
-import { i18n } from '../../../data/site';
-const locale = 'en';
-const text = i18n[locale];
-const publications = (await getCollection('publications')).sort((a, b) => a.data.date.localeCompare(b.data.date));
+import PageLayout from '@/layouts/CommonPage.astro'
+import { Button, Icon, PublicationSection, SimpleIcon } from '@/components/user'
+
+const headings = [
+  { depth: 2, slug: 'about-me', text: 'About Me' },
+  { depth: 2, slug: 'research-interests', text: 'Research Interests' },
+  { depth: 2, slug: 'publications', text: 'Publications' },
+  { depth: 2, slug: 'awards', text: 'Awards' }
+]
+
+const publications = [
+  {
+    title: 'LLM4PPM: Learning Transferable Process Semantics for Predictive Process Monitoring',
+    authors: [{ name: 'Jinhui Luo', isMe: true }, { name: 'Jiayi Long' }, { name: 'Jiawei Chen' }, { name: 'Guosheng Kang', isCoreContributor: true }],
+    venue: 'WISE', year: '2026', type: 'conference' as const,
+    abstract: 'A process foundation model that learns transferable semantics from event logs with continuous pre-training and LoRA tuning.', links: [], status: 'accepted' as const
+  },
+  {
+    title: 'Frequency-Based Heterogeneous Graph-Sequence Fusion Network for Next Activity Prediction',
+    authors: [{ name: 'Jinhui Luo', isMe: true }, { name: 'Jiayi Long' }, { name: 'Ziyi Niu' }, { name: 'Guosheng Kang', isCoreContributor: true }],
+    venue: 'IJCNN', year: '2026', type: 'conference' as const,
+    abstract: 'A graph-sequence fusion network that models interaction frequency and contextual dependency.', links: [], status: 'accepted' as const
+  },
+  {
+    title: 'Aligning Graphs and Sequences: A Contrastive Learning Approach for Next Event Prediction',
+    authors: [{ name: 'Jiayi Long' }, { name: 'Jinhui Luo', isMe: true }, { name: 'Jiawei Chen' }, { name: 'Guosheng Kang', isCoreContributor: true }],
+    venue: 'CSCWD', year: '2026', type: 'conference' as const,
+    abstract: 'A contrastive framework that strengthens graph structure and event-sequence representations.', links: [], status: 'accepted' as const
+  },
+  {
+    title: 'Next Event Prediction by Fusing Event-Sequence and Attribute-Association Semantics',
+    authors: [{ name: 'Jiawei Chen' }, { name: 'Jinhui Luo', isMe: true }, { name: 'Guosheng Kang', isCoreContributor: true }],
+    venue: 'CIMS', year: '2026', type: 'journal' as const,
+    abstract: 'A semantic fusion method for next-event prediction using event sequences and attribute relations.', links: [], status: 'accepted' as const
+  },
+  {
+    title: 'Predictive Business Process Monitoring Based on Multi-Modal Fusion and Multi-Task Learning',
+    authors: [{ name: 'Jiawei Chen' }, { name: 'Jinhui Luo', isMe: true }, { name: 'Guosheng Kang', isCoreContributor: true }],
+    venue: 'Applied Soft Computing', year: '2026', type: 'journal' as const,
+    abstract: 'A multimodal and multi-task framework for semantic, sequential, and attribute-aware prediction.', links: [], status: 'under-review' as const
+  },
+  {
+    title: 'Semantic Stories for Next Activity Prediction with Retrieval-Augmented Generation and Fine-Tuning',
+    authors: [{ name: 'Xinyao Yan' }, { name: 'Jinhui Luo', isMe: true }, { name: 'Jiayi Long' }, { name: 'Guosheng Kang', isCoreContributor: true }],
+    venue: 'ICSS', year: '2026', type: 'conference' as const,
+    abstract: 'A retrieval-augmented semantic-story framework for next-activity prediction.', links: [], status: 'accepted' as const
+  }
+]
 ---
-<Layout locale={locale} title={text.academicTitle} wide>
-  <AxiSection title={text.academicTitle} id="academic">
-    <p class="axi-page-lead">Research on event sequence prediction, graph data mining, graph neural networks, and large language models.</p>
-    <div class="filter-row" data-publication-filters><button class="filter-button is-active" data-filter="all">All</button><button class="filter-button" data-filter="conference">Conference</button><button class="filter-button" data-filter="journal">Journal</button></div>
-    <div class="publication-grid axi-archive-grid" data-publication-grid>{publications.map((publication) => <PublicationCard publication={publication} locale={locale} />)}</div>
-  </AxiSection>
-  <script is:inline>
-    document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => {
-      document.querySelectorAll('[data-filter]').forEach((item) => item.classList.remove('is-active'));
-      button.classList.add('is-active');
-      const filter = button.dataset.filter;
-      document.querySelectorAll('[data-publication-grid] .publication-card').forEach((card) => { card.hidden = filter !== 'all' && card.dataset.category !== filter; });
-    }));
-  </script>
-</Layout>
+
+<PageLayout title='Academic' {headings} info={{ slug: '/en/academic', hideComment: true }}>
+  <h2 id='about-me'>About Me<a class='anchor' href='#about-me'>#</a></h2>
+  <p>I am a data science student at Hunan University of Science and Technology and a graduate student at Southeast University. I conduct research with the Hunan Provincial Key Laboratory of Service Computing and New Software Technology.</p>
+  <p>My work connects graph data mining, graph neural networks, foundation models, AI agents, and event sequence prediction.</p>
+  <Button title='GitHub profile' class='w-fit' href='https://github.com/Jinhui524' target='_blank'><Icon class='size-5' name='github' slot='before' /></Button>
+
+  <h2 id='research-interests'>Research Interests<a class='anchor' href='#research-interests'>#</a></h2>
+  <div class='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+    {[
+      ['Graph Data Mining', 'Mining structure from complex data', 'ros'],
+      ['Graph Neural Networks', 'Learning over relational structure', 'pytorch'],
+      ['Foundation Models', 'Language models for process intelligence', 'openai'],
+      ['AI Agents', 'Tool-using intelligent systems', 'github'],
+      ['Event Sequences', 'Predictive process monitoring', 'calendar'],
+      ['Semantic Modeling', 'Structured representations and reasoning', 'document']
+    ].map(([title, description, icon]) => (
+      <div class='group relative overflow-hidden rounded-xl border border-border bg-card p-4 transition-all hover:border-foreground/25 hover:shadow-md'>
+        <div class='flex items-start gap-4'><div class='flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10'><SimpleIcon class='size-5 text-primary' name={icon} /></div><div class='flex-1'><p class='text-xl font-medium leading-tight text-foreground'>{title}</p><p class='text-sm leading-relaxed text-muted-foreground'>{description}</p></div></div>
+      </div>
+    ))}
+  </div>
+
+  <h2 id='publications'>Publications<a class='anchor' href='#publications'>#</a></h2>
+  <PublicationSection {publications} />
+
+  <h2 id='awards'>Awards<a class='anchor' href='#awards'>#</a></h2>
+  <ul>
+    <li>Second Prize, Chuanzhi Cup National IT Skills Competition.</li>
+    <li>First and third prizes in RAICOM Robotics Developer Competition tracks.</li>
+    <li>First Prize, China Robot and Artificial Intelligence Competition, Hunan.</li>
+    <li>First Prize, Hunan Provincial Collegiate Programming Contest.</li>
+    <li>Second Prize, Lanqiao Cup Software and Information Technology Competition.</li>
+  </ul>
+</PageLayout>

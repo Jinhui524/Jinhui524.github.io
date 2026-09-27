@@ -1,10 +1,23 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../../components/Layout.astro';
-import AxiSection from '../../../components/AxiSection.astro';
-import ProjectCard from '../../../components/ProjectCard.astro';
-import { i18n } from '../../../data/site';
-const locale = 'en';
-const projects = await getCollection('projects');
+import PageLayout from '@/layouts/CommonPage.astro'
+import ProjectSection from '@/components/projects/ProjectSection.astro'
+
+const headings = [{ depth: 2, slug: 'projects', text: 'Projects' }]
 ---
-<Layout locale={locale} title={i18n[locale].selectedProjects} wide><AxiSection title={i18n[locale].selectedProjects} id="projects"><p class="axi-page-lead">Research prototypes and reproducible systems built from ideas.</p><div class="project-list axi-archive-projects">{projects.map((project) => <ProjectCard project={project} locale={locale} />)}</div></AxiSection></Layout>
+
+<PageLayout title='Projects' {headings} info={{ slug: '/en/projects', hideComment: true }}>
+  <p class='text-muted-foreground'>Research prototypes and reproducible systems built from ideas.</p>
+  <h2 id='projects' class='mb-8 text-2xl font-semibold'>Projects</h2>
+  <ProjectSection
+    project={[
+      {
+        name: 'Wangshe Guanti: Intelligent TCM Tongue Diagnosis Framework',
+        description: 'A multi-platform tongue diagnosis system combining D-FINE, SAM2, and feature-guided constitution analysis.',
+        links: [
+          { type: 'site', href: 'https://github.com/Jinhui524' },
+          { type: 'github', href: 'https://github.com/Jinhui524' }
+        ]
+      }
+    ]}
+  />
+</PageLayout>

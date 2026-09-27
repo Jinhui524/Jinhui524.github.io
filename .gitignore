@@ -12,6 +12,8 @@ Gemfile.lock
 node_modules/
 .astro/
 dist/
+.vercel/
+.wrangler/
 
 # Ignore the vendor file at root level and bundle for alternative installation
 /vendor/

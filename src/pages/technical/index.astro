@@ -1,9 +1,0 @@
----
-import { getCollection } from 'astro:content';
-import Layout from '../../components/Layout.astro';
-import AxiSection from '../../components/AxiSection.astro';
-import { i18n } from '../../data/site';
-const locale = 'zh';
-const notes = await getCollection('notes');
----
-<Layout locale={locale} title={i18n[locale].technicalTitle} wide><AxiSection title={i18n[locale].technicalTitle} id="technical"><p class="axi-page-lead">人工智能学习路线、图神经网络、大模型、Agent 和实验笔记。</p><div class="axi-article-list">{notes.map((note) => <a class="axi-archive-row" href={`/technical/${note.data.slug}/`}><span class="axi-archive-row__meta">{note.data.date} · Technical</span><strong>{note.data.titleZh}</strong><p>{note.data.excerptZh}</p><span class="text-link">阅读技术笔记 ↗</span></a>)}</div></AxiSection></Layout>
