@@ -19,10 +19,7 @@ interface Props {
     year: string
     type: 'conference' | 'journal' | 'workshop' | 'preprint'
     abstract?: string
-    links: {
-      type: string
-      href: string
-    }[]
+    links: { type: string; href: string }[]
     status: 'published' | 'accepted' | 'under-review' | 'preprint'
     citations?: number
     authorsAlphabetical?: boolean
@@ -38,6 +35,7 @@ const { class: className, publication } = Astro.props
 
 const linkIconMap: Record<string, { type: 'simple' | 'builtin'; icon: string; color?: string }> = {
   pdf: { type: 'builtin', icon: 'document' },
+  paper: { type: 'builtin', icon: 'document' },
   arxiv: { type: 'simple', icon: 'arxiv', color: '#B31B1B' },
   code: { type: 'simple', icon: 'github', color: '#181717' },
   github: { type: 'simple', icon: 'github', color: '#181717' },
@@ -57,38 +55,66 @@ const linkIconMap: Record<string, { type: 'simple' | 'builtin'; icon: string; co
   dataset: { type: 'simple', icon: 'huggingface', color: '#FFD21E' },
 }
 
-const typeColors = {
-  conference: 'bg-sky-100 text-sky-800 dark:bg-sky-700 dark:text-sky-100',
-  journal: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-700 dark:text-emerald-100',
-  workshop: 'bg-amber-100 text-amber-800 dark:bg-amber-700 dark:text-amber-100',
-  preprint: 'bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200'
+const typeLabels = {
+  conference: 'Conference',
+  journal: 'Journal',
+  workshop: 'Workshop',
+  preprint: 'Preprint'
+} as const
+
+const typeClasses = {
+  conference: 'publication-badge publication-badge--conference',
+  journal: 'publication-badge publication-badge--journal',
+  workshop: 'publication-badge publication-badge--workshop',
+  preprint: 'publication-badge publication-badge--preprint'
+} as const
+
+const statusLabels = {
+  published: 'Published',
+  accepted: 'Accepted',
+  'under-review': 'Under Review',
+  preprint: 'Preprint'
+} as const
+
+const statusClasses = {
+  published: 'publication-badge publication-badge--published',
+  accepted: 'publication-badge publication-badge--accepted',
+  'under-review': 'publication-badge publication-badge--review',
+  preprint: 'publication-badge publication-badge--preprint'
+} as const
+
+const symbolBaseClass = 'text-primary dark:text-blue-400'
+const symbolMutedClass = 'text-muted-foreground/80 dark:text-slate-400/80'
+
+const getLinkLabel = (type: string) => {
+  const normalized = type.toLowerCase()
+  if (['pdf', 'paper', 'arxiv', 'ieee', 'acm', 'springer'].includes(normalized)) return 'Paper'
+  if (['code', 'github'].includes(normalized)) return 'Code'
+  if (['website', 'site'].includes(normalized)) return 'Website'
+  if (normalized === 'dataset') return 'Dataset'
+  if (normalized === 'slides') return 'Slides'
+  if (normalized === 'poster') return 'Poster'
+  if (normalized === 'video') return 'Video'
+  return type.charAt(0).toUpperCase() + type.slice(1)
 }
 
-const statusColors = {
-  published: 'bg-green-100 text-green-800 dark:bg-green-700 dark:text-green-100',
-  accepted: 'bg-blue-100 text-blue-800 dark:bg-blue-700 dark:text-blue-100',
-  'under-review': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100',
-  preprint: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-700 dark:text-indigo-100'
-}
-
-const symbolBaseClass = "text-primary dark:text-blue-400";
-const symbolMutedClass = "text-muted-foreground/80 dark:text-slate-400/80";
-
+const hasAuthorNotes = publication.authors.some((author) => author.isEqual || author.isCoreContributor || author.role)
 ---
 
-<div class={cn('border rounded-xl p-4 transition-all group hover:border-foreground/25 hover:shadow-md', className)}>
-  <div class='flex flex-col gap-4 sm:flex-row'>
+<article class={cn('publication-card group', className)}>
+  <div class='publication-card__layout'>
     {
       publication.image && (
-        <div class='publication-figure shrink-0 sm:w-44 md:w-56'>
+        <div class='publication-card__media'>
           {
             publication.detailHref ? (
-              <a href={publication.detailHref} aria-label={`View details for ${publication.title}`} class='block overflow-hidden rounded-lg border border-border/70 bg-muted/30'>
-                <img src={publication.image} alt={`${publication.title} framework`} loading='lazy' decoding='async' class='aspect-[16/10] h-full w-full object-contain p-1 transition-transform duration-300 group-hover:scale-[1.03]' />
+              <a href={publication.detailHref} aria-label={`View details for ${publication.title}`} class='publication-card__media-link'>
+                <img src={publication.image} alt={`${publication.title} framework`} loading='lazy' decoding='async' />
+                <span class='publication-card__media-hint' aria-hidden='true'>↗</span>
               </a>
             ) : (
-              <div class='overflow-hidden rounded-lg border border-border/70 bg-muted/30'>
-                <img src={publication.image} alt={`${publication.title} framework`} loading='lazy' decoding='async' class='aspect-[16/10] h-full w-full object-contain p-1' />
+              <div class='publication-card__media-link'>
+                <img src={publication.image} alt={`${publication.title} framework`} loading='lazy' decoding='async' />
               </div>
             )
           }
@@ -96,149 +122,239 @@ const symbolMutedClass = "text-muted-foreground/80 dark:text-slate-400/80";
       )
     }
 
-    <div class='min-w-0 flex-1'>
-  <div class='mb-3'>
-
-    <p class='text-lg sm:text-xl text-foreground leading-tight mb-2 mt-0 transition-colors group-hover:text-primary' style='line-height: 1.4;'>
-      {publication.title}
-    </p>
-
-    <div class='flex flex-wrap gap-2 mb-3'>
-      <span
-        class={cn('px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap', typeColors[publication.type])}
-      >
-        {publication.type.charAt(0).toUpperCase() + publication.type.slice(1)}
-      </span>
-      <span
-        class={cn('px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap', statusColors[publication.status])}
-      >
-        {publication.status.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-      </span>
-      {publication.ranking && <span class='rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary whitespace-nowrap'>{publication.ranking}</span>}
-    </div>
-
-    {publication.topics && publication.topics.length > 0 && (
-      <div class='mb-3 flex flex-wrap gap-1.5'>
-        {publication.topics.map((topic) => <span class='rounded-full bg-muted px-2 py-0.5 text-[0.68rem] text-muted-foreground'>{topic}</span>)}
+    <div class='publication-card__body'>
+      <div class='publication-card__badges' aria-label='Publication metadata'>
+        <span class={typeClasses[publication.type]}>{typeLabels[publication.type]}</span>
+        <span class={statusClasses[publication.status]}>{statusLabels[publication.status]}</span>
       </div>
-    )}
 
-    { publication.authors && publication.authors.length > 0 && (
-      <div class='mb-3 text-sm text-muted-foreground dark:text-slate-300'>
-        {publication.authors.map((author, index) => (
-          <span class="author-item">
-            {author.homepage ? (
-              <a href={author.homepage} target='_blank' rel="noopener noreferrer" class='text-primary hover:underline transition-colors duration-200 dark:text-blue-400'>
-                {author.isMe ? (
-                  <strong class='text-foreground font-semibold dark:text-white'>{author.name}</strong>
-                ) : (
-                  author.name
-                )}
-              </a>
-            ) : (
-              author.isMe ? (
-                <strong class='text-foreground font-semibold dark:text-white'>{author.name}</strong>
-              ) : (
-                author.name
-              )
-            )}
-            {author.isEqual && <sup class={cn(symbolBaseClass, 'ml-px')}>*</sup>}
-            {author.isCoreContributor && <sup class={cn(symbolBaseClass, 'ml-px')}>§</sup>}
-            {author.role === 'corresponding' && <sup class={cn(symbolBaseClass, 'ml-px')}>†</sup>}
-            {author.role === 'project-leader' && <sup class={cn(symbolBaseClass, 'ml-px')}>‡</sup>}
-            {index < publication.authors.length - 1 && <span class="text-muted-foreground/70 dark:text-slate-400/70">, </span>}
-          </span>
-        ))}
-      </div>
-    )}
-
-    {(publication.authors.some(a => a.isEqual || a.isCoreContributor || a.role) || publication.authorsAlphabetical) && (
-      <div class={cn('mb-3 text-xs', symbolMutedClass, 'flex flex-wrap gap-x-3 gap-y-1')}>
-        {publication.authors.some(a => a.isEqual) && <span><sup class={symbolBaseClass}>*</sup>Equal contribution</span>}
-        {publication.authors.some(a => a.isCoreContributor) && <span><sup class={symbolBaseClass}>§</sup>Core contributor</span>}
-        {publication.authors.some(a => a.role === 'project-leader') && <span><sup class={symbolBaseClass}>‡</sup>Project Leader</span>}
-        {publication.authors.some(a => a.role === 'corresponding') && <span><sup class={symbolBaseClass}>†</sup>Corresponding author</span>}
-        {publication.authorsAlphabetical && <span class="italic">Authors are listed in alphabetical order</span>}
-      </div>
-    )}
-
-    <div class='mb-3 flex items-center flex-wrap gap-x-2 text-sm'>
-      <span class='font-medium text-foreground dark:text-slate-200'>{publication.venue}</span>
-      <span class='text-muted-foreground dark:text-slate-400'>•</span>
-      <span class='text-muted-foreground dark:text-slate-400'>{publication.year}</span>
-    </div>
-
-    {
-      publication.citations != null && publication.citations > 0 && (
-        <div class='mb-4 flex items-center gap-1.5 text-xs text-muted-foreground dark:text-slate-400'>
-          <Icon class='size-3.5 text-current' name='quote' />
-          <span>{publication.citations} citation{publication.citations === 1 ? '' : 's'}</span>
-        </div>
-      )
-    }
-  </div> {/* 结束元信息区域的 div */}
-
-  {/* 摘要 */}
-  {
-    publication.abstract && (
-      <div class='mb-4'>
-        <p class='text-sm leading-relaxed text-muted-foreground dark:text-slate-300'>
-          {publication.abstract}
-        </p>
-      </div>
-    )
-  }
-
-  {/* 链接按钮 */}
-  {
-    ((publication.links && publication.links.length > 0) || publication.detailHref) && (
-      <div class='flex flex-wrap gap-2 sm:gap-2.5'>
-        {publication.links.map((link) => {
-          const iconConfig = linkIconMap[link.type.toLowerCase()] || { type: 'builtin', icon: 'earth' };
-          return (
-            <a
-              href={link.href}
-              target='_blank'
-              rel="noopener noreferrer"
-              class='inline-flex items-center gap-1.5 rounded-md bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:bg-muted/80 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring ring-offset-background ring-offset-2 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 dark:hover:text-slate-100 dark:focus-visible:ring-slate-500'
-            >
-              {iconConfig.type === 'simple' ? (
-                <SimpleIcon 
-                  class='size-3.5 sm:size-4' 
-                  name={iconConfig.icon} 
-                  color={iconConfig.color || 'currentColor'}
-                />
-              ) : (
-                <Icon class='size-3.5 sm:size-4 text-current' name={iconConfig.icon as any} />
-              )}
-              <span class="hidden sm:inline">{link.type.toUpperCase()}</span>
-              <span class="sm:hidden">{link.type.charAt(0).toUpperCase() + link.type.slice(1)}</span>
-            </a>
+      <h3 class='publication-card__title'>
+        {
+          publication.detailHref ? (
+            <a href={publication.detailHref} class='publication-card__title-link'>{publication.title}</a>
+          ) : (
+            publication.title
           )
-        })}
-        {publication.detailHref && (
-          <a
-            href={publication.detailHref}
-            class='inline-flex items-center gap-1.5 rounded-md bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-all hover:bg-primary/15 focus-visible:ring-2 focus-visible:ring-ring ring-offset-background ring-offset-2'
-          >
-            <span aria-hidden='true'>↗</span>
-            <span>{publication.detailLabel || 'Details'}</span>
-          </a>
-        )}
+        }
+      </h3>
+
+      {publication.authors.length > 0 && (
+        <p class='publication-card__authors'>
+          {publication.authors.map((author, index) => (
+            <span class='author-item'>
+              {author.homepage ? (
+                <a href={author.homepage} target='_blank' rel='noopener noreferrer' class={author.isMe ? 'author-name author-name--me' : 'author-name'}>{author.name}</a>
+              ) : (
+                <span class={author.isMe ? 'author-name author-name--me' : 'author-name'}>{author.name}</span>
+              )}
+              {author.isEqual && <sup class={cn(symbolBaseClass, 'ml-px')}>*</sup>}
+              {author.isCoreContributor && <sup class={cn(symbolBaseClass, 'ml-px')}>§</sup>}
+              {author.role === 'corresponding' && <sup class={cn(symbolBaseClass, 'ml-px')}>†</sup>}
+              {author.role === 'project-leader' && <sup class={cn(symbolBaseClass, 'ml-px')}>‡</sup>}
+              {index < publication.authors.length - 1 && <span class='text-muted-foreground/60 dark:text-slate-400/60'>, </span>}
+            </span>
+          ))}
+        </p>
+      )}
+
+      {hasAuthorNotes && (
+        <div class={cn('publication-card__notes', symbolMutedClass)}>
+          {publication.authors.some((author) => author.isMe) && <span><strong class='text-foreground dark:text-slate-200'>Jinhui Luo</strong> is highlighted</span>}
+          {publication.authors.some((author) => author.isEqual) && <span><sup class={symbolBaseClass}>*</sup> Equal contribution</span>}
+          {publication.authors.some((author) => author.isCoreContributor) && <span><sup class={symbolBaseClass}>§</sup> Core contributor</span>}
+          {publication.authors.some((author) => author.role === 'project-leader') && <span><sup class={symbolBaseClass}>‡</sup> Project leader</span>}
+          {publication.authors.some((author) => author.role === 'corresponding') && <span><sup class={symbolBaseClass}>†</sup> Corresponding author</span>}
+          {publication.authorsAlphabetical && <span class='italic'>Authors are listed alphabetically</span>}
+        </div>
+      )}
+
+      {publication.abstract && <p class='publication-card__abstract'>{publication.abstract}</p>}
+
+      <div class='publication-card__venue'>
+        <span class='publication-card__venue-name'>{publication.venue}</span>
+        <span aria-hidden='true'>·</span>
+        <time datetime={publication.year}>{publication.year}</time>
       </div>
-    )
-  }
+
+      {publication.topics && publication.topics.length > 0 && (
+        <div class='publication-card__topics' aria-label='Research topics'>
+          {publication.topics.map((topic) => <span>{topic}</span>)}
+        </div>
+      )}
+
+      {
+        (publication.ranking || (publication.links && publication.links.length > 0) || publication.detailHref) && (
+          <div class='publication-card__footer'>
+            {publication.ranking && <span class='publication-badge publication-badge--ranking'>{publication.ranking}</span>}
+            <div class='publication-card__actions'>
+            {publication.links.map((link) => {
+              const normalizedType = link.type.toLowerCase()
+              const iconConfig = linkIconMap[normalizedType] || { type: 'builtin', icon: 'earth' }
+              const label = getLinkLabel(link.type)
+              return (
+                <a href={link.href} target='_blank' rel='noopener noreferrer' class='publication-action-link'>
+                  {iconConfig.type === 'simple' ? (
+                    <SimpleIcon class='size-3.5' name={iconConfig.icon} color={iconConfig.color || 'currentColor'} />
+                  ) : (
+                    <Icon class='size-3.5 text-current' name={iconConfig.icon as any} />
+                  )}
+                  <span>{label}</span>
+                </a>
+              )
+            })}
+            {publication.detailHref && (
+              <a href={publication.detailHref} class='publication-action-link publication-action-link--details'>
+                <span>{publication.detailLabel || 'Details'}</span>
+                <span aria-hidden='true'>↗</span>
+              </a>
+            )}
+            </div>
+          </div>
+        )
+      }
+    </div>
   </div>
-  </div>
-</div>
+</article>
 
 <style>
-  .publication-figure img { max-height: 11rem; }
-  @media (max-width: 640px) {
-    .publication-figure { width: 100%; }
-    .publication-figure img { max-height: 13rem; }
+  .publication-card {
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    background: var(--color-card);
+    padding: 1rem;
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
   }
+
+  .publication-card:hover {
+    border-color: color-mix(in srgb, var(--color-primary) 30%, var(--color-border));
+    box-shadow: 0 12px 30px rgb(15 23 42 / 0.07);
+    transform: translateY(-1px);
+  }
+
+  .publication-card__layout {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .publication-card__media { width: 100%; }
+
+  .publication-card__media-link {
+    position: relative;
+    display: flex;
+    min-height: 12rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--color-muted) 42%, transparent);
+  }
+
+  .publication-card__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 18rem;
+    object-fit: contain;
+    padding: 0.45rem;
+    transition: transform 300ms ease;
+  }
+
+  .publication-card:hover .publication-card__media img { transform: scale(1.025); }
+
+  .publication-card__media-hint {
+    position: absolute;
+    right: 0.55rem;
+    top: 0.55rem;
+    display: grid;
+    width: 1.75rem;
+    height: 1.75rem;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--color-card) 88%, transparent);
+    color: var(--color-muted-foreground);
+    font-size: 0.75rem;
+    opacity: 0;
+    transform: translateY(-0.25rem);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .publication-card:hover .publication-card__media-hint,
+  .publication-card__media-link:focus-visible .publication-card__media-hint { opacity: 1; transform: translateY(0); }
+  .publication-card__body { min-width: 0; }
+  .publication-card__badges, .publication-card__topics, .publication-card__actions, .publication-card__footer { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; }
+  .publication-card__badges { margin-bottom: 0.7rem; }
+
+  .publication-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.55rem;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    padding: 0.25rem 0.55rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .publication-badge--conference, .publication-badge--accepted { border-color: color-mix(in srgb, #0ea5e9 22%, var(--color-border)); background: color-mix(in srgb, #0ea5e9 10%, transparent); color: color-mix(in srgb, #0284c7 85%, var(--color-foreground)); }
+  .publication-badge--journal, .publication-badge--published { border-color: color-mix(in srgb, #10b981 22%, var(--color-border)); background: color-mix(in srgb, #10b981 10%, transparent); color: color-mix(in srgb, #059669 85%, var(--color-foreground)); }
+  .publication-badge--workshop, .publication-badge--review { border-color: color-mix(in srgb, #f59e0b 24%, var(--color-border)); background: color-mix(in srgb, #f59e0b 11%, transparent); color: color-mix(in srgb, #b45309 85%, var(--color-foreground)); }
+  .publication-badge--preprint { border-color: color-mix(in srgb, var(--color-muted-foreground) 25%, var(--color-border)); background: color-mix(in srgb, var(--color-muted) 75%, transparent); color: var(--color-muted-foreground); }
+  .publication-badge--ranking { border-color: color-mix(in srgb, var(--color-primary) 30%, var(--color-border)); background: color-mix(in srgb, var(--color-primary) 10%, transparent); color: var(--color-primary); }
+
+  .publication-card__title { margin: 0; color: var(--color-foreground); font-size: clamp(1.05rem, 1.8vw, 1.28rem); font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+  .publication-card__title-link { text-decoration: none; transition: color 180ms ease; }
+  .publication-card__title-link:hover, .publication-card__title-link:focus-visible { color: var(--color-primary); }
+  .publication-card__authors { margin: 0.6rem 0 0; color: var(--color-muted-foreground); font-size: 0.82rem; line-height: 1.65; }
+  .author-name--me { color: var(--color-foreground); font-weight: 650; }
+  .author-name:hover, .author-name:focus-visible { color: var(--color-primary); text-decoration: underline; text-underline-offset: 0.15em; }
+  .publication-card__notes { display: flex; flex-wrap: wrap; gap: 0.35rem 0.8rem; margin-top: 0.4rem; font-size: 0.68rem; line-height: 1.5; }
+  .publication-card__abstract { max-width: 72ch; margin: 0.8rem 0 0; color: var(--color-muted-foreground); font-size: 0.84rem; line-height: 1.7; }
+  .publication-card__venue { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; margin-top: 0.8rem; color: var(--color-muted-foreground); font-size: 0.78rem; }
+  .publication-card__venue-name { color: var(--color-foreground); font-weight: 600; }
+  .publication-card__topics { margin-top: 0.7rem; }
+  .publication-card__topics span { border-radius: 9999px; background: color-mix(in srgb, var(--color-muted) 72%, transparent); color: var(--color-muted-foreground); font-size: 0.66rem; line-height: 1; padding: 0.3rem 0.5rem; }
+  .publication-card__footer { margin-top: 1rem; justify-content: space-between; gap: 0.7rem; }
+  .publication-card__actions { margin-top: 0; gap: 0.45rem; }
+
+  .publication-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background: color-mix(in srgb, var(--color-muted) 45%, transparent);
+    color: var(--color-muted-foreground);
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.45rem 0.6rem;
+    text-decoration: none;
+    transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, transform 180ms ease;
+  }
+
+  .publication-action-link:hover, .publication-action-link:focus-visible { border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border)); background: color-mix(in srgb, var(--color-primary) 10%, transparent); color: var(--color-primary); transform: translateY(-1px); }
+  .publication-action-link--details { border-color: color-mix(in srgb, var(--color-primary) 25%, var(--color-border)); background: color-mix(in srgb, var(--color-primary) 10%, transparent); color: var(--color-primary); }
+  .publication-card :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+  @media (min-width: 640px) {
+    .publication-card { padding: 1.25rem; }
+    .publication-card__layout { grid-template-columns: minmax(13.75rem, 15rem) minmax(0, 1fr); gap: 1.5rem; }
+    .publication-card__media-link { min-height: 12rem; height: 100%; }
+    .publication-card__media img { max-height: 15rem; }
+  }
+
+  @media (max-width: 639px) {
+    .publication-card__media-link { min-height: 13rem; }
+    .publication-card__media img { max-height: 18rem; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .publication-figure img { transition: none; }
+    .publication-card, .publication-card__media img, .publication-card__media-hint, .publication-action-link, .publication-card__title-link { transition: none; }
   }
 </style>
