@@ -49,7 +49,9 @@ export const academicPublications: PublicationRecord[] = [
       { name: 'Jinhui Luo', isMe: true },
       { name: 'Jiayi Long' },
       { name: 'Jiawei Chen' },
-      { name: 'Guosheng Kang', isCoreContributor: true }
+      { name: 'Guosheng Kang', isCoreContributor: true },
+      { name: 'Yiping Wen' },
+      { name: 'Buqing Cao' }
     ],
     venue: 'WISE',
     year: '2026',
@@ -58,12 +60,12 @@ export const academicPublications: PublicationRecord[] = [
     ranking: 'CCF B',
     image: '/images/publications/frameworks/llm4ppm.png',
     topics: ['Process intelligence', 'Large language models'],
-    abstractZh: '将事件日志转换为语义故事，通过持续预训练与 LoRA 指令微调学习可迁移流程语义。',
-    abstractEn: 'A process foundation model learns transferable semantics from event logs with continuous pre-training and LoRA tuning.',
-    overviewZh: '本文把离散的事件日志组织为可读、可检索的流程语义故事，并设计面向流程领域的持续预训练与参数高效微调流程，使语言模型能够迁移到不同业务流程的预测性监控任务。',
-    overviewEn: 'We turn discrete event logs into readable and retrievable semantic stories, then combine process-oriented continual pre-training with parameter-efficient tuning for predictive monitoring across business processes.',
-    contributionZh: '我负责数据语义化方案、模型训练流程和实验分析，重点验证跨数据集迁移能力。',
-    contributionEn: 'I worked on the semantic serialization pipeline, model training protocol, and experiments validating transfer across datasets.',
+    abstractZh: '使用大语言模型学习可迁移流程语义，支持下一活动、剩余时间和结果预测。',
+    abstractEn: 'A foundation-model framework for transferable process semantics and multi-task predictive process monitoring.',
+    overviewZh: '本文提出 LLM4PPM，将事件日志转换为语义故事，通过持续预训练与 LoRA 指令微调构建面向多领域的流程基础模型，并支持下一活动、剩余时间和结果预测。',
+    overviewEn: 'LLM4PPM transforms event logs into semantic stories and builds a cross-domain process foundation model through continuous pre-training and LoRA instruction tuning. It supports next-activity, remaining-time, and outcome prediction.',
+    contributionZh: '我整理了 13 个结构化事件日志数据集，完成语义故事语料构建，实施持续预训练与 LoRA 多任务微调，并负责实验设计和论文撰写。',
+    contributionEn: 'I standardized 13 structured event-log datasets, built the semantic-story corpus, implemented continuous pre-training and LoRA multi-task tuning, and led the experiments and paper writing.',
     links: []
   },
   {
@@ -74,7 +76,9 @@ export const academicPublications: PublicationRecord[] = [
       { name: 'Jinhui Luo', isMe: true },
       { name: 'Jiayi Long' },
       { name: 'Ziyi Niu' },
-      { name: 'Guosheng Kang', isCoreContributor: true }
+      { name: 'Guosheng Kang', isCoreContributor: true },
+      { name: 'Ye Cao' },
+      { name: 'Xinci Qiu' }
     ],
     venue: 'IJCNN',
     year: '2026',
@@ -83,12 +87,12 @@ export const academicPublications: PublicationRecord[] = [
     ranking: 'CCF C',
     image: '/images/publications/frameworks/fhgsn.png',
     topics: ['Graph neural networks', 'Next activity prediction'],
-    abstractZh: '通过异构图和序列融合，同时建模事件日志中的交互频率与上下文依赖。',
-    abstractEn: 'A graph-sequence fusion network models interaction frequency and contextual dependency in event logs.',
-    overviewZh: '方法以事件、属性和活动之间的关系构建异构图，同时保留原始事件顺序，通过频率感知的消息传递和序列编码联合建模局部结构与长期上下文。',
-    overviewEn: 'The method builds a heterogeneous graph over events, attributes, and activities while preserving event order, using frequency-aware message passing and sequence encoding to model local structure and long-range context together.',
-    contributionZh: '我参与异构图构建、频率特征设计和消融实验，分析图结构对下一活动预测的影响。',
-    contributionEn: 'I contributed to heterogeneous graph construction, frequency feature design, and ablations studying the effect of graph structure on next-activity prediction.',
+    abstractZh: '通过异构图与序列融合，同时建模交互频率和上下文依赖。',
+    abstractEn: 'A graph-sequence fusion network that jointly learns structural dependencies and temporal dynamics.',
+    overviewZh: 'FHGSN 构建事件日志异构图，并通过两阶段 GraphSAGE 聚合机制融合交互频率与上下文依赖，用于下一活动预测。',
+    overviewEn: 'FHGSN constructs a heterogeneous event-log graph and uses a two-stage GraphSAGE representation framework to capture interaction frequency and contextual dependency for next-activity prediction.',
+    contributionZh: '我提出事件日志异构图构建策略，设计两阶段 GraphSAGE 表征框架，完成实验设计和论文撰写。',
+    contributionEn: 'I proposed the heterogeneous graph construction strategy, designed the two-stage GraphSAGE framework, and completed the experiments and manuscript.',
     links: []
   },
   {
@@ -99,7 +103,10 @@ export const academicPublications: PublicationRecord[] = [
       { name: 'Jiayi Long' },
       { name: 'Jinhui Luo', isMe: true },
       { name: 'Jiawei Chen' },
-      { name: 'Guosheng Kang', isCoreContributor: true }
+      { name: 'Guosheng Kang', isCoreContributor: true },
+      { name: 'Lifeng Yang' },
+      { name: 'Wen Li' },
+      { name: 'Jiayan Xiang' }
     ],
     venue: 'CSCWD',
     year: '2026',
@@ -109,11 +116,11 @@ export const academicPublications: PublicationRecord[] = [
     image: '/images/publications/frameworks/gsca.png',
     topics: ['Contrastive learning', 'Graph-sequence fusion'],
     abstractZh: '通过对比学习让流程图结构表征与事件序列表征互相增强。',
-    abstractEn: 'A contrastive framework strengthens graph structure and event-sequence representations for next-event prediction.',
-    overviewZh: '本文构造图视角与序列视角下的正负样本对，使用对比目标将两个视角映射到一致的语义空间，再将融合表征用于下一事件预测。',
-    overviewEn: 'We construct positive and negative pairs from graph and sequence views, align them in a shared semantic space with contrastive objectives, and use the fused representation for next-event prediction.',
-    contributionZh: '我参与对比样本构造、训练目标实现以及不同图序列融合策略的实验比较。',
-    contributionEn: 'I contributed to contrastive pair construction, objective implementation, and experiments comparing graph-sequence fusion strategies.',
+    abstractEn: 'A contrastive graph-sequence alignment framework for next-event prediction.',
+    overviewZh: '本文研究流程拓扑和事件序列的对齐问题，通过对比学习让结构信息与长程依赖互相强化。',
+    overviewEn: 'This work aligns process topology and event sequences with contrastive learning so that structural information and long-range dependencies reinforce each other.',
+    contributionZh: '我负责 DFG 构建和 GCN 图表征学习模块，参与对比学习框架、实验设计和论文写作。',
+    contributionEn: 'I designed the DFG construction and GCN graph representation modules, and contributed to the contrastive framework, experiments, and writing.',
     links: []
   },
   {
@@ -123,7 +130,9 @@ export const academicPublications: PublicationRecord[] = [
     authors: [
       { name: 'Jiawei Chen' },
       { name: 'Jinhui Luo', isMe: true },
-      { name: 'Guosheng Kang', isCoreContributor: true }
+      { name: 'Guosheng Kang', isCoreContributor: true },
+      { name: 'Yingbo Liu' },
+      { name: 'Jianxun Liu' }
     ],
     venue: '计算机集成制造系统',
     year: '2026',
@@ -133,11 +142,11 @@ export const academicPublications: PublicationRecord[] = [
     image: '/images/publications/frameworks/sa4nap.png',
     topics: ['Event sequences', 'Semantic modeling'],
     abstractZh: '融合事件序列语义与属性关联语义，提升业务流程下一事件预测。',
-    abstractEn: 'A semantic fusion method combines event sequences and attribute relations for next-event prediction.',
-    overviewZh: '方法从事件发生顺序和事件属性关联两个层面提取语义，利用交互式融合模块减少单一视角造成的信息缺失，从而提升复杂业务流程中的预测稳定性。',
-    overviewEn: 'The method extracts semantics from event order and attribute associations, using an interactive fusion module to reduce information loss from either view and improve prediction stability in complex processes.',
-    contributionZh: '我负责属性关联图建模、语义融合模块实现与实验结果分析。',
-    contributionEn: 'I worked on attribute-association graph modeling, semantic fusion implementation, and analysis of experimental results.',
+    abstractEn: 'Fusing event-sequence semantics and attribute-association semantics for next-event prediction.',
+    overviewZh: '本文结合 BERT 语义故事编码与事件属性关联建模，构建面向业务流程下一事件预测的语义融合方法。',
+    overviewEn: 'The method combines BERT-based semantic-story encoding with attribute-association modeling for next-event prediction in business processes.',
+    contributionZh: '我实现 BERT 语义故事编码组件，负责实验设计并完成论文撰写。',
+    contributionEn: 'I implemented the BERT semantic-story encoder, led the experiments, and wrote the manuscript.',
     links: []
   },
   {
@@ -147,7 +156,11 @@ export const academicPublications: PublicationRecord[] = [
     authors: [
       { name: 'Jiawei Chen' },
       { name: 'Jinhui Luo', isMe: true },
-      { name: 'Guosheng Kang', isCoreContributor: true }
+      { name: 'Guosheng Kang', isCoreContributor: true },
+      { name: 'Jianxun Liu' },
+      { name: 'Yiping Wen' },
+      { name: 'Hangyu Cheng' },
+      { name: 'Jun Peng' }
     ],
     venue: 'Applied Soft Computing',
     year: '2026',
@@ -157,36 +170,39 @@ export const academicPublications: PublicationRecord[] = [
     image: '/images/publications/frameworks/mfml.png',
     topics: ['Multimodal learning', 'Predictive monitoring'],
     abstractZh: '以多模态融合和多任务优化共同建模语义、序列与属性特征。',
-    abstractEn: 'A multimodal and multi-task framework jointly models semantic, sequential, and attribute features.',
-    overviewZh: '本文将流程文本、事件序列和结构化属性作为互补模态，通过共享表示和任务特定解码器同时优化下一事件、时间和风险等预测目标。',
-    overviewEn: 'We treat process text, event sequences, and structured attributes as complementary modalities, jointly optimizing next-event, time, and risk objectives with shared representations and task-specific decoders.',
-    contributionZh: '我参与多模态输入设计、多任务损失配置和模型鲁棒性分析。',
-    contributionEn: 'I contributed to multimodal input design, multi-task loss configuration, and robustness analysis.',
+    abstractEn: 'A multimodal and multi-task framework for semantic, sequential, and attribute-aware process monitoring.',
+    overviewZh: 'MFML 通过语义、序列和属性分支进行多模态融合，并使用损失驱动的多任务学习优化下一活动、剩余时间和结果预测。',
+    overviewEn: 'MFML couples semantic, sequential, and attribute-aware branches with loss-driven multi-task optimization for predictive business process monitoring.',
+    contributionZh: '我实现 Hybrid Transformer-LSTM 序列编码器和 Residual CNN 属性建模分支，设计多任务学习框架，并参与实验与论文撰写。',
+    contributionEn: 'I implemented the hybrid Transformer-LSTM sequence encoder and Residual CNN attribute branch, designed the multi-task objective, and contributed to the experiments and manuscript.',
     links: []
   },
   {
-    slug: 'rag-semantic-stories',
+    slug: 'sarft',
     titleZh: '结合检索增强生成与微调的下一活动预测语义故事',
     titleEn: 'Semantic Stories for Next Activity Prediction with Retrieval-Augmented Generation and Fine-Tuning',
     authors: [
       { name: 'Xinyao Yan' },
       { name: 'Jinhui Luo', isMe: true },
       { name: 'Jiayi Long' },
-      { name: 'Guosheng Kang', isCoreContributor: true }
+      { name: 'Guosheng Kang', isCoreContributor: true },
+      { name: 'Jianxun Liu' },
+      { name: 'Yiping Wen' },
+      { name: 'Xiaoxong Xiao' }
     ],
-    venue: 'ICSS',
+    venue: 'CCF International Conference on Service Science (ICSS)',
     year: '2026',
     type: 'conference',
     status: 'accepted',
     ranking: 'CCF C',
     image: '/images/publications/frameworks/rag.png',
     topics: ['Retrieval-augmented generation', 'Process mining'],
-    abstractZh: '将事件日志组织为语义故事，检索历史上下文并引导大模型预测下一活动。',
-    abstractEn: 'A retrieval-augmented semantic-story framework retrieves historical context to guide next-activity prediction.',
-    overviewZh: '我们把历史轨迹转写为语义故事并建立向量索引，在预测时检索相似流程片段，再结合领域微调的大语言模型生成下一活动及其解释。',
-    overviewEn: 'Historical traces are rewritten as semantic stories and indexed for retrieval; similar process fragments are combined with a domain-tuned language model to predict and explain the next activity.',
-    contributionZh: '我参与检索语料构建、提示模板设计和生成结果的定量与定性评估。',
-    contributionEn: 'I contributed to retrieval corpus construction, prompt template design, and quantitative and qualitative evaluation of generated predictions.',
+    abstractZh: '将事件日志组织为语义故事，以检索历史上下文并引导 LLM 预测下一活动。',
+    abstractEn: 'A retrieval-augmented semantic-story framework for next-activity prediction.',
+    overviewZh: 'SAR-FT 将事件日志组织成语义故事，检索历史上下文，并通过领域微调缓解通用大模型的幻觉问题。',
+    overviewEn: 'SAR-FT organizes event logs into semantic stories, retrieves historical context, and adapts an LLM to reduce hallucination in next-activity prediction.',
+    contributionZh: '我参与检索增强生成模块的设计，完成领域文献调研并参与论文修改。',
+    contributionEn: 'I contributed to the retrieval-augmented generation module, domain literature review, and manuscript revision.',
     links: []
   }
 ]
