@@ -1,0 +1,33 @@
+---
+import { i18n, profile, researchInterests, type Locale } from '../data/site';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const text = i18n[locale];
+const prefix = locale === 'en' ? '/en' : '';
+---
+
+<section class="axi-profile" aria-label={locale === 'zh' ? '个人信息' : 'Profile'}>
+  <div class="axi-profile__identity">
+    <img class="axi-profile__avatar" src={profile.avatar} alt={`${profile.name} profile`} fetchpriority="high" />
+    <div class="axi-profile__copy">
+      <p class="axi-profile__kicker">{locale === 'zh' ? 'Undergraduate researcher' : 'Undergraduate researcher'}</p>
+      <h1>{profile.name}<span>{profile.nameZh}</span></h1>
+      <div class="axi-badges">
+        <span>{profile.role[locale]}</span>
+        <span>⌖ {profile.location[locale]}</span>
+        <span>AI · Process Intelligence</span>
+      </div>
+      <div class="axi-socials">
+        <a href={profile.github} target="_blank" rel="noreferrer"><span aria-hidden="true">⌘</span> GitHub</a>
+        <a href={`mailto:${profile.email}`}><span aria-hidden="true">@</span> Email</a>
+        <a href={profile.scholar} target="_blank" rel="noreferrer"><span aria-hidden="true">S</span> Scholar</a>
+        <a href={`${prefix}/cv/`}><span aria-hidden="true">CV</span> CV</a>
+      </div>
+    </div>
+  </div>
+  <p class="axi-profile__motto">{locale === 'zh' ? '本科生研究者，关注 AI 与预测性流程智能。' : 'Undergraduate researcher working on AI and process intelligence.'}</p>
+  <div class="axi-profile__topics" aria-label={text.researchTitle}>
+    {researchInterests.slice(0, 4).map((item) => <span>{item[locale]}</span>)}
+  </div>
+</section>

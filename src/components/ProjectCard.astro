@@ -9,7 +9,6 @@ const prefix = locale === 'en' ? '/en' : '';
 ---
 
 <article class="project-card">
-  <div class="project-number">01</div>
   <div class="project-card-body">
     <div class="card-topline"><span class="paper-venue">{p[locale === 'zh' ? 'levelZh' : 'levelEn']}</span><span class="project-role">{p[locale === 'zh' ? 'roleZh' : 'roleEn']}</span></div>
     <h3><a href={`${prefix}/projects/${p.slug}/`}>{p[locale === 'zh' ? 'titleZh' : 'titleEn']}</a></h3>
