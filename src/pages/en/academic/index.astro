@@ -5,22 +5,14 @@ import { getLocalizedPublications } from '@/data/academic'
 
 const headings = [
   { depth: 2, slug: 'about-me', text: 'About Me' },
-  { depth: 2, slug: 'research-updates', text: 'Research Updates' },
   { depth: 2, slug: 'education', text: 'Education & Experience' },
   { depth: 2, slug: 'research-interests', text: 'Research Interests' },
   { depth: 2, slug: 'publications', text: 'Publications' },
   { depth: 2, slug: 'awards', text: 'Awards' }
 ]
 
-const updates = [
-  { date: '2026.06', status: 'Accepted', title: 'LLM4PPM was accepted to WISE 2026.', href: 'https://github.com/Jinhui524', label: 'Research notes' },
-  { date: '2026.03', status: 'Research', title: 'Started graduate-stage research at Southeast University.', href: 'https://www.seu.edu.cn/', label: 'Southeast University' },
-  { date: '2025.09', status: 'Lab', title: 'Joined the Service Computing and Software Service Lab as a student researcher.', href: 'https://guoshengkang.github.io/', label: 'Laboratory' },
-  { date: '2024.09', status: 'Started', title: 'Started systematic study of graph mining and event sequence prediction.', href: 'https://computer.hnust.edu.cn/', label: 'HNUST' }
-]
-
 const education = [
-  { period: '2026 — Present', title: 'Southeast University', subtitle: 'Master stage · Data and intelligent systems', role: 'Graduate researcher', href: 'https://www.seu.edu.cn/' },
+  { period: '2026 — Present', title: 'Southeast University · Incoming', subtitle: 'School of Computer Science and Engineering · Data and intelligent systems', role: 'Incoming graduate student', href: 'https://cse.seu.edu.cn/' },
   { period: '2023 — 2027', title: 'Hunan University of Science and Technology', subtitle: 'Data Science and Big Data Technology', role: 'Undergraduate student', href: 'https://computer.hnust.edu.cn/' },
   { period: '2024 — Present', title: 'Key Laboratory of Service Computing and New Software Technology', subtitle: 'Graph data, process intelligence and foundation models', role: 'Student researcher · Prof. Guosheng Kang', href: 'https://guoshengkang.github.io/' }
 ]
@@ -38,11 +30,6 @@ const awards = [
   <p>I am a data science student at Hunan University of Science and Technology and a graduate student at Southeast University. I conduct research with the Hunan Provincial Key Laboratory of Service Computing and New Software Technology.</p>
   <p>My work connects graph data mining, graph neural networks, foundation models, AI agents, and event sequence prediction.</p>
   <Button title='GitHub profile' class='w-fit' href='https://github.com/Jinhui524' target='_blank' rel='noopener noreferrer'><Icon class='size-5' name='github' slot='before' /></Button>
-
-  <h2 id='research-updates'>Research Updates<a class='anchor' href='#research-updates'>#</a></h2>
-  <div class='space-y-2 rounded-xl border border-border bg-card p-2 sm:p-3'>
-    {updates.map((update) => <a class='academic-news-row group' href={update.href} target='_blank' rel='noopener noreferrer'><time class='w-20 shrink-0 font-mono text-xs text-muted-foreground'>{update.date}</time><span class='academic-status shrink-0'>{update.status}</span><span class='min-w-0 flex-1 text-sm leading-relaxed text-foreground transition-colors group-hover:text-primary'>{update.title}</span><span class='hidden shrink-0 text-xs text-muted-foreground transition-colors group-hover:text-primary sm:inline'>{update.label} ↗</span></a>)}
-  </div>
 
   <h2 id='education'>Education &amp; Experience<a class='anchor' href='#education'>#</a></h2>
   <div class='academic-timeline space-y-3'>

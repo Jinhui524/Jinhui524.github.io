@@ -5,51 +5,19 @@ import { getLocalizedPublications } from '@/data/academic'
 
 const headings = [
   { depth: 2, slug: 'about-me', text: 'About Me' },
-  { depth: 2, slug: 'research-updates', text: 'Research Updates' },
   { depth: 2, slug: 'education', text: 'Education & Experience' },
   { depth: 2, slug: 'research-interests', text: 'Research Interests' },
   { depth: 2, slug: 'publications', text: 'Publications' },
   { depth: 2, slug: 'awards', text: 'Awards' }
 ]
 
-const updates = [
-  {
-    date: '2026.06',
-    status: 'Accepted',
-    title: 'LLM4PPM 被 WISE 2026 接收，继续探索可迁移的流程语义学习。',
-    href: 'https://github.com/Jinhui524',
-    label: 'Research notes'
-  },
-  {
-    date: '2026.03',
-    status: 'Research',
-    title: '加入东南大学硕士阶段研究，在服务计算实验室开展流程智能研究。',
-    href: 'https://www.seu.edu.cn/',
-    label: 'Southeast University'
-  },
-  {
-    date: '2025.09',
-    status: 'Lab',
-    title: '在湖南省服务计算与软件服务新技术重点实验室参与本科生科研。',
-    href: 'https://guoshengkang.github.io/',
-    label: 'Laboratory'
-  },
-  {
-    date: '2024.09',
-    status: 'Started',
-    title: '开始系统学习图数据挖掘与事件序列预测。',
-    href: 'https://computer.hnust.edu.cn/',
-    label: 'HNUST'
-  }
-]
-
 const education = [
   {
     period: '2026 — Present',
-    title: 'Southeast University',
-    subtitle: 'Master stage · Data and intelligent systems',
-    role: 'Graduate researcher',
-    href: 'https://www.seu.edu.cn/'
+    title: 'Southeast University · incoming',
+    subtitle: 'School of Computer Science and Engineering · Data and intelligent systems',
+    role: 'Incoming graduate student',
+    href: 'https://cse.seu.edu.cn/'
   },
   {
     period: '2023 — 2027',
@@ -92,18 +60,6 @@ const awards = [
   <Button title='GitHub profile' class='w-fit' href='https://github.com/Jinhui524' target='_blank' rel='noopener noreferrer'>
     <Icon class='size-5' name='github' slot='before' />
   </Button>
-
-  <h2 id='research-updates'>Research Updates<a class='anchor' href='#research-updates'>#</a></h2>
-  <div class='space-y-2 rounded-xl border border-border bg-card p-2 sm:p-3'>
-    {updates.map((update) => (
-      <a class='academic-news-row group' href={update.href} target='_blank' rel='noopener noreferrer'>
-        <time class='w-20 shrink-0 font-mono text-xs text-muted-foreground'>{update.date}</time>
-        <span class='academic-status shrink-0'>{update.status}</span>
-        <span class='min-w-0 flex-1 text-sm leading-relaxed text-foreground transition-colors group-hover:text-primary'>{update.title}</span>
-        <span class='hidden shrink-0 text-xs text-muted-foreground transition-colors group-hover:text-primary sm:inline'>{update.label} ↗</span>
-      </a>
-    ))}
-  </div>
 
   <h2 id='education'>Education &amp; Experience<a class='anchor' href='#education'>#</a></h2>
   <div class='academic-timeline space-y-3'>

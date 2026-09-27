@@ -7,6 +7,7 @@ import Section from '@/components/home/Section.astro'
 import avatar from '@/assets/avatar.png'
 import config from '@/site-config'
 import GitHubActivityCalendar from '@/components/home/GitHubActivityCalendar.astro'
+import { newsItems } from '@/data/news'
 ---
 
 <PageLayout meta={{ title: 'Home' }} highlightColor='#659EB966'>
@@ -25,29 +26,50 @@ import GitHubActivityCalendar from '@/components/home/GitHubActivityCalendar.ast
           <h1 class='text-3xl font-bold'>{config.author_en}</h1>
           <div class='flex flex-wrap gap-x-1 gap-y-1'>
             {config.personal?.location && <Label title={config.personal.location}><Icon name='location' class='size-4' slot='icon' /></Label>}
-            {config.personal?.githubUsername && <Label title='Github' as='a' href={`https://github.com/${config.personal.githubUsername}`} target='_blank' rel='noopener noreferrer'><Icon name='github' class='size-4' slot='icon' /></Label>}
-            {config.personal?.email && <Label title='Email' as='a' href={`mailto:${config.personal.email}`}><Icon name='email' class='size-4' slot='icon' /></Label>}
-            {config.personal?.googleScholar && <Label title='Scholar' as='a' href={config.personal.googleScholar}><Icon name='earth' class='size-4' slot='icon' /></Label>}
+            {config.personal?.googleScholar && !config.personal.googleScholar.endsWith('scholar.google.com/') && <Label title='Scholar' as='a' href={config.personal.googleScholar} target='_blank' rel='noopener noreferrer'><Icon name='earth' class='size-4' slot='icon' /></Label>}
           </div>
           <nav class='flex flex-wrap items-center gap-2 text-xs' aria-label='Quick links'>
             {config.personal?.githubUsername && <a class='quick-link' href={`https://github.com/${config.personal.githubUsername}`} target='_blank' rel='noopener noreferrer'><Icon name='github' class='size-3.5' /><span>GitHub</span></a>}
             {config.personal?.email && <a class='quick-link' href={`mailto:${config.personal.email}`}><Icon name='email' class='size-3.5' /><span>Email</span></a>}
             <a class='quick-link' href='/en/academic'><Icon name='document' class='size-3.5' /><span>Academic</span></a>
+            <a class='quick-link' href='https://cse.seu.edu.cn/' target='_blank' rel='noopener noreferrer'><Icon name='earth' class='size-3.5' /><span>SEU CSE</span></a>
           </nav>
         </div>
       </div>
 
+      <div class='home-scroll-cue' aria-hidden='true'>
+        <span class='home-scroll-cue-line'></span>
+        <span>Scroll to explore</span>
+      </div>
+
       <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
-        <Section title='About'>
+        <Section title='About' class='home-section reveal-section'>
           <p class='text-muted-foreground'>I am Jinhui Luo, a data science student at Hunan University of Science and Technology and a graduate student at Southeast University. My work connects graph data, graph neural networks, foundation models, agents, and event sequence prediction.</p>
           <Button title='More about me' class='w-fit self-end' href='/en/about' style='ahead' />
         </Section>
-        <Section title='Education'>
-          <Card as='a' heading='Southeast University · Graduate stage' subheading='Graph data and intelligent systems' date='2026' href='https://www.seu.edu.cn/' />
+        <Section title='🔥 News' class='home-section reveal-section'>
+          <div class='home-news' aria-label='News'>
+            {newsItems.map((item) => {
+              const href = item.href?.startsWith('/') ? `/en${item.href}` : item.href || '/en/academic'
+              const external = href.startsWith('http')
+              return <a class='home-news-row group' href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+                <time class='home-news-date' datetime={item.date.replace('.', '-')}>{item.date}</time>
+                <span class='home-news-emoji' aria-hidden='true'>{item.emoji}</span>
+                <span class='home-news-content'>
+                  <span class='home-news-meta'><span class='home-news-status'>{item.statusEn}</span><span class='home-news-label'>{item.labelEn}</span></span>
+                  <span class='home-news-title'>{item.titleEn}</span>
+                </span>
+                <span class='home-news-arrow' aria-hidden='true'>↗</span>
+              </a>
+            })}
+          </div>
+        </Section>
+        <Section title='Education' class='home-section reveal-section'>
+          <Card as='a' heading='Southeast University · Incoming' subheading='School of Computer Science and Engineering · Graph data and intelligent systems' date='2026' href='https://cse.seu.edu.cn/' />
           <Card as='a' heading='Hunan University of Science and Technology' subheading='Data Science and Big Data Technology' date='2023 - 2027' href='https://computer.hnust.edu.cn/' />
           <Card as='a' heading='Service Computing and Software Service Lab' subheading='Undergraduate research member · Prof. Guosheng Kang' date='2024 - Present' href='https://guoshengkang.github.io/' />
         </Section>
-        <Section title='Statistics'>
+        <Section title='Statistics' class='home-section reveal-section'>
           <BlogStats blogStartDate={new Date(config.personal?.blogStartDate || '2026-04-14')} />
           <div class='mt-1 flex flex-wrap items-center gap-2 text-sm text-muted-foreground'>
             <span class='rounded-full bg-primary/10 px-3 py-1 font-medium text-primary'>Research status</span>
@@ -61,6 +83,33 @@ import GitHubActivityCalendar from '@/components/home/GitHubActivityCalendar.ast
     </section>
   </main>
 </PageLayout>
+
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+  const revealSections = document.querySelectorAll<HTMLElement>('.reveal-section')
+  if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        entry.target.classList.add('is-visible')
+        observer.unobserve(entry.target)
+      })
+    }, { threshold: 0.12 })
+    revealSections.forEach((section) => revealObserver.observe(section))
+  } else {
+    revealSections.forEach((section) => section.classList.add('is-visible'))
+  }
+
+  const watermark = document.querySelector<SVGElement>('.research-watermark')
+  const updateWatermark = () => {
+    if (!watermark || reducedMotion.matches) return
+    const progress = Math.min(window.scrollY / 560, 1)
+    watermark.style.setProperty('--scroll-shift', `${progress * 18}px`)
+    watermark.style.opacity = String(0.06 - progress * 0.025)
+  }
+  updateWatermark()
+  window.addEventListener('scroll', updateWatermark, { passive: true })
+</script>
 
 <style>
   .quick-link {
@@ -84,6 +133,24 @@ import GitHubActivityCalendar from '@/components/home/GitHubActivityCalendar.ast
     transform: translateY(-1px);
   }
 
+  .home-news { overflow: hidden; border-top: 1px solid hsl(var(--border) / 0.7); }
+  .home-news-row { display: flex; align-items: flex-start; gap: 0.75rem; border-bottom: 1px solid hsl(var(--border) / 0.7); padding: 0.8rem 0.65rem; color: inherit; text-decoration: none; transition: background-color 180ms ease, padding-left 180ms ease; }
+  .home-news-row:hover, .home-news-row:focus-visible { background: hsl(var(--muted) / 0.46); padding-left: 0.9rem; }
+  .home-news-date { min-width: 4.4rem; padding-top: 0.2rem; color: hsl(var(--muted-foreground) / 0.82); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.72rem; }
+  .home-news-emoji { padding-top: 0.1rem; font-size: 1rem; }
+  .home-news-content { display: flex; min-width: 0; flex: 1; flex-direction: column; gap: 0.3rem; }
+  .home-news-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+  .home-news-status { border-radius: 9999px; background: hsl(var(--primary) / 0.12); color: hsl(var(--primary)); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1; padding: 0.28rem 0.52rem; }
+  .home-news-label { color: hsl(var(--muted-foreground) / 0.82); font-size: 0.7rem; }
+  .home-news-title { color: hsl(var(--foreground)); font-size: 0.88rem; line-height: 1.55; transition: color 180ms ease; }
+  .group:hover .home-news-title, .group:focus-visible .home-news-title { color: hsl(var(--primary)); }
+  .home-news-arrow { align-self: center; color: hsl(var(--muted-foreground)); opacity: 0.65; transition: color 180ms ease, transform 180ms ease; }
+  .group:hover .home-news-arrow, .group:focus-visible .home-news-arrow { color: hsl(var(--primary)); transform: translate(2px, -2px); }
+  .home-scroll-cue { display: flex; align-items: center; gap: 0.45rem; color: hsl(var(--muted-foreground) / 0.72); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .home-scroll-cue-line { display: inline-block; width: 1.9rem; height: 1px; background: hsl(var(--primary) / 0.6); }
+  .reveal-section { opacity: 0; transform: translateY(12px); transition: opacity 500ms ease, transform 500ms ease; }
+  .reveal-section.is-visible { opacity: 1; transform: translateY(0); }
+
   @media (prefers-reduced-motion: reduce) {
     .quick-link { transition: none; }
   }
@@ -91,14 +158,24 @@ import GitHubActivityCalendar from '@/components/home/GitHubActivityCalendar.ast
   .research-watermark {
     transform-origin: center;
     animation: research-watermark-drift 18s ease-in-out infinite alternate;
+    transform: translate3d(0, var(--scroll-shift, 0px), 0);
   }
 
   @keyframes research-watermark-drift {
-    from { transform: translate3d(-0.5%, 0, 0) scale(1); }
-    to { transform: translate3d(0.5%, 1%, 0) scale(1.015); }
+    from { transform: translate3d(-0.5%, var(--scroll-shift, 0px), 0) scale(1); }
+    to { transform: translate3d(0.5%, calc(1% + var(--scroll-shift, 0px)), 0) scale(1.015); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .research-watermark { animation: none; }
+    .research-watermark, .reveal-section { animation: none; transition: none; transform: none; }
+    .home-news-row, .home-news-arrow, .quick-link { transition: none; }
+    .home-scroll-cue { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .home-news-row { gap: 0.5rem; padding-inline: 0.3rem; }
+    .home-news-date { min-width: 3.8rem; font-size: 0.66rem; }
+    .home-news-title { font-size: 0.82rem; }
+    .home-news-label { display: none; }
   }
 </style>
