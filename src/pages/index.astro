@@ -25,10 +25,15 @@ import config from '@/site-config'
           <h1 class='text-3xl font-bold'>{config.author}</h1>
           <div class='flex flex-wrap gap-x-1 gap-y-1'>
             {config.personal?.location && <Label title={config.personal.location}><Icon name='location' class='size-4' slot='icon' /></Label>}
-            {config.personal?.githubUsername && <Label title='Github' as='a' href={`https://github.com/${config.personal.githubUsername}`} target='_blank'><Icon name='github' class='size-4' slot='icon' /></Label>}
+            {config.personal?.githubUsername && <Label title='Github' as='a' href={`https://github.com/${config.personal.githubUsername}`} target='_blank' rel='noopener noreferrer'><Icon name='github' class='size-4' slot='icon' /></Label>}
             {config.personal?.email && <Label title='Email' as='a' href={`mailto:${config.personal.email}`}><Icon name='email' class='size-4' slot='icon' /></Label>}
             {config.personal?.googleScholar && <Label title='Scholar' as='a' href={config.personal.googleScholar}><Icon name='earth' class='size-4' slot='icon' /></Label>}
           </div>
+          <nav class='flex flex-wrap items-center gap-2 text-xs' aria-label='Quick links'>
+            {config.personal?.githubUsername && <a class='quick-link' href={`https://github.com/${config.personal.githubUsername}`} target='_blank' rel='noopener noreferrer'><Icon name='github' class='size-3.5' /><span>GitHub</span></a>}
+            {config.personal?.email && <a class='quick-link' href={`mailto:${config.personal.email}`}><Icon name='email' class='size-3.5' /><span>Email</span></a>}
+            <a class='quick-link' href='/academic'><Icon name='document' class='size-3.5' /><span>Academic</span></a>
+          </nav>
         </div>
       </div>
 
@@ -58,6 +63,31 @@ import config from '@/site-config'
 </PageLayout>
 
 <style>
+  .quick-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid hsl(var(--border) / 0.7);
+    border-radius: 9999px;
+    background: hsl(var(--muted) / 0.45);
+    padding: 0.3rem 0.65rem;
+    color: hsl(var(--muted-foreground));
+    text-decoration: none;
+    transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, transform 180ms ease;
+  }
+
+  .quick-link:hover,
+  .quick-link:focus-visible {
+    border-color: hsl(var(--primary) / 0.45);
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+    transform: translateY(-1px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .quick-link { transition: none; }
+  }
+
   .research-watermark {
     transform-origin: center;
     animation: research-watermark-drift 18s ease-in-out infinite alternate;

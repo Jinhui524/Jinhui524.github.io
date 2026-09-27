@@ -1,0 +1,72 @@
+---
+import PageLayout from '@/layouts/CommonPage.astro'
+import { getPublication, academicPublications, type PublicationRecord } from '@/data/academic'
+
+export function getStaticPaths() {
+  return academicPublications.map((publication) => ({
+    params: { slug: publication.slug },
+    props: { publication }
+  }))
+}
+
+interface Props {
+  publication: PublicationRecord
+}
+
+const { publication } = Astro.props as Props
+const record = publication ?? getPublication(Astro.params.slug ?? '')
+
+if (!record) {
+  return Astro.redirect('/en/academic')
+}
+
+const headings = [
+  { depth: 2, slug: 'abstract', text: 'Abstract' },
+  { depth: 2, slug: 'overview', text: 'Research Overview' },
+  { depth: 2, slug: 'contribution', text: 'My Contribution' }
+]
+---
+
+<PageLayout title={record.titleEn} {headings} info={{ slug: `/en/academic/${record.slug}`, hideComment: true }}>
+  <div class='mb-6 flex flex-wrap items-center gap-2 text-sm text-muted-foreground'>
+    <span class='rounded-full bg-primary/10 px-2.5 py-1 font-medium text-primary'>{record.venue}</span>
+    <span>{record.year}</span>
+    <span aria-hidden='true'>·</span>
+    <span>{record.type === 'conference' ? 'Conference' : 'Journal'}</span>
+    {record.ranking && <span class='rounded-full border border-border px-2.5 py-1 text-xs'>{record.ranking}</span>}
+  </div>
+
+  {record.image && (
+    <figure class='publication-detail-figure mb-8 overflow-hidden rounded-xl border border-border bg-card p-2'>
+      <img src={record.image} alt={`${record.titleEn} framework`} class='mx-auto max-h-[28rem] w-full object-contain' />
+      <figcaption class='px-2 pb-1 pt-3 text-center text-xs text-muted-foreground'>Research framework</figcaption>
+    </figure>
+  )}
+
+  <div class='mb-8 flex flex-wrap gap-2'>
+    {record.topics.map((topic) => <span class='rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground'>{topic}</span>)}
+  </div>
+
+  <h2 id='abstract'>Abstract<a class='anchor' href='#abstract'>#</a></h2>
+  <p>{record.abstractEn}</p>
+
+  <h2 id='overview'>Research Overview<a class='anchor' href='#overview'>#</a></h2>
+  <p>{record.overviewEn}</p>
+
+  <h2 id='contribution'>My Contribution<a class='anchor' href='#contribution'>#</a></h2>
+  <p>{record.contributionEn}</p>
+
+  <div class='mt-8 flex flex-wrap gap-2'>
+    {record.links.map((link) => (
+      <a href={link.href} target='_blank' rel='noopener noreferrer' class='inline-flex items-center gap-1.5 rounded-md bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary'>
+        <span>{link.type.toUpperCase()}</span><span aria-hidden='true'>↗</span>
+      </a>
+    ))}
+    {record.links.length === 0 && <span class='text-xs text-muted-foreground'>Paper links will be added when publicly available.</span>}
+  </div>
+</PageLayout>
+
+<style>
+  .publication-detail-figure img { max-height: 28rem; }
+  @media (prefers-reduced-motion: reduce) { .publication-detail-figure img { transition: none; } }
+</style>

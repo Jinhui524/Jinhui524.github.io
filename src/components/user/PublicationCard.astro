@@ -26,6 +26,11 @@ interface Props {
     status: 'published' | 'accepted' | 'under-review' | 'preprint'
     citations?: number
     authorsAlphabetical?: boolean
+    ranking?: string
+    topics?: string[]
+    image?: string
+    detailHref?: string
+    detailLabel?: string
   }
 }
 
@@ -72,6 +77,26 @@ const symbolMutedClass = "text-muted-foreground/80 dark:text-slate-400/80";
 ---
 
 <div class={cn('border rounded-xl p-4 transition-all group hover:border-foreground/25 hover:shadow-md', className)}>
+  <div class='flex flex-col gap-4 sm:flex-row'>
+    {
+      publication.image && (
+        <div class='publication-figure shrink-0 sm:w-36 md:w-44'>
+          {
+            publication.detailHref ? (
+              <a href={publication.detailHref} aria-label={`View details for ${publication.title}`} class='block overflow-hidden rounded-lg border border-border/70 bg-muted/30'>
+                <img src={publication.image} alt={`${publication.title} framework`} loading='lazy' decoding='async' class='aspect-[16/10] h-full w-full object-contain p-1 transition-transform duration-300 group-hover:scale-[1.03]' />
+              </a>
+            ) : (
+              <div class='overflow-hidden rounded-lg border border-border/70 bg-muted/30'>
+                <img src={publication.image} alt={`${publication.title} framework`} loading='lazy' decoding='async' class='aspect-[16/10] h-full w-full object-contain p-1' />
+              </div>
+            )
+          }
+        </div>
+      )
+    }
+
+    <div class='min-w-0 flex-1'>
   <div class='mb-3'>
 
     <p class='text-lg sm:text-xl text-foreground leading-tight mb-2 mt-0 transition-colors group-hover:text-primary' style='line-height: 1.4;'>
@@ -89,7 +114,14 @@ const symbolMutedClass = "text-muted-foreground/80 dark:text-slate-400/80";
       >
         {publication.status.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
       </span>
+      {publication.ranking && <span class='rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary whitespace-nowrap'>{publication.ranking}</span>}
     </div>
+
+    {publication.topics && publication.topics.length > 0 && (
+      <div class='mb-3 flex flex-wrap gap-1.5'>
+        {publication.topics.map((topic) => <span class='rounded-full bg-muted px-2 py-0.5 text-[0.68rem] text-muted-foreground'>{topic}</span>)}
+      </div>
+    )}
 
     { publication.authors && publication.authors.length > 0 && (
       <div class='mb-3 text-sm text-muted-foreground dark:text-slate-300'>
@@ -159,7 +191,7 @@ const symbolMutedClass = "text-muted-foreground/80 dark:text-slate-400/80";
 
   {/* 链接按钮 */}
   {
-    publication.links && publication.links.length > 0 && (
+    ((publication.links && publication.links.length > 0) || publication.detailHref) && (
       <div class='flex flex-wrap gap-2 sm:gap-2.5'>
         {publication.links.map((link) => {
           const iconConfig = linkIconMap[link.type.toLowerCase()] || { type: 'builtin', icon: 'earth' };
@@ -184,7 +216,29 @@ const symbolMutedClass = "text-muted-foreground/80 dark:text-slate-400/80";
             </a>
           )
         })}
+        {publication.detailHref && (
+          <a
+            href={publication.detailHref}
+            class='inline-flex items-center gap-1.5 rounded-md bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-all hover:bg-primary/15 focus-visible:ring-2 focus-visible:ring-ring ring-offset-background ring-offset-2'
+          >
+            <span aria-hidden='true'>↗</span>
+            <span>{publication.detailLabel || 'Details'}</span>
+          </a>
+        )}
       </div>
     )
   }
+  </div>
+  </div>
 </div>
+
+<style>
+  .publication-figure img { max-height: 8.25rem; }
+  @media (max-width: 640px) {
+    .publication-figure { width: 100%; }
+    .publication-figure img { max-height: 11rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .publication-figure img { transition: none; }
+  }
+</style>

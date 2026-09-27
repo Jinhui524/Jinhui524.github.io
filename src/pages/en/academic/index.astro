@@ -1,18 +1,7 @@
 ---
 import PageLayout from '@/layouts/CommonPage.astro'
 import { Button, Icon, PublicationSection, SimpleIcon } from '@/components/user'
-
-type Publication = {
-  title: string
-  authors: Array<{ name: string; isMe?: boolean; isCoreContributor?: boolean }>
-  venue: string
-  year: string
-  type: 'conference' | 'journal' | 'workshop' | 'preprint'
-  abstract: string
-  links: { type: string; href: string }[]
-  status: 'published' | 'accepted' | 'under-review' | 'preprint'
-  topics: string[]
-}
+import { getLocalizedPublications } from '@/data/academic'
 
 const headings = [
   { depth: 2, slug: 'about-me', text: 'About Me' },
@@ -36,14 +25,7 @@ const education = [
   { period: '2024 — Present', title: 'Key Laboratory of Service Computing and New Software Technology', subtitle: 'Graph data, process intelligence and foundation models', role: 'Student researcher · Prof. Guosheng Kang', href: 'https://guoshengkang.github.io/' }
 ]
 
-const publications: Publication[] = [
-  { title: 'LLM4PPM: Learning Transferable Process Semantics for Predictive Process Monitoring', authors: [{ name: 'Jinhui Luo', isMe: true }, { name: 'Jiayi Long' }, { name: 'Jiawei Chen' }, { name: 'Guosheng Kang', isCoreContributor: true }], venue: 'WISE', year: '2026', type: 'conference', abstract: 'A process foundation model that learns transferable semantics from event logs with continuous pre-training and LoRA tuning.', links: [], status: 'accepted', topics: ['Process intelligence', 'Large language models'] },
-  { title: 'Frequency-Based Heterogeneous Graph-Sequence Fusion Network for Next Activity Prediction', authors: [{ name: 'Jinhui Luo', isMe: true }, { name: 'Jiayi Long' }, { name: 'Ziyi Niu' }, { name: 'Guosheng Kang', isCoreContributor: true }], venue: 'IJCNN', year: '2026', type: 'conference', abstract: 'A graph-sequence fusion network that models interaction frequency and contextual dependency.', links: [], status: 'accepted', topics: ['Graph neural networks', 'Next activity prediction'] },
-  { title: 'Aligning Graphs and Sequences: A Contrastive Learning Approach for Next Event Prediction', authors: [{ name: 'Jiayi Long' }, { name: 'Jinhui Luo', isMe: true }, { name: 'Jiawei Chen' }, { name: 'Guosheng Kang', isCoreContributor: true }], venue: 'CSCWD', year: '2026', type: 'conference', abstract: 'A contrastive framework that strengthens graph structure and event-sequence representations.', links: [], status: 'accepted', topics: ['Contrastive learning', 'Graph-sequence fusion'] },
-  { title: 'Next Event Prediction by Fusing Event-Sequence and Attribute-Association Semantics', authors: [{ name: 'Jiawei Chen' }, { name: 'Jinhui Luo', isMe: true }, { name: 'Guosheng Kang', isCoreContributor: true }], venue: 'CIMS', year: '2026', type: 'journal', abstract: 'A semantic fusion method for next-event prediction using event sequences and attribute relations.', links: [], status: 'accepted', topics: ['Event sequences', 'Semantic modeling'] },
-  { title: 'Predictive Business Process Monitoring Based on Multi-Modal Fusion and Multi-Task Learning', authors: [{ name: 'Jiawei Chen' }, { name: 'Jinhui Luo', isMe: true }, { name: 'Guosheng Kang', isCoreContributor: true }], venue: 'Applied Soft Computing', year: '2026', type: 'journal', abstract: 'A multimodal and multi-task framework for semantic, sequential, and attribute-aware prediction.', links: [], status: 'under-review', topics: ['Multimodal learning', 'Predictive monitoring'] },
-  { title: 'Semantic Stories for Next Activity Prediction with Retrieval-Augmented Generation and Fine-Tuning', authors: [{ name: 'Xinyao Yan' }, { name: 'Jinhui Luo', isMe: true }, { name: 'Jiayi Long' }, { name: 'Guosheng Kang', isCoreContributor: true }], venue: 'ICSS', year: '2026', type: 'conference', abstract: 'A retrieval-augmented semantic-story framework for next-activity prediction.', links: [], status: 'accepted', topics: ['Retrieval-augmented generation', 'Process mining'] }
-]
+const publications = getLocalizedPublications('en')
 
 const awards = [
   { title: 'Competitions and engineering', items: ['Second Prize, Chuanzhi Cup National IT Skills Competition.', 'Third Prize, 2025 RAICOM Robotics Developer Competition.', 'First Prize, 2026 RAICOM Algorithm Optimization Competition.'] },
@@ -74,7 +56,7 @@ const awards = [
 
   <h2 id='publications'>Publications<a class='anchor' href='#publications'>#</a></h2>
   <div data-publication-filter class='mb-5 flex flex-wrap items-center gap-2' role='group' aria-label='Publication filters'><span class='mr-1 text-sm text-muted-foreground'>Filter:</span>{[['all', 'All'], ['conference', 'Conference'], ['journal', 'Journal'], ['under-review', 'Under Review']].map(([value, label], index) => <button type='button' data-filter={value} aria-pressed={index === 0 ? 'true' : 'false'} class:list-active={index === 0} class='publication-filter-button'>{label}</button>)}<span class='ml-auto text-xs text-muted-foreground' data-publication-count>{publications.length} publications</span></div>
-  <div class='space-y-6' data-publication-list>{publications.map((publication) => <div class='publication-entry' data-publication-entry data-type={publication.type} data-status={publication.status}><div class='mb-2 flex flex-wrap gap-1.5 pl-1'>{publication.topics.map((topic) => <span class='research-tag'>{topic}</span>)}</div><PublicationSection publications={[publication]} groupByYear={false} /></div>)}</div>
+  <div class='space-y-6' data-publication-list>{publications.map((publication) => <div class='publication-entry' data-publication-entry data-type={publication.type} data-status={publication.status}><PublicationSection publications={[publication]} groupByYear={false} /></div>)}</div>
   <div id='academic-toast' class='academic-toast' aria-live='polite' aria-atomic='true'></div>
 
   <h2 id='awards'>Awards<a class='anchor' href='#awards'>#</a></h2>

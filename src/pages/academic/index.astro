@@ -1,22 +1,7 @@
 ---
 import PageLayout from '@/layouts/CommonPage.astro'
 import { Button, Icon, PublicationSection, SimpleIcon } from '@/components/user'
-
-type Publication = {
-  title: string
-  authors: Array<{
-    name: string
-    isMe?: boolean
-    isCoreContributor?: boolean
-  }>
-  venue: string
-  year: string
-  type: 'conference' | 'journal' | 'workshop' | 'preprint'
-  abstract: string
-  links: { type: string; href: string }[]
-  status: 'published' | 'accepted' | 'under-review' | 'preprint'
-  topics: string[]
-}
+import { getLocalizedPublications } from '@/data/academic'
 
 const headings = [
   { depth: 2, slug: 'about-me', text: 'About Me' },
@@ -82,102 +67,7 @@ const education = [
   }
 ]
 
-const publications: Publication[] = [
-  {
-    title: 'LLM4PPM：面向预测性业务流程监控的可迁移流程语义学习',
-    authors: [
-      { name: 'Jinhui Luo', isMe: true },
-      { name: 'Jiayi Long' },
-      { name: 'Jiawei Chen' },
-      { name: 'Guosheng Kang', isCoreContributor: true }
-    ],
-    venue: 'WISE',
-    year: '2026',
-    type: 'conference',
-    abstract: '将事件日志转换为语义故事，通过持续预训练与 LoRA 指令微调学习可迁移流程语义。',
-    links: [],
-    status: 'accepted',
-    topics: ['Process intelligence', 'Large language models']
-  },
-  {
-    title: '基于频率的异构图序列融合网络用于下一活动预测',
-    authors: [
-      { name: 'Jinhui Luo', isMe: true },
-      { name: 'Jiayi Long' },
-      { name: 'Ziyi Niu' },
-      { name: 'Guosheng Kang', isCoreContributor: true }
-    ],
-    venue: 'IJCNN',
-    year: '2026',
-    type: 'conference',
-    abstract: '通过异构图和序列融合，同时建模事件日志中的交互频率与上下文依赖。',
-    links: [],
-    status: 'accepted',
-    topics: ['Graph neural networks', 'Next activity prediction']
-  },
-  {
-    title: '对齐图与序列：用于下一事件预测的对比学习方法',
-    authors: [
-      { name: 'Jiayi Long' },
-      { name: 'Jinhui Luo', isMe: true },
-      { name: 'Jiawei Chen' },
-      { name: 'Guosheng Kang', isCoreContributor: true }
-    ],
-    venue: 'CSCWD',
-    year: '2026',
-    type: 'conference',
-    abstract: '通过对比学习让流程图结构表征与事件序列表征互相增强。',
-    links: [],
-    status: 'accepted',
-    topics: ['Contrastive learning', 'Graph-sequence fusion']
-  },
-  {
-    title: '融合事件序列语义与属性关联语义的业务流程下一事件预测',
-    authors: [
-      { name: 'Jiawei Chen' },
-      { name: 'Jinhui Luo', isMe: true },
-      { name: 'Guosheng Kang', isCoreContributor: true }
-    ],
-    venue: '计算机集成制造系统',
-    year: '2026',
-    type: 'journal',
-    abstract: '融合事件序列语义与属性关联语义，提升业务流程下一事件预测。',
-    links: [],
-    status: 'accepted',
-    topics: ['Event sequences', 'Semantic modeling']
-  },
-  {
-    title: '基于多模态融合与多任务学习的预测性业务流程监控',
-    authors: [
-      { name: 'Jiawei Chen' },
-      { name: 'Jinhui Luo', isMe: true },
-      { name: 'Guosheng Kang', isCoreContributor: true }
-    ],
-    venue: 'Applied Soft Computing',
-    year: '2026',
-    type: 'journal',
-    abstract: '以多模态融合和多任务优化共同建模语义、序列与属性特征。',
-    links: [],
-    status: 'under-review',
-    topics: ['Multimodal learning', 'Predictive monitoring']
-  },
-  {
-    title: '结合检索增强生成与微调的下一活动预测语义故事',
-    authors: [
-      { name: 'Xinyao Yan' },
-      { name: 'Jinhui Luo', isMe: true },
-      { name: 'Jiayi Long' },
-      { name: 'Guosheng Kang', isCoreContributor: true }
-    ],
-    venue: 'ICSS',
-    year: '2026',
-    type: 'conference',
-    abstract: '将事件日志组织为语义故事，检索历史上下文并引导大模型预测下一活动。',
-    links: [],
-    status: 'accepted',
-    topics: ['Retrieval-augmented generation', 'Process mining']
-  }
-]
+const publications = getLocalizedPublications('zh')
 
 const awards = [
   {
@@ -272,9 +162,6 @@ const awards = [
   <div class='space-y-6' data-publication-list>
     {publications.map((publication) => (
       <div class='publication-entry' data-publication-entry data-type={publication.type} data-status={publication.status}>
-        <div class='mb-2 flex flex-wrap gap-1.5 pl-1'>
-          {publication.topics.map((topic) => <span class='research-tag'>{topic}</span>)}
-        </div>
         <PublicationSection publications={[publication]} groupByYear={false} />
       </div>
     ))}

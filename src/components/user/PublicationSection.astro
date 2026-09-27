@@ -25,6 +25,11 @@ interface Props {
     }[]
     status: 'published' | 'accepted' | 'under-review' | 'preprint'
     citations?: number
+    ranking?: string
+    topics?: string[]
+    image?: string
+    detailHref?: string
+    detailLabel?: string
   }>
   groupByYear?: boolean
 }

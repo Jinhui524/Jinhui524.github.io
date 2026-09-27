@@ -1,8 +1,12 @@
 ---
 import PageLayout from '@/layouts/CommonPage.astro'
 import ProjectSection from '@/components/projects/ProjectSection.astro'
+import SponsorshipSection from '@/components/projects/SponsorshipSection.astro'
 
-const headings = [{ depth: 2, slug: 'projects', text: 'Projects' }]
+const headings = [
+  { depth: 2, slug: 'projects', text: 'Projects' },
+  { depth: 2, slug: 'sponsorship', text: 'Sponsorship' }
+]
 ---
 
 <PageLayout title='Projects' {headings} info={{ slug: '/en/projects', hideComment: true }}>
@@ -18,6 +22,16 @@ const headings = [{ depth: 2, slug: 'projects', text: 'Projects' }]
           { type: 'github', href: 'https://github.com/Jinhui524' }
         ]
       }
+    ]}
+  />
+  <SponsorshipSection
+    title='Sponsorship'
+    description='If my research and open-source work helps you, you are welcome to leave a note of support. QR codes will be added later.'
+    emptyMessage='No sponsorship records yet. Thank you for every bit of attention and support.'
+    sponsorTitle='Sponsors'
+    methods={[
+      { name: 'WeChat', label: 'WeChat sponsorship', placeholder: 'QR code coming soon' },
+      { name: 'Alipay', label: 'Alipay sponsorship', placeholder: 'QR code coming soon' }
     ]}
   />
 </PageLayout>
