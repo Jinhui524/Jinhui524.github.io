@@ -3,6 +3,7 @@ import PageLayout from '@/layouts/CommonPage.astro'
 import config from '@/site-config'
 import ToolSection from '@/components/about/ToolSection.astro'
 import AlgorithmShowcase from '@/components/about/AlgorithmShowcase.astro'
+import { getAwardGroups } from '@/data/awards'
 
 const tools = [
   {
@@ -39,6 +40,8 @@ const headings = [
   { depth: 2, slug: 'theme', text: 'Theme' },
   { depth: 2, slug: 'copyright', text: 'Copyright' }
 ]
+
+const awards = getAwardGroups('en')
 ---
 
 <PageLayout title='About' {headings} info='/en/about'>
@@ -61,13 +64,25 @@ const headings = [
   <p>Graph data mining · Graph neural networks · Foundation models · AI agents · Event sequence prediction · Structured semantic modeling</p>
 
   <h2 id='awards'>Awards<a class='anchor' href='#awards'>#</a></h2>
-  <ul>
-    <li>Second Prize, Chuanzhi Cup National IT Skills Competition.</li>
-    <li>First and third prizes in RAICOM Robotics Developer Competition tracks.</li>
-    <li>First Prize, China Robot and Artificial Intelligence Competition, Hunan.</li>
-    <li>First Prize, Hunan Provincial Collegiate Programming Contest.</li>
-    <li>Second Prize, Lanqiao Cup Software and Information Technology Competition.</li>
-  </ul>
+  <div class='not-prose about-awards-grid'>
+    {awards.map((group, index) => (
+      <section class='about-award-card'>
+        <div class='about-award-heading'>
+          <span class='about-award-index'>{String(index + 1).padStart(2, '0')}</span>
+          <h3>{group.title}</h3>
+        </div>
+        <ul class='about-award-list'>
+          {group.items.map((item) => (
+            <li class='about-award-item'>
+              <time class='about-award-date'>{item.date}</time>
+              <span class='about-award-title'>{item.title}</span>
+              <span class='about-award-category'>{item.category}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
 
   <h2 id='tools'>🧰 Tools<a class='anchor' href='#tools'>#</a></h2>
   <ToolSection title='Productivity' {tools} />
@@ -96,3 +111,17 @@ const headings = [
   </p>
   <p>Contact: <a href={`mailto:${config.personal?.email}`}>{config.personal?.email}</a></p>
 </PageLayout>
+
+<style>
+  .about-awards-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin:1.5rem 0 2.5rem; }
+  .about-award-card { border:1px solid var(--color-border); border-radius:.75rem; background:var(--color-card); padding:1.25rem; }
+  .about-award-heading { display:flex; align-items:center; gap:.75rem; margin-bottom:1rem; }
+  .about-award-heading h3 { margin:0; color:var(--color-foreground); font-size:1.125rem; font-weight:600; }
+  .about-award-index { display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; border-radius:.625rem; background:color-mix(in srgb,var(--color-primary) 12%,transparent); color:var(--color-primary); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.7rem; font-weight:600; }
+  .about-award-list { display:grid; gap:.75rem; margin:0; padding:0; list-style:none; }
+  .about-award-item { display:grid; grid-template-columns:auto minmax(0,1fr); align-items:start; gap:.35rem .75rem; color:var(--color-muted-foreground); font-size:.875rem; line-height:1.5; }
+  .about-award-date { color:var(--color-muted-foreground); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.72rem; white-space:nowrap; }
+  .about-award-title { min-width:0; color:var(--color-foreground); }
+  .about-award-category { grid-column:2; justify-self:start; border-radius:9999px; background:color-mix(in srgb,var(--color-primary) 10%,transparent); color:var(--color-primary); font-size:.6875rem; font-weight:600; line-height:1; padding:.35rem .55rem; white-space:nowrap; }
+  @media (max-width:640px) { .about-awards-grid { grid-template-columns:1fr; } }
+</style>

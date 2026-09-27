@@ -2,6 +2,7 @@
 import PageLayout from '@/layouts/CommonPage.astro'
 import { Button, Icon, PublicationSection, SimpleIcon } from '@/components/user'
 import { getLocalizedPublications } from '@/data/academic'
+import { getAwardGroups } from '@/data/awards'
 
 const headings = [
   { depth: 2, slug: 'about-me', text: 'About Me' },
@@ -19,10 +20,7 @@ const education = [
 
 const publications = getLocalizedPublications('en')
 
-const awards = [
-  { title: 'National Awards', items: [['2026.07.15', 'Second Prize, 2026 RAICOM Robotics Developer Competition · Algorithm Optimization.'], ['2026.07.28', 'Second Prize, 28th China Robot and Artificial Intelligence Competition.'], ['2025.05.08', 'Second Prize, 7th Chuanzhi Cup National IT Skills Competition.'], ['2025.08.27', 'Third Prize, 2025 RAICOM Robotics Developer Competition · Programming.'], ['2026.07.28', 'Third Prize, 28th China Robot and Artificial Intelligence Competition.']] },
-  { title: 'Provincial Awards', items: [['2025.11.02', 'First Prize, 21st Hunan Provincial Collegiate Programming Contest.'], ['2026.06.12', 'Second Prize, 19th China Collegiate Computer Design Competition · Central South Region.'], ['2025.05.26', 'Second Prize, 16th Lanqiao Cup Software and Information Technology Competition.'], ['2026.06.22', 'Third Prize, 2026 China Collegiate Computer Contest · Network Challenge, Central China.']] }
-]
+const awards = getAwardGroups('en')
 ---
 
 <PageLayout title='Academic' {headings} info={{ slug: '/en/academic', hideComment: true }}>
@@ -47,7 +45,7 @@ const awards = [
   <div id='academic-toast' class='academic-toast' aria-live='polite' aria-atomic='true'></div>
 
   <h2 id='awards'>Awards<a class='anchor' href='#awards'>#</a></h2>
-  <div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>{awards.map((group, index) => <section class='rounded-xl border border-border bg-card p-5'><div class='mb-4 flex items-center gap-3'><span class='academic-award-index'>{String(index + 1).padStart(2, '0')}</span><h3 class='m-0 text-lg font-semibold text-foreground'>{group.title}</h3></div><ul class='m-0 space-y-2 text-sm leading-relaxed text-muted-foreground'>{group.items.map(([date, item]) => <li class='flex gap-3'><time class='shrink-0 font-mono text-xs text-muted-foreground/80'>{date}</time><span>{item}</span></li>)}</ul></section>)}</div>
+  <div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>{awards.map((group, index) => <section class='rounded-xl border border-border bg-card p-5'><div class='mb-4 flex items-center gap-3'><span class='academic-award-index'>{String(index + 1).padStart(2, '0')}</span><h3 class='m-0 text-lg font-semibold text-foreground'>{group.title}</h3></div><ul class='m-0 space-y-2 text-sm leading-relaxed text-muted-foreground'>{group.items.map((item) => <li class='flex items-start gap-3'><time class='shrink-0 pt-0.5 font-mono text-xs text-muted-foreground/80'>{item.date}</time><span class='min-w-0 flex-1'>{item.title}</span><span class='academic-award-category shrink-0'>{item.category}</span></li>)}</ul></section>)}</div>
 </PageLayout>
 
 <script is:inline>
@@ -63,9 +61,10 @@ const awards = [
 <style>
   .academic-news-row, .academic-education-card { display:flex; align-items:center; gap:.75rem; border-radius:.75rem; padding:.75rem; transition:background-color 180ms ease, transform 180ms ease; }
   .academic-news-row:hover, .academic-education-card:hover { background-color:color-mix(in srgb,var(--color-muted) 65%,transparent); transform:translateX(2px); }
-  .academic-status, .academic-role, .research-tag, .academic-award-index { border-radius:9999px; font-size:.6875rem; font-weight:600; letter-spacing:.01em; line-height:1; padding:.35rem .55rem; }
+  .academic-status, .academic-role, .academic-award-category, .research-tag, .academic-award-index { border-radius:9999px; font-size:.6875rem; font-weight:600; letter-spacing:.01em; line-height:1; padding:.35rem .55rem; }
   .academic-status, .academic-role { background:color-mix(in srgb,var(--color-primary) 12%,transparent); color:var(--color-primary); }
   .research-tag { background:color-mix(in srgb,var(--color-muted) 80%,transparent); color:var(--color-muted-foreground); }
+  .academic-award-category { background:color-mix(in srgb,var(--color-primary) 10%,transparent); color:var(--color-primary); white-space:nowrap; }
   .academic-education-card { position:relative; border:1px solid var(--color-border); background:var(--color-card); }
   .academic-education-index, .academic-award-index { display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; width:2rem; height:2rem; border-radius:.625rem; background:color-mix(in srgb,var(--color-primary) 12%,transparent); color:var(--color-primary); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.7rem; font-weight:600; }
   .publication-filter-button { border:1px solid var(--color-border); border-radius:9999px; background:var(--color-card); color:var(--color-muted-foreground); cursor:pointer; font-size:.75rem; padding:.4rem .7rem; transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease; }
@@ -74,6 +73,6 @@ const awards = [
   .publication-entry[hidden] { display:none; }
   .academic-toast { position:fixed; right:1rem; bottom:1rem; z-index:40; border:1px solid var(--color-border); border-radius:.75rem; background:var(--color-card); box-shadow:0 12px 30px rgb(0 0 0 / .12); color:var(--color-foreground); font-size:.8rem; opacity:0; padding:.65rem .85rem; pointer-events:none; transform:translateY(.5rem); transition:opacity 180ms ease,transform 180ms ease; }
   .academic-toast.is-visible { opacity:1; transform:translateY(0); }
-  @media (max-width:640px) { .academic-news-row,.academic-education-card { align-items:flex-start; flex-wrap:wrap; } .academic-news-row > :nth-child(3),.academic-education-card > :nth-child(2) { flex-basis:calc(100% - 3rem); } .academic-news-row > :last-child,.academic-education-card > :last-child { margin-left:3rem; } }
+  @media (max-width:640px) { .academic-news-row,.academic-education-card { align-items:flex-start; flex-wrap:wrap; } .academic-news-row > :nth-child(3),.academic-education-card > :nth-child(2) { flex-basis:calc(100% - 3rem); } .academic-news-row > :last-child,.academic-education-card > :last-child { margin-left:3rem; } .academic-award-category { margin-left:3rem; } }
   @media (prefers-reduced-motion:reduce) { .academic-news-row,.academic-education-card,.academic-toast,.publication-filter-button { transition:none; } }
 </style>

@@ -2,6 +2,7 @@
 import PageLayout from '@/layouts/CommonPage.astro'
 import { Button, Icon, PublicationSection, SimpleIcon } from '@/components/user'
 import { getLocalizedPublications } from '@/data/academic'
+import { getAwardGroups } from '@/data/awards'
 
 const headings = [
   { depth: 2, slug: 'about-me', text: 'About Me' },
@@ -37,27 +38,7 @@ const education = [
 
 const publications = getLocalizedPublications('zh')
 
-const awards = [
-  {
-    title: '国家级荣誉',
-    items: [
-      ['2026.07.15', '2026 睿抗机器人开发者大赛智海算法调优赛题 · 国家级二等奖'],
-      ['2026.07.28', '第二十八届中国机器人及人工智能大赛 · 国家级二等奖'],
-      ['2025.05.08', '第七届传智杯全国 IT 技能大赛程序设计挑战赛 · 国家级二等奖'],
-      ['2025.08.27', '2025 睿抗机器人开发者大赛编程技能赛项 · 国家级三等奖'],
-      ['2026.07.28', '第二十八届中国机器人及人工智能大赛 · 国家级三等奖']
-    ]
-  },
-  {
-    title: '省级荣誉',
-    items: [
-      ['2025.11.02', '湖南省第 21 届大学生计算机程序设计竞赛 · 省级一等奖'],
-      ['2026.06.12', '第十九届中国大学生计算机设计大赛中南地区赛 · 省级二等奖'],
-      ['2025.05.26', '第十六届蓝桥杯软件和信息技术专业人才大赛 · 省级二等奖'],
-      ['2026.06.22', '2026 中国高校计算机大赛网络挑战赛华中地区 · 省级三等奖']
-    ]
-  }
-]
+const awards = getAwardGroups('zh')
 ---
 
 <PageLayout title='Academic' {headings} info={{ slug: '/academic', hideComment: true }}>
@@ -144,7 +125,13 @@ const awards = [
           <h3 class='m-0 text-lg font-semibold text-foreground'>{group.title}</h3>
         </div>
         <ul class='m-0 space-y-2 text-sm leading-relaxed text-muted-foreground'>
-          {group.items.map(([date, item]) => <li class='flex gap-3'><time class='shrink-0 font-mono text-xs text-muted-foreground/80'>{date}</time><span>{item}</span></li>)}
+          {group.items.map((item) => (
+            <li class='flex items-start gap-3'>
+              <time class='shrink-0 pt-0.5 font-mono text-xs text-muted-foreground/80'>{item.date}</time>
+              <span class='min-w-0 flex-1'>{item.title}</span>
+              <span class='academic-award-category shrink-0'>{item.category}</span>
+            </li>
+          ))}
         </ul>
       </section>
     ))}
@@ -205,6 +192,7 @@ const awards = [
 
   .academic-status,
   .academic-role,
+  .academic-award-category,
   .research-tag,
   .academic-award-index {
     border-radius: 9999px;
@@ -224,6 +212,12 @@ const awards = [
   .research-tag {
     background: color-mix(in srgb, var(--color-muted) 80%, transparent);
     color: var(--color-muted-foreground);
+  }
+
+  .academic-award-category {
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    color: var(--color-primary);
+    white-space: nowrap;
   }
 
   .academic-education-card {
@@ -312,6 +306,10 @@ const awards = [
 
     .academic-news-row > :last-child,
     .academic-education-card > :last-child {
+      margin-left: 3rem;
+    }
+
+    .academic-award-category {
       margin-left: 3rem;
     }
   }
