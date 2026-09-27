@@ -1,11 +1,42 @@
 ---
 import PageLayout from '@/layouts/CommonPage.astro'
 import config from '@/site-config'
+import ToolSection from '@/components/about/ToolSection.astro'
+import AlgorithmShowcase from '@/components/about/AlgorithmShowcase.astro'
+
+const tools = [
+  {
+    name: 'VS Code',
+    description: 'Code Editor',
+    href: 'https://code.visualstudio.com/',
+    icon: import('@/assets/tools/vscode.svg?raw')
+  },
+  {
+    name: 'Cursor',
+    description: 'AI-powered Code Editor',
+    href: 'https://www.cursor.com/',
+    icon: import('@/assets/tools/cursor.svg?raw')
+  },
+  {
+    name: 'Chrome',
+    description: 'Web Browser',
+    href: 'https://www.google.com/chrome/',
+    icon: import('@/assets/tools/chrome.svg?raw')
+  },
+  {
+    name: 'Ubuntu',
+    description: 'Linux Distribution',
+    href: 'https://ubuntu.com/',
+    icon: import('@/assets/tools/ubuntu.svg?raw')
+  }
+]
 
 const headings = [
   { depth: 2, slug: 'education', text: 'Education' },
   { depth: 2, slug: 'research', text: 'Research Interests' },
   { depth: 2, slug: 'awards', text: 'Awards' },
+  { depth: 2, slug: 'tools', text: 'Tools' },
+  { depth: 2, slug: 'theme', text: 'Theme' },
   { depth: 2, slug: 'copyright', text: 'Copyright' }
 ]
 ---
@@ -38,9 +69,30 @@ const headings = [
     <li>Second Prize, Lanqiao Cup Software and Information Technology Competition.</li>
   </ul>
 
+  <h2 id='tools'>🧰 Tools<a class='anchor' href='#tools'>#</a></h2>
+  <ToolSection title='Productivity' {tools} />
+
+  <h2 id='theme'>🎨 Theme<a class='anchor' href='#theme'>#</a></h2>
+  <p>
+    This site is built with Astro and tailored for research reading, discovery, and project presentation. The small interactive sketches below reflect my interest in visualization and thoughtful interface details.
+  </p>
+  <AlgorithmShowcase />
+
   <h2 id='copyright'>Copyright<a class='anchor' href='#copyright'>#</a></h2>
   <p>
-    Original profile copy, research materials, and images belong to Jinhui Luo; third-party assets remain with their respective authors.
+    Unless otherwise noted, original profile copy, research materials, and design work are created by Jinhui Luo and released under the
+    <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' target='_blank' rel='noopener noreferrer'>
+      CC BY-NC-SA 4.0
+    </a>
+    license. You may share and adapt this material with attribution, for non-commercial purposes, and under the same license.
+  </p>
+  <p>
+    Third-party images, logos, fonts, icons, and open-source code remain the property of their respective rights holders and are used under their applicable licenses. Please contact me if you believe any material infringes your rights.
+  </p>
+  <p class='not-prose flex justify-center py-2'>
+    <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' target='_blank' rel='noopener noreferrer' aria-label='Creative Commons BY-NC-SA 4.0 license'>
+      <img src='/images/licenses/cc-by-nc-sa.svg' alt='Creative Commons BY-NC-SA 4.0' width='88' height='31' loading='lazy' />
+    </a>
   </p>
   <p>Contact: <a href={`mailto:${config.personal?.email}`}>{config.personal?.email}</a></p>
 </PageLayout>

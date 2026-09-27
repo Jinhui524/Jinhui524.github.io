@@ -28,10 +28,12 @@ const { class: className, title, tools, ...props } = Astro.props
     {
       tools.map((tool) => (
         <a
-          class='group relative text-sm leading-normal no-underline'
+          class='group relative rounded-lg text-sm leading-normal no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
           href={tool.href}
           id={tool.name}
           target='_blank'
+          rel='noopener noreferrer'
+          aria-label={`${tool.name}: ${tool.description}`}
         >
           <div class='flex items-center gap-x-3 rounded-lg border border-transparent px-1.5 py-1 transition-colors hover:border-border hover:bg-muted'>
             <Svg

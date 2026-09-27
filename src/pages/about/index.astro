@@ -1,11 +1,42 @@
 ---
 import PageLayout from '@/layouts/CommonPage.astro'
 import config from '@/site-config'
+import ToolSection from '@/components/about/ToolSection.astro'
+import AlgorithmShowcase from '@/components/about/AlgorithmShowcase.astro'
+
+const tools = [
+  {
+    name: 'VS Code',
+    description: 'Code Editor',
+    href: 'https://code.visualstudio.com/',
+    icon: import('@/assets/tools/vscode.svg?raw')
+  },
+  {
+    name: 'Cursor',
+    description: 'AI-powered Code Editor',
+    href: 'https://www.cursor.com/',
+    icon: import('@/assets/tools/cursor.svg?raw')
+  },
+  {
+    name: 'Chrome',
+    description: 'Web Browser',
+    href: 'https://www.google.com/chrome/',
+    icon: import('@/assets/tools/chrome.svg?raw')
+  },
+  {
+    name: 'Ubuntu',
+    description: 'Linux Distribution',
+    href: 'https://ubuntu.com/',
+    icon: import('@/assets/tools/ubuntu.svg?raw')
+  }
+]
 
 const headings = [
   { depth: 2, slug: 'education', text: 'Education' },
   { depth: 2, slug: 'research', text: 'Research Interests' },
   { depth: 2, slug: 'awards', text: 'Awards' },
+  { depth: 2, slug: 'tools', text: 'Tools' },
+  { depth: 2, slug: 'theme', text: 'Theme' },
   { depth: 2, slug: 'copyright', text: 'Copyright' }
 ]
 ---
@@ -38,9 +69,30 @@ const headings = [
     <li>蓝桥杯软件和信息技术人才大赛二等奖。</li>
   </ul>
 
+  <h2 id='tools'>🧰 工具<a class='anchor' href='#tools'>#</a></h2>
+  <ToolSection title='Productivity' {tools} />
+
+  <h2 id='theme'>🎨 主题<a class='anchor' href='#theme'>#</a></h2>
+  <p>
+    本站基于 Astro 构建，并针对科研主页的阅读、检索和作品展示进行了定制。下面的小型算法演示记录了我对可视化与交互细节的兴趣。
+  </p>
+  <AlgorithmShowcase />
+
   <h2 id='copyright'>版权<a class='anchor' href='#copyright'>#</a></h2>
   <p>
-    本站的个人文字、研究资料和图片属于罗锦辉。第三方素材的权利归其原作者所有。
+    除特别说明外，本网站原创文字、研究资料与设计内容均由罗锦辉创作，并以
+    <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' target='_blank' rel='noopener noreferrer'>
+      CC BY-NC-SA 4.0
+    </a>
+    许可发布。您可以在注明作者和链接的前提下分享或基于这些内容进行创作，但不得用于商业目的，且衍生作品需采用相同许可。
+  </p>
+  <p>
+    站内第三方图片、Logo、字体、图标与开源代码的权利归各自权利人所有；它们仅在相应许可范围内使用。如发现侵权内容，请通过下方邮箱联系我。
+  </p>
+  <p class='not-prose flex justify-center py-2'>
+    <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' target='_blank' rel='noopener noreferrer' aria-label='Creative Commons BY-NC-SA 4.0 license'>
+      <img src='/images/licenses/cc-by-nc-sa.svg' alt='Creative Commons BY-NC-SA 4.0' width='88' height='31' loading='lazy' />
+    </a>
   </p>
   <p>联系邮箱：<a href={`mailto:${config.personal?.email}`}>{config.personal?.email}</a></p>
 </PageLayout>

@@ -1,41 +1,35 @@
 ---
 layout: '@/layouts/IndividualPage.astro'
 
-title: 'Copyright'
-description: 'Effective date: 2026-09-27'
-language: 'En'
+title: '版权声明'
+description: '生效日期：2026-09-27'
+language: 'Zh'
 back: '/terms/list'
 ---
 
-<h2 style="text-align: center;"><b>COPYRIGHT NOTICE</b></h2>
-<p>Effective date: 2026-09-27</p>	 	 
+<h2 style="text-align: center;"><b>版权声明</b></h2>
+<p>生效日期：2026-09-27</p>
 
-<p>Unless otherwise noted, all original content on <b>jinhui524.github.io</b> — including but not limited to text, code snippets, and tutorials — is created by <b>Jinhui Luo</b> and licensed under the 
-<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
-Creative Commons Attribution 4.0 International License (CC BY 4.0)
-</a>.</p>
+<p>除特别说明外，<b>jinhui524.github.io</b> 上的原创文字、研究资料、代码片段和设计内容均由 <b>罗锦辉</b> 创作，并依据 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可（CC BY-NC-SA 4.0）</a> 发布。</p>
 
-<p>This license allows you to:</p>
+<p>在遵守许可协议的前提下，您可以：</p>
 <ul>
-  <li><b>Share</b> — copy and redistribute the material in any medium or format</li>
-  <li><b>Adapt</b> — remix, transform, and build upon the material for any purpose, even commercially</li>
+  <li><b>共享</b> —— 以任何媒介或格式复制和再发布本作品；</li>
+  <li><b>演绎</b> —— 对本作品进行混合、转换或基于本作品创作。</li>
 </ul>
 
-<p>Under the following condition:</p>
+<p>您必须遵守以下条件：</p>
 <ul>
-  <li><b>Attribution</b> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may not imply endorsement by the original author.</li>
+  <li><b>署名</b> —— 给出适当的作者署名、提供许可协议链接，并说明是否进行了修改；</li>
+  <li><b>非商业性使用</b> —— 不得将本作品或衍生作品用于商业目的；</li>
+  <li><b>相同方式共享</b> —— 如果您修改或基于本作品创作，必须以相同许可协议发布。</li>
 </ul>
 
-<p><b>Note:</b> The majority of blog post cover images ("Hero Images") are selected from publicly available works on 
-<a href="https://www.pixiv.net/" target="_blank" rel="noopener noreferrer">Pixiv</a>, with credit and original links provided in each post.</p>
+<p>站内使用的第三方图片、Logo、字体、图标、商标和开源代码仍归各自权利人所有，并依据其相应许可使用。若您认为站内内容侵犯了您的权利，请通过 <a href="mailto:Luojh0524@163.com">Luojh0524@163.com</a> 联系我，我会尽快核查并处理。</p>
 
-<p>This site may also include third-party images, logos, trademarks, or other materials sourced from the internet. These assets — regardless of whether they are explicitly marked with ©, ™, or other symbols — remain the intellectual property of their respective rights holders. Their use on this site is strictly for illustrative or non-commercial purposes. No copyright or trademark infringement is intended.</p>
-
-<p>If you believe that any content on <b>jinhui524.github.io</b> infringes upon your rights, please contact us at <b>Luojh0524@163.com</b>. We will respond promptly and remove the content if necessary.</p>
-
-<p>Example attribution (for content reuse):</p>
+<p>推荐的转载署名格式：</p>
 <blockquote>
-  Originally published on <a href="https://jinhui524.github.io" target="_blank">jinhui524.github.io</a> by Jinhui Luo, licensed under 
-  <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.
+  原文发表于 <a href="https://jinhui524.github.io" target="_blank" rel="noopener noreferrer">jinhui524.github.io</a>，作者为罗锦辉，依据 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a> 许可发布。
 </blockquote>
 
+<p style="text-align: center;"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer"><img src="/images/licenses/cc-by-nc-sa.svg" width="88" height="31" alt="Creative Commons BY-NC-SA 4.0" /></a></p>

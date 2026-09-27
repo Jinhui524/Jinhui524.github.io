@@ -7,21 +7,21 @@ interface Props {
 const { class: className = '' } = Astro.props;
 ---
 
-<div class={`algorithm-showcase ${className}`}>
+<div class={`algorithm-showcase ${className}`} aria-label="Interactive algorithm showcase">
   <div class="showcase-header">
     <h3 id="current-title">Boids Algorithm</h3>
     <div class="showcase-controls">
-      <button id="prev-btn" class="nav-btn" aria-label="上一个算法">
+      <button id="prev-btn" class="nav-btn" type="button" aria-label="Previous algorithm">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="15,18 9,12 15,6"></polyline>
         </svg>
       </button>
-      <div class="indicator-dots" id="indicator-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+      <div class="indicator-dots" id="indicator-dots" role="tablist" aria-label="Choose an algorithm">
+        <button class="dot active" type="button" role="tab" aria-label="Boids Algorithm" aria-selected="true"></button>
+        <button class="dot" type="button" role="tab" aria-label="Game of Life" aria-selected="false"></button>
+        <button class="dot" type="button" role="tab" aria-label="Pathfinding" aria-selected="false"></button>
       </div>
-      <button id="next-btn" class="nav-btn" aria-label="下一个算法">
+      <button id="next-btn" class="nav-btn" type="button" aria-label="Next algorithm">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="9,18 15,12 9,6"></polyline>
         </svg>
@@ -35,6 +35,7 @@ const { class: className = '' } = Astro.props;
       <div class="showcase-slide active" data-title="Boids Algorithm">
         <div class="boids-showcase">
           <canvas id="boidsCanvas"></canvas>
+          <p class="motion-note" aria-live="polite">Animation is paused because reduced motion is enabled.</p>
         </div>
       </div>
       
@@ -42,6 +43,7 @@ const { class: className = '' } = Astro.props;
       <div class="showcase-slide" data-title="Game of Life">
         <div class="cellular-automata-showcase">
           <canvas id="cellularAutomataCanvas"></canvas>
+          <p class="motion-note" aria-live="polite">Animation is paused because reduced motion is enabled.</p>
         </div>
       </div>
       
@@ -49,6 +51,7 @@ const { class: className = '' } = Astro.props;
       <div class="showcase-slide" data-title="Pathfinding">
         <div class="astar-showcase">
           <canvas id="astarCanvas"></canvas>
+          <p class="motion-note" aria-live="polite">Animation is paused because reduced motion is enabled.</p>
         </div>
       </div>
     </div>
@@ -100,6 +103,12 @@ const { class: className = '' } = Astro.props;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
+  .nav-btn:focus-visible,
+  .dot:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+  }
+
   .nav-btn:hover {
     background: rgba(255, 255, 255, 0.95);
     color: #334155;
@@ -127,6 +136,9 @@ const { class: className = '' } = Astro.props;
   }
 
   .dot {
+    display: block;
+    padding: 0;
+    border: 0;
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -166,6 +178,47 @@ const { class: className = '' } = Astro.props;
 
   .showcase-slide.active {
     opacity: 1;
+  }
+
+  .motion-note {
+    display: none;
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    width: min(80%, 28rem);
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.75rem;
+    background: hsl(var(--background) / 0.88);
+    color: hsl(var(--muted-foreground));
+    font-size: 0.875rem;
+    text-align: center;
+    backdrop-filter: blur(8px);
+  }
+
+  .algorithm-showcase.reduced-motion .motion-note {
+    display: block;
+  }
+
+  .algorithm-showcase.reduced-motion canvas {
+    visibility: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .showcase-slider,
+    .showcase-slide,
+    .showcase-header h3,
+    .nav-btn,
+    .dot {
+      transition: none;
+    }
+
+    .nav-btn:hover,
+    .dot.active,
+    .dot:hover:not(.active) {
+      transform: none;
+    }
   }
 
   .boids-showcase {
@@ -303,6 +356,8 @@ const { class: className = '' } = Astro.props;
   // 翻页展示逻辑
   class AlgorithmShowcase {
     currentIndex: number = 0;
+    reducedMotion: boolean = false;
+    root!: HTMLElement;
     slides!: NodeListOf<Element>;
     dots!: NodeListOf<Element>;
     slider!: HTMLElement;
@@ -316,10 +371,12 @@ const { class: className = '' } = Astro.props;
     titles = ["Boids Algorithm", "Game of Life", "Pathfinding"];
 
     constructor() {
+      this.root = document.querySelector('.algorithm-showcase') as HTMLElement;
+      this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (this.reducedMotion) this.root.classList.add('reduced-motion');
       this.initializeElements();
       this.setupEventListeners();
       this.updateDisplay();
-      this.initializeBoids();
     }
 
     initializeElements(): void {
@@ -337,6 +394,11 @@ const { class: className = '' } = Astro.props;
       
       this.dots.forEach((dot, index) => {
         dot.addEventListener('click', () => this.goToSlide(index));
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') this.previousSlide();
+        if (event.key === 'ArrowRight') this.nextSlide();
       });
     }
 
@@ -372,6 +434,7 @@ const { class: className = '' } = Astro.props;
       
       this.dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === this.currentIndex);
+        dot.setAttribute('aria-selected', String(index === this.currentIndex));
       });
       
       // 更新标题
@@ -380,6 +443,11 @@ const { class: className = '' } = Astro.props;
       // 更新按钮状态
       (this.prevBtn as HTMLButtonElement).disabled = this.currentIndex === 0;
       (this.nextBtn as HTMLButtonElement).disabled = this.currentIndex === this.slides.length - 1;
+
+      if (this.reducedMotion) {
+        this.destroyOtherSystems([]);
+        return;
+      }
       
       // 处理算法系统
       if (this.currentIndex === 0) {

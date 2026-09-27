@@ -4,38 +4,32 @@ layout: '@/layouts/IndividualPage.astro'
 title: 'Copyright'
 description: 'Effective date: 2026-09-27'
 language: 'En'
-back: '/terms/list'
+back: '/en/terms/list'
 ---
 
 <h2 style="text-align: center;"><b>COPYRIGHT NOTICE</b></h2>
-<p>Effective date: 2026-09-27</p>	 	 
+<p>Effective date: 2026-09-27</p>
 
-<p>Unless otherwise noted, all original content on <b>jinhui524.github.io</b> — including but not limited to text, code snippets, and tutorials — is created by <b>Jinhui Luo</b> and licensed under the 
-<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
-Creative Commons Attribution 4.0 International License (CC BY 4.0)
-</a>.</p>
+<p>Unless otherwise noted, original writing, research materials, code snippets, and design work on <b>jinhui524.github.io</b> are created by <b>Jinhui Luo</b> and released under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)</a>.</p>
 
-<p>This license allows you to:</p>
+<p>Under this license, you may:</p>
 <ul>
-  <li><b>Share</b> — copy and redistribute the material in any medium or format</li>
-  <li><b>Adapt</b> — remix, transform, and build upon the material for any purpose, even commercially</li>
+  <li><b>Share</b> — copy and redistribute the material in any medium or format;</li>
+  <li><b>Adapt</b> — remix, transform, and build upon the material.</li>
 </ul>
 
-<p>Under the following condition:</p>
+<p>You must follow these conditions:</p>
 <ul>
-  <li><b>Attribution</b> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may not imply endorsement by the original author.</li>
+  <li><b>Attribution</b> — give appropriate credit, link to the license, and indicate whether changes were made;</li>
+  <li><b>NonCommercial</b> — do not use the material for commercial purposes;</li>
+  <li><b>ShareAlike</b> — distribute adaptations under the same license.</li>
 </ul>
 
-<p><b>Note:</b> The majority of blog post cover images ("Hero Images") are selected from publicly available works on 
-<a href="https://www.pixiv.net/" target="_blank" rel="noopener noreferrer">Pixiv</a>, with credit and original links provided in each post.</p>
+<p>Third-party images, logos, fonts, icons, trademarks, and open-source code remain the property of their respective rights holders and are used under their applicable licenses. If you believe that any content on this site infringes your rights, please contact <a href="mailto:Luojh0524@163.com">Luojh0524@163.com</a> so that it can be reviewed and removed when appropriate.</p>
 
-<p>This site may also include third-party images, logos, trademarks, or other materials sourced from the internet. These assets — regardless of whether they are explicitly marked with ©, ™, or other symbols — remain the intellectual property of their respective rights holders. Their use on this site is strictly for illustrative or non-commercial purposes. No copyright or trademark infringement is intended.</p>
-
-<p>If you believe that any content on <b>jinhui524.github.io</b> infringes upon your rights, please contact us at <b>Luojh0524@163.com</b>. We will respond promptly and remove the content if necessary.</p>
-
-<p>Example attribution (for content reuse):</p>
+<p>Suggested attribution:</p>
 <blockquote>
-  Originally published on <a href="https://jinhui524.github.io" target="_blank">jinhui524.github.io</a> by Jinhui Luo, licensed under 
-  <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.
+  Originally published on <a href="https://jinhui524.github.io" target="_blank" rel="noopener noreferrer">jinhui524.github.io</a> by Jinhui Luo, licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a>.
 </blockquote>
 
+<p style="text-align: center;"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer"><img src="/images/licenses/cc-by-nc-sa.svg" width="88" height="31" alt="Creative Commons BY-NC-SA 4.0" /></a></p>
