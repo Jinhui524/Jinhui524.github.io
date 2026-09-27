@@ -113,7 +113,8 @@ const toc = generateToc(headings)
               directHeading.textContent || '',
               link.element.getAttribute('href')
             )
-            directHeading.scrollIntoView({ behavior: 'smooth' })
+            const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+            directHeading.scrollIntoView({ behavior })
           } else {
             console.warn(`No heading found for slug: ${link.slug}`)
           }

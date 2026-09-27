@@ -11,14 +11,14 @@ const allCategories = getUniqueCategories(allCollections)
 
 // Define category display names and filter allowed categories
 const categoryMap: Record<string, string> = {
-  'tech': 'Technical',
+  'technical': 'Technical',
   'daily': 'Daily Life',
   'research': 'Research',
   'journal': 'Month Journal'
 }
 
 // Define custom order (Research first)
-const categoryOrder = ['research', 'tech', 'daily', 'journal']
+const categoryOrder = ['research', 'technical', 'daily', 'journal']
 
 // Filter and map categories with custom order
 const categories = categoryOrder
@@ -66,18 +66,22 @@ function getLocalizedUrl(locale: string | undefined, path: string) {
                   <a
                     href={getLocalizedUrl(Astro.currentLocale, item.link)}
                     class='blog-menu-link flex w-full flex-none items-center justify-end py-2 font-medium transition-none hover:text-primary md:px-3 md:justify-center'
-                    aria-label='Nav menu item'
+                    aria-label='Blog menu'
+                    aria-haspopup='true'
+                    aria-expanded='false'
+                    aria-controls='blog-category-menu'
                   >
                     {item.title}
                     <Icon name='chevron-down' class='chevron-icon ml-1 size-4 transition-transform' />
                   </a>
                   {/* Dropdown menu */}
-                  <div class='dropdown-menu absolute right-0 top-full mt-0 w-48 rounded-xl border border-border bg-background/80 shadow-lg backdrop-blur-md dark:bg-muted/80 md:left-0 md:right-auto' style='z-index: 9999;'>
+                  <div id='blog-category-menu' class='dropdown-menu absolute right-0 top-full mt-0 w-48 rounded-xl border border-border bg-background/80 shadow-lg backdrop-blur-md dark:bg-muted/80 md:left-0 md:right-auto' style='z-index: 9999;' role='menu' aria-label='Blog categories' aria-hidden='true'>
                     <div class='py-1'>
                       {categories.map((category) => (
                         <a
                           href={getLocalizedUrl(Astro.currentLocale, `/blog/${category.slug}`)}
                           class='category-link block px-4 py-2 text-sm transition-colors hover:bg-background/60 hover:text-primary dark:hover:bg-muted/60'
+                          role='menuitem'
                         >
                           {category.name}
                         </a>
@@ -118,6 +122,9 @@ function getLocalizedUrl(locale: string | undefined, path: string) {
       <button
         id='toggleDarkMode'
         class='group/dark box-content size-5 rounded-md border p-1.5 transition-colors hover:bg-border md:group-[.not-top]:rounded-xl'
+        type='button'
+        aria-label='Change color theme'
+        aria-pressed='false'
       >
         <span class='sr-only'>Dark Theme</span>
         <Icon class='system size-5 group-hover/dark:text-primary' name='computer' />
@@ -127,6 +134,10 @@ function getLocalizedUrl(locale: string | undefined, path: string) {
       <button
         id='toggleMenu'
         class='rounded-md border p-1.5 transition-colors hover:bg-border md:hidden md:group-[.not-top]:rounded-xl'
+        type='button'
+        aria-label='Open navigation menu'
+        aria-expanded='false'
+        aria-controls='headerExpandConetent'
       >
         <span class='sr-only'>Menu</span>
         <Icon class='size-5' name='menu' />
@@ -162,6 +173,12 @@ function getLocalizedUrl(locale: string | undefined, path: string) {
 
       // Dark Mode
       const darkModeBtn = this.querySelector('#toggleDarkMode') as HTMLElement
+      const updateThemeButton = (theme: string) => {
+        const readableTheme = theme === 'dark' ? 'dark' : theme === 'light' ? 'light' : 'system'
+        darkModeBtn.setAttribute('aria-label', `Theme: ${readableTheme}. Activate to switch theme.`)
+        darkModeBtn.setAttribute('aria-pressed', readableTheme === 'system' ? 'false' : 'true')
+      }
+      updateThemeButton(darkModeBtn.dataset.theme || localStorage.getItem('theme') || 'system')
       darkModeBtn.addEventListener('click', () => {
         // Old way: dispatch event
         // const toggleDarkModeEvent = new CustomEvent('theme-change', {
@@ -170,12 +187,82 @@ function getLocalizedUrl(locale: string | undefined, path: string) {
         // document.dispatchEvent(toggleDarkModeEvent)
         const newTheme = setTheme(undefined, true)
         darkModeBtn.dataset.theme = newTheme
+        updateThemeButton(newTheme || 'system')
         showToast({ message: `Set theme to ${newTheme}` })
       })
 
       // Menu
-      this.querySelector('#toggleMenu')?.addEventListener('click', () => {
-        this.classList.toggle('expanded')
+      const menuButton = this.querySelector('#toggleMenu') as HTMLButtonElement | null
+      const menuContent = this.querySelector('#headerExpandConetent') as HTMLElement | null
+      const setMenuExpanded = (expanded: boolean) => {
+        this.classList.toggle('expanded', expanded)
+        menuButton?.setAttribute('aria-expanded', String(expanded))
+        menuButton?.setAttribute('aria-label', expanded ? 'Close navigation menu' : 'Open navigation menu')
+      }
+      menuButton?.addEventListener('click', () => setMenuExpanded(!this.classList.contains('expanded')))
+
+      const blogMenu = this.querySelector('.menu-item-with-dropdown') as HTMLElement | null
+      const blogTrigger = blogMenu?.querySelector('.blog-menu-link') as HTMLAnchorElement | null
+      const dropdown = blogMenu?.querySelector('.dropdown-menu') as HTMLElement | null
+      const setDropdownExpanded = (expanded: boolean) => {
+        blogMenu?.classList.toggle('open', expanded)
+        blogTrigger?.setAttribute('aria-expanded', String(expanded))
+        dropdown?.setAttribute('aria-hidden', String(!expanded))
+      }
+      const toggleDropdown = () => setDropdownExpanded(!blogMenu?.classList.contains('open'))
+      blogTrigger?.addEventListener('click', (event) => {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+          event.preventDefault()
+          toggleDropdown()
+        }
+      })
+      blogTrigger?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          toggleDropdown()
+          if (event.key === 'Enter' && !window.matchMedia('(max-width: 768px)').matches) {
+            dropdown?.querySelector<HTMLElement>('[role="menuitem"]')?.focus()
+          }
+        } else if (event.key === 'ArrowDown') {
+          event.preventDefault()
+          setDropdownExpanded(true)
+          dropdown?.querySelector<HTMLElement>('[role="menuitem"]')?.focus()
+        } else if (event.key === 'Escape') {
+          event.preventDefault()
+          setDropdownExpanded(false)
+        }
+      })
+      blogMenu?.addEventListener('focusout', () => {
+        window.setTimeout(() => {
+          if (!blogMenu.contains(document.activeElement)) setDropdownExpanded(false)
+        }, 0)
+      })
+      blogMenu?.addEventListener('focusin', () => setDropdownExpanded(true))
+      blogMenu?.addEventListener('pointerenter', () => setDropdownExpanded(true))
+      blogMenu?.addEventListener('pointerleave', () => {
+        if (!blogMenu.contains(document.activeElement)) setDropdownExpanded(false)
+      })
+      blogMenu?.querySelectorAll<HTMLElement>('[role="menuitem"]').forEach((item) => {
+        item.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            event.preventDefault()
+            setDropdownExpanded(false)
+            blogTrigger?.focus()
+          }
+        })
+        item.addEventListener('click', () => {
+          setDropdownExpanded(false)
+          setMenuExpanded(false)
+        })
+      })
+      menuContent?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setMenuExpanded(false))
+      })
+      this.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          setDropdownExpanded(false)
+          setMenuExpanded(false)
+        }
       })
     }
   }
@@ -311,6 +398,14 @@ function getLocalizedUrl(locale: string | undefined, path: string) {
     transform: translateY(0) !important;
     pointer-events: auto !important;
   }
+
+  .menu-item-with-dropdown:focus-within .dropdown-menu,
+  .menu-item-with-dropdown.open .dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+  }
   
   .menu-item-with-dropdown:hover .chevron-icon {
     transform: rotate(180deg);
@@ -339,14 +434,19 @@ function getLocalizedUrl(locale: string | undefined, path: string) {
       box-shadow: none !important;
       backdrop-filter: none !important;
       padding-left: 0;
-      opacity: 1 !important;
-      visibility: visible !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
       transform: translateY(0) !important;
       pointer-events: none;
+      max-height: 0;
+      transition: opacity 0.2s ease-in-out, max-height 0.2s ease-in-out, visibility 0.2s;
     }
 
-    .expanded .dropdown-menu {
+    .expanded .menu-item-with-dropdown.open .dropdown-menu {
+      opacity: 1 !important;
+      visibility: visible !important;
       pointer-events: auto;
+      max-height: 400px;
     }
 
     .dropdown-menu .py-1 {

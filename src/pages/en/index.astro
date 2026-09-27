@@ -11,7 +11,14 @@ import GitHubActivityCalendar from '@/components/home/GitHubActivityCalendar.ast
 
 <PageLayout meta={{ title: 'Home' }} highlightColor='#659EB966'>
   <main class='flex w-full flex-col items-center'>
-    <section class='animate mb-10 flex flex-col items-center gap-y-7' id='content-header'>
+    <section class='relative animate mb-10 flex flex-col items-center gap-y-7' id='content-header'>
+      <svg class='research-watermark pointer-events-none absolute -inset-x-24 -top-12 -z-10 h-72 w-[calc(100%+12rem)] opacity-[0.06]' viewBox='0 0 960 280' fill='none' aria-hidden='true'>
+        <path d='M72 180 230 74l146 96 166-112 154 96 124-71' stroke='currentColor' stroke-width='1.2' stroke-dasharray='4 9' />
+        <path d='M72 180 192 222l184-52 166 38 154-96 124 72' stroke='currentColor' stroke-width='1.2' />
+        <g fill='currentColor'>
+          <circle cx='72' cy='180' r='5' /><circle cx='230' cy='74' r='5' /><circle cx='376' cy='170' r='5' /><circle cx='542' cy='58' r='5' /><circle cx='696' cy='154' r='5' /><circle cx='820' cy='83' r='5' />
+        </g>
+      </svg>
       <div class='flex flex-row items-center gap-x-6'>
         <Image src={avatar} alt='profile' class='h-36 w-auto rounded-lg border p-1' loading='eager' />
         <div class='flex flex-col gap-y-4'>
@@ -37,9 +44,31 @@ import GitHubActivityCalendar from '@/components/home/GitHubActivityCalendar.ast
         </Section>
         <Section title='Statistics'>
           <BlogStats blogStartDate={new Date(config.personal?.blogStartDate || '2026-04-14')} />
+          <div class='mt-1 flex flex-wrap items-center gap-2 text-sm text-muted-foreground'>
+            <span class='rounded-full bg-primary/10 px-3 py-1 font-medium text-primary'>Research status</span>
+            <span>Graduate stage · Open to collaboration</span>
+            <span class='text-muted-foreground/60'>·</span>
+            <span>Always evolving</span>
+          </div>
         </Section>
         {config.personal?.githubUsername && <GitHubActivityCalendar username={config.personal.githubUsername} />}
       </div>
     </section>
   </main>
 </PageLayout>
+
+<style>
+  .research-watermark {
+    transform-origin: center;
+    animation: research-watermark-drift 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes research-watermark-drift {
+    from { transform: translate3d(-0.5%, 0, 0) scale(1); }
+    to { transform: translate3d(0.5%, 1%, 0) scale(1.015); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .research-watermark { animation: none; }
+  }
+</style>

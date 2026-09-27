@@ -3,6 +3,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Keep keyboard focus visible without changing the visual language of the theme. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 3px;
+}
+
 html.dark {
   color-scheme: dark;
 }
@@ -23,11 +29,15 @@ html.dark {
   animation: 300ms fade-in-up;
   animation-fill-mode: forwards;
 }
-@media (prefers-reduced-motion) {
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .animate {
-    opacity: 0;
-    animation: 100ms fade-in-up;
-    animation-fill-mode: forwards;
+    opacity: 1;
+    animation: none;
+    transform: none;
   }
 }
 #content-header {

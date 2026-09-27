@@ -33,6 +33,8 @@ const projectIconSet: Record<string, iconsType> = {
   <div class='grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8'>
     {
       project.map((project, index) => {
+        const links = Array.isArray(project.links) ? project.links : []
+        const primaryLink = links.find((link) => link.type === 'site')?.href || links[0]?.href
         var imagePath = null
         if (project.image) {
           imagePath = '/src/assets/projects/' + project.image
@@ -67,15 +69,20 @@ const projectIconSet: Record<string, iconsType> = {
               {/* Header section */}
               <div class='flex-1 space-y-3'>
                 <div class='flex items-start justify-between gap-4'>
-                  <a 
-                    href={project.links.find(link => link.type === 'site')?.href || project.links[0].href}
-                    target='_blank'
-                    class='group/title no-underline'
-                  >
-                    <h3 class='text-xl font-semibold tracking-tight text-foreground transition-colors group-hover/title:text-primary'>
-                      {project.name}
-                    </h3>
-                  </a>
+                  {primaryLink ? (
+                    <a
+                      href={primaryLink}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      class='group/title no-underline'
+                    >
+                      <h3 class='text-xl font-semibold tracking-tight text-foreground transition-colors group-hover/title:text-primary'>
+                        {project.name}
+                      </h3>
+                    </a>
+                  ) : (
+                    <h3 class='text-xl font-semibold tracking-tight text-foreground'>{project.name}</h3>
+                  )}
                   {imagePath && (
                     <div class='flex-shrink-0 overflow-hidden rounded-lg border border-border/30 bg-background/60 p-1.5 backdrop-blur-sm transition-all duration-300 group-hover:border-primary/30 group-hover:bg-background/80'>
                       <Image
@@ -94,22 +101,24 @@ const projectIconSet: Record<string, iconsType> = {
               </div>
               
               {/* Footer section */}
-              <div class='mt-4 flex items-center gap-2 border-t border-border/30 pt-3'>
-                {project.links.map((link) => {
+              {links.length > 0 && <div class='mt-4 flex items-center gap-2 border-t border-border/30 pt-3'>
+                {links.map((link) => {
                   const icon = projectIconSet[link.type]
+                  if (!icon || !link.href) return null
                   return (
                     <a
                       href={link.href}
                       class='group/link flex items-center gap-1.5 rounded-full border border-border/40 bg-background/40 px-3 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:bg-primary/10 hover:text-primary hover:shadow-md hover:shadow-primary/20'
                       aria-label={link.type}
                       target='_blank'
+                      rel='noopener noreferrer'
                     >
                       <Icon class='size-3.5 transition-transform group-hover/link:scale-110' name={icon} />
                       <span class='capitalize'>{link.type}</span>
                     </a>
                   )
                 })}
-              </div>
+              </div>}
             </div>
             
             {/* Decorative corner accent */}

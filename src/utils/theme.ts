@@ -1,12 +1,21 @@
+let systemMediaQuery: MediaQueryList | undefined
+let systemThemeHandler: ((event: MediaQueryListEvent) => void) | undefined
+
 export function getTheme() {
   return localStorage.getItem('theme')
 }
 
 export function listenThemeChange(theme?: string) {
-  if (theme && theme !== 'system') return // if theme is specified, no need to listen window theme change
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    setTheme(e.matches ? 'dark' : 'light')
-  })
+  if (theme && theme !== 'system') {
+    if (systemMediaQuery && systemThemeHandler) systemMediaQuery.removeEventListener('change', systemThemeHandler)
+    systemMediaQuery = undefined
+    systemThemeHandler = undefined
+    return
+  }
+  if (systemMediaQuery && systemThemeHandler) return
+  systemMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+  systemThemeHandler = (event) => setTheme(event.matches ? 'dark' : 'light')
+  systemMediaQuery.addEventListener('change', systemThemeHandler)
 }
 
 export function setTheme(theme?: string, save = false) {

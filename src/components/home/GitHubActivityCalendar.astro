@@ -29,15 +29,26 @@ interface Props {
   username: string
 }
 
-async function fetchData(username: string): Promise<GitHubActivityApiResponse> {
+async function fetchData(username: string): Promise<GitHubActivityApiResponse | null> {
   const apiUrl = 'https://github-contributions-api.jogruber.de/v4/'
-  const response = await fetch(`${apiUrl}${username}?y=last`)
-  const data = (await response.json()) as GitHubActivityApiResponse
-  if (!response.ok) {
-    const message = (data as any).error || 'Unknown error'
-    throw Error(`Fetching GitHub contribution data for "${username}" failed: ${message}`)
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 8000)
+  try {
+    const response = await fetch(`${apiUrl}${encodeURIComponent(username)}?y=last`, {
+      signal: controller.signal
+    })
+    const data = (await response.json()) as GitHubActivityApiResponse
+    if (!response.ok || !Array.isArray(data?.contributions)) {
+      throw Error(`Fetching GitHub contribution data for "${username}" failed`)
+    }
+    return data
+  } catch {
+    // A contribution calendar is optional enrichment. Keep the page buildable when
+    // the public endpoint is unavailable, times out, or returns malformed data.
+    return null
+  } finally {
+    clearTimeout(timeout)
   }
-  return data
 }
 
 function fillHoles(activities: Array<GitHubActivityDay>): Array<GitHubActivityDay> {
@@ -97,9 +108,30 @@ function getMonthLabels(weeks: Array<Array<GitHubActivityDay>>) {
 const { username } = Astro.props as Props
 const data = await fetchData(username)
 
-const activities = data.contributions
-const totalCount = data.total.lastYear
-const activityYear = getYear(parseISO(activities[0].date))
+const activities = (data?.contributions ?? []).filter(
+  (activity) =>
+    typeof activity?.date === 'string' &&
+    !Number.isNaN(parseISO(activity.date).getTime()) &&
+    Number.isFinite(activity.count) &&
+    Number.isFinite(activity.level)
+)
+const hasActivity = activities.length > 0
+const totalCount = data?.total?.lastYear ?? activities.reduce((sum, activity) => sum + activity.count, 0)
+const activityYear = hasActivity ? getYear(parseISO(activities[0].date)) : new Date().getFullYear()
+const isEnglish = Astro.currentLocale === 'en'
+const labels = isEnglish
+  ? {
+      unavailable: 'GitHub activity is temporarily unavailable.',
+      contributions: 'contributions',
+      less: 'Less',
+      more: 'More'
+    }
+  : {
+      unavailable: 'GitHub 活动数据暂时无法获取。',
+      contributions: '次贡献',
+      less: '少',
+      more: '多'
+    }
 
 const blockSize = 12
 const blockMargin = 4
@@ -107,14 +139,14 @@ const blockRadius = 2
 const fontSize = 14
 const labelMargin = 8
 const labelHeight = fontSize + labelMargin
-const weeks = groupByWeeks(activities)
+const weeks = hasActivity ? groupByWeeks(activities) : []
 const width = weeks.length * (blockSize + blockMargin) - blockMargin
 const height = labelHeight + (blockSize + blockMargin) * 7 - blockMargin
 const monthLabels = getMonthLabels(weeks)
 ---
 
 <div class="overflow-x-auto w-full" style="max-width: 90vw;">
-  <svg class='block' width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+  {hasActivity ? <svg class='block' width={width} height={height} viewBox={`0 0 ${width} ${height}`} aria-label={isEnglish ? 'GitHub contribution activity' : 'GitHub 贡献活动'} role='img'>
     <g>
       {
         monthLabels.map(({ label, weekIndex }) => (
@@ -159,15 +191,15 @@ const monthLabels = getMonthLabels(weeks)
         </g>
       ))
     }
-  </svg>
+  </svg> : <div class='rounded-xl border border-border/60 bg-muted/30 px-4 py-6 text-sm text-muted-foreground' role='status'>{labels.unavailable}</div>}
 </div>
-<footer class='flex items-center justify-between'>
-  <div>{totalCount} contributions in {activityYear} ~ {activityYear + 1}</div>
+{hasActivity && <footer class='flex flex-wrap items-center justify-between gap-2 text-sm' aria-label={isEnglish ? 'GitHub contribution legend' : 'GitHub 贡献图例'}>
+  <div>{totalCount} {labels.contributions} in {activityYear} ~ {activityYear + 1}</div>
   <div class='flex items-center gap-1'>
-    <span>Less</span>
+    <span>{labels.less}</span>
     {
       [0, 1, 2, 3, 4].map((level) => (
-        <svg width={blockSize} height={blockSize}>
+        <svg width={blockSize} height={blockSize} aria-hidden='true'>
           <rect
             width={blockSize}
             height={blockSize}
@@ -184,6 +216,6 @@ const monthLabels = getMonthLabels(weeks)
         </svg>
       ))
     }
-    <span>More</span>
+    <span>{labels.more}</span>
   </div>
-</footer>
+</footer>}

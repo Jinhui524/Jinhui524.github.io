@@ -2,14 +2,87 @@
 import PageLayout from '@/layouts/CommonPage.astro'
 import { Button, Icon, PublicationSection, SimpleIcon } from '@/components/user'
 
+type Publication = {
+  title: string
+  authors: Array<{
+    name: string
+    isMe?: boolean
+    isCoreContributor?: boolean
+  }>
+  venue: string
+  year: string
+  type: 'conference' | 'journal' | 'workshop' | 'preprint'
+  abstract: string
+  links: { type: string; href: string }[]
+  status: 'published' | 'accepted' | 'under-review' | 'preprint'
+  topics: string[]
+}
+
 const headings = [
   { depth: 2, slug: 'about-me', text: 'About Me' },
+  { depth: 2, slug: 'research-updates', text: 'Research Updates' },
+  { depth: 2, slug: 'education', text: 'Education & Experience' },
   { depth: 2, slug: 'research-interests', text: 'Research Interests' },
   { depth: 2, slug: 'publications', text: 'Publications' },
   { depth: 2, slug: 'awards', text: 'Awards' }
 ]
 
-const publications = [
+const updates = [
+  {
+    date: '2026.06',
+    status: 'Accepted',
+    title: 'LLM4PPM 被 WISE 2026 接收，继续探索可迁移的流程语义学习。',
+    href: 'https://github.com/Jinhui524',
+    label: 'Research notes'
+  },
+  {
+    date: '2026.03',
+    status: 'Research',
+    title: '加入东南大学硕士阶段研究，在服务计算实验室开展流程智能研究。',
+    href: 'https://www.seu.edu.cn/',
+    label: 'Southeast University'
+  },
+  {
+    date: '2025.09',
+    status: 'Lab',
+    title: '在湖南省服务计算与软件服务新技术重点实验室参与本科生科研。',
+    href: 'https://guoshengkang.github.io/',
+    label: 'Laboratory'
+  },
+  {
+    date: '2024.09',
+    status: 'Started',
+    title: '开始系统学习图数据挖掘与事件序列预测。',
+    href: 'https://computer.hnust.edu.cn/',
+    label: 'HNUST'
+  }
+]
+
+const education = [
+  {
+    period: '2026 — Present',
+    title: 'Southeast University',
+    subtitle: 'Master stage · Data and intelligent systems',
+    role: 'Graduate researcher',
+    href: 'https://www.seu.edu.cn/'
+  },
+  {
+    period: '2023 — 2027',
+    title: 'Hunan University of Science and Technology',
+    subtitle: 'Data Science and Big Data Technology',
+    role: 'Undergraduate student',
+    href: 'https://computer.hnust.edu.cn/'
+  },
+  {
+    period: '2024 — Present',
+    title: 'Key Laboratory of Service Computing and New Software Technology',
+    subtitle: 'Research on graph data, process intelligence and foundation models',
+    role: 'Student researcher · Prof. Guosheng Kang',
+    href: 'https://guoshengkang.github.io/'
+  }
+]
+
+const publications: Publication[] = [
   {
     title: 'LLM4PPM：面向预测性业务流程监控的可迁移流程语义学习',
     authors: [
@@ -20,10 +93,11 @@ const publications = [
     ],
     venue: 'WISE',
     year: '2026',
-    type: 'conference' as const,
+    type: 'conference',
     abstract: '将事件日志转换为语义故事，通过持续预训练与 LoRA 指令微调学习可迁移流程语义。',
     links: [],
-    status: 'accepted' as const
+    status: 'accepted',
+    topics: ['Process intelligence', 'Large language models']
   },
   {
     title: '基于频率的异构图序列融合网络用于下一活动预测',
@@ -35,10 +109,11 @@ const publications = [
     ],
     venue: 'IJCNN',
     year: '2026',
-    type: 'conference' as const,
+    type: 'conference',
     abstract: '通过异构图和序列融合，同时建模事件日志中的交互频率与上下文依赖。',
     links: [],
-    status: 'accepted' as const
+    status: 'accepted',
+    topics: ['Graph neural networks', 'Next activity prediction']
   },
   {
     title: '对齐图与序列：用于下一事件预测的对比学习方法',
@@ -50,10 +125,11 @@ const publications = [
     ],
     venue: 'CSCWD',
     year: '2026',
-    type: 'conference' as const,
+    type: 'conference',
     abstract: '通过对比学习让流程图结构表征与事件序列表征互相增强。',
     links: [],
-    status: 'accepted' as const
+    status: 'accepted',
+    topics: ['Contrastive learning', 'Graph-sequence fusion']
   },
   {
     title: '融合事件序列语义与属性关联语义的业务流程下一事件预测',
@@ -64,10 +140,11 @@ const publications = [
     ],
     venue: '计算机集成制造系统',
     year: '2026',
-    type: 'journal' as const,
+    type: 'journal',
     abstract: '融合事件序列语义与属性关联语义，提升业务流程下一事件预测。',
     links: [],
-    status: 'accepted' as const
+    status: 'accepted',
+    topics: ['Event sequences', 'Semantic modeling']
   },
   {
     title: '基于多模态融合与多任务学习的预测性业务流程监控',
@@ -78,10 +155,11 @@ const publications = [
     ],
     venue: 'Applied Soft Computing',
     year: '2026',
-    type: 'journal' as const,
+    type: 'journal',
     abstract: '以多模态融合和多任务优化共同建模语义、序列与属性特征。',
     links: [],
-    status: 'under-review' as const
+    status: 'under-review',
+    topics: ['Multimodal learning', 'Predictive monitoring']
   },
   {
     title: '结合检索增强生成与微调的下一活动预测语义故事',
@@ -93,10 +171,22 @@ const publications = [
     ],
     venue: 'ICSS',
     year: '2026',
-    type: 'conference' as const,
+    type: 'conference',
     abstract: '将事件日志组织为语义故事，检索历史上下文并引导大模型预测下一活动。',
     links: [],
-    status: 'accepted' as const
+    status: 'accepted',
+    topics: ['Retrieval-augmented generation', 'Process mining']
+  }
+]
+
+const awards = [
+  {
+    title: '竞赛与工程实践',
+    items: ['第七届传智杯全国 IT 技能大赛编程挑战赛二等奖。', '2025 RAICOM 机器人开发者大赛编程技能赛道三等奖。', '2026 RAICOM 机器人开发者大赛智海算法优化赛道一等奖。']
+  },
+  {
+    title: '算法与人工智能',
+    items: ['第二十八届中国机器人及人工智能大赛湖南赛区一等奖。', '第二十一届湖南省大学生程序设计竞赛一等奖。', '第十六届蓝桥杯软件和信息技术人才大赛二等奖。']
   }
 ]
 ---
@@ -109,9 +199,38 @@ const publications = [
   <p>
     我的研究关注图数据挖掘、图神经网络、大语言模型、智能体与事件序列预测，探索结构化数据与语义建模之间的连接。
   </p>
-  <Button title='GitHub profile' class='w-fit' href='https://github.com/Jinhui524' target='_blank'>
+  <Button title='GitHub profile' class='w-fit' href='https://github.com/Jinhui524' target='_blank' rel='noopener noreferrer'>
     <Icon class='size-5' name='github' slot='before' />
   </Button>
+
+  <h2 id='research-updates'>Research Updates<a class='anchor' href='#research-updates'>#</a></h2>
+  <div class='space-y-2 rounded-xl border border-border bg-card p-2 sm:p-3'>
+    {updates.map((update) => (
+      <a class='academic-news-row group' href={update.href} target='_blank' rel='noopener noreferrer'>
+        <time class='w-20 shrink-0 font-mono text-xs text-muted-foreground'>{update.date}</time>
+        <span class='academic-status shrink-0'>{update.status}</span>
+        <span class='min-w-0 flex-1 text-sm leading-relaxed text-foreground transition-colors group-hover:text-primary'>{update.title}</span>
+        <span class='hidden shrink-0 text-xs text-muted-foreground transition-colors group-hover:text-primary sm:inline'>{update.label} ↗</span>
+      </a>
+    ))}
+  </div>
+
+  <h2 id='education'>Education &amp; Experience<a class='anchor' href='#education'>#</a></h2>
+  <div class='academic-timeline space-y-3'>
+    {education.map((item, index) => (
+      <a class='academic-education-card group' href={item.href} target='_blank' rel='noopener noreferrer'>
+        <span class='academic-education-index'>{String(index + 1).padStart(2, '0')}</span>
+        <span class='min-w-0 flex-1'>
+          <span class='mb-1 flex flex-wrap items-center gap-2'>
+            <strong class='text-base text-foreground transition-colors group-hover:text-primary'>{item.title}</strong>
+            <span class='academic-role'>{item.role}</span>
+          </span>
+          <span class='block text-sm text-muted-foreground'>{item.subtitle}</span>
+        </span>
+        <time class='shrink-0 text-xs text-muted-foreground'>{item.period}</time>
+      </a>
+    ))}
+  </div>
 
   <h2 id='research-interests'>Research Interests<a class='anchor' href='#research-interests'>#</a></h2>
   <div class='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
@@ -123,7 +242,7 @@ const publications = [
       ['事件序列预测', 'Event sequence prediction', 'timeline'],
       ['结构化语义建模', 'Structured semantic modeling', 'document']
     ].map(([title, description, icon]) => (
-      <div class='group relative overflow-hidden rounded-xl border border-border bg-card p-4 transition-all hover:border-foreground/25 hover:shadow-md'>
+      <div class='group relative overflow-hidden rounded-xl border border-border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-foreground/25 hover:shadow-md'>
         <div class='flex items-start gap-4'>
           <div class='flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20'>
             <SimpleIcon class='size-5 text-primary transition-transform duration-300 group-hover:scale-110' name={icon} />
@@ -138,15 +257,217 @@ const publications = [
   </div>
 
   <h2 id='publications'>Publications<a class='anchor' href='#publications'>#</a></h2>
-  <PublicationSection {publications} />
+  <div data-publication-filter class='mb-5 flex flex-wrap items-center gap-2' role='group' aria-label='Publication filters'>
+    <span class='mr-1 text-sm text-muted-foreground'>Filter:</span>
+    {[
+      ['all', 'All'],
+      ['conference', 'Conference'],
+      ['journal', 'Journal'],
+      ['under-review', 'Under Review']
+    ].map(([value, label], index) => (
+      <button type='button' data-filter={value} aria-pressed={index === 0 ? 'true' : 'false'} class:list-active={index === 0} class='publication-filter-button'>{label}</button>
+    ))}
+    <span class='ml-auto text-xs text-muted-foreground' data-publication-count>{publications.length} publications</span>
+  </div>
+  <div class='space-y-6' data-publication-list>
+    {publications.map((publication) => (
+      <div class='publication-entry' data-publication-entry data-type={publication.type} data-status={publication.status}>
+        <div class='mb-2 flex flex-wrap gap-1.5 pl-1'>
+          {publication.topics.map((topic) => <span class='research-tag'>{topic}</span>)}
+        </div>
+        <PublicationSection publications={[publication]} groupByYear={false} />
+      </div>
+    ))}
+  </div>
+  <div id='academic-toast' class='academic-toast' aria-live='polite' aria-atomic='true'></div>
 
   <h2 id='awards'>Awards<a class='anchor' href='#awards'>#</a></h2>
-  <ul>
-    <li>第七届传智杯全国 IT 技能大赛编程挑战赛二等奖。</li>
-    <li>2025 RAICOM 机器人开发者大赛编程技能赛道三等奖。</li>
-    <li>2026 RAICOM 机器人开发者大赛智海算法优化赛道一等奖。</li>
-    <li>第二十八届中国机器人及人工智能大赛湖南赛区一等奖。</li>
-    <li>第二十一届湖南省大学生程序设计竞赛一等奖。</li>
-    <li>第十六届蓝桥杯软件和信息技术人才大赛二等奖。</li>
-  </ul>
+  <div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+    {awards.map((group, index) => (
+      <section class='rounded-xl border border-border bg-card p-5'>
+        <div class='mb-4 flex items-center gap-3'>
+          <span class='academic-award-index'>{String(index + 1).padStart(2, '0')}</span>
+          <h3 class='m-0 text-lg font-semibold text-foreground'>{group.title}</h3>
+        </div>
+        <ul class='m-0 space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground'>
+          {group.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+    ))}
+  </div>
 </PageLayout>
+
+<script is:inline>
+  const filterRoot = document.querySelector('[data-publication-filter]')
+  const publicationEntries = Array.from(document.querySelectorAll('[data-publication-entry]'))
+  const countLabel = document.querySelector('[data-publication-count]')
+  const toast = document.querySelector('#academic-toast')
+  let toastTimer
+
+  const showToast = (message) => {
+    if (!toast) return
+    toast.textContent = message
+    toast.classList.add('is-visible')
+    clearTimeout(toastTimer)
+    toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 1800)
+  }
+
+  filterRoot?.querySelectorAll('button[data-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter') || 'all'
+      let visibleCount = 0
+      publicationEntries.forEach((entry) => {
+        const matches = filter === 'all' || entry.dataset.type === filter || entry.dataset.status === filter
+        entry.toggleAttribute('hidden', !matches)
+        if (matches) visibleCount += 1
+      })
+      filterRoot.querySelectorAll('button[data-filter]').forEach((item) => {
+        const active = item === button
+        item.setAttribute('aria-pressed', String(active))
+        item.classList.toggle('list-active', active)
+      })
+      if (countLabel) countLabel.textContent = `${visibleCount} publications`
+      showToast(filter === 'all' ? 'Showing all publications' : `Showing ${button.textContent}`)
+    })
+  })
+</script>
+
+<style>
+  .academic-news-row,
+  .academic-education-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    transition: background-color 180ms ease, transform 180ms ease;
+  }
+
+  .academic-news-row:hover,
+  .academic-education-card:hover {
+    background-color: color-mix(in srgb, var(--color-muted) 65%, transparent);
+    transform: translateX(2px);
+  }
+
+  .academic-status,
+  .academic-role,
+  .research-tag,
+  .academic-award-index {
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    padding: 0.35rem 0.55rem;
+  }
+
+  .academic-status,
+  .academic-role {
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    color: var(--color-primary);
+  }
+
+  .research-tag {
+    background: color-mix(in srgb, var(--color-muted) 80%, transparent);
+    color: var(--color-muted-foreground);
+  }
+
+  .academic-education-card {
+    position: relative;
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+  }
+
+  .academic-education-index,
+  .academic-award-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.625rem;
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    color: var(--color-primary);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .publication-filter-button {
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+    background: var(--color-card);
+    color: var(--color-muted-foreground);
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.7rem;
+    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+  }
+
+  .publication-filter-button:hover,
+  .publication-filter-button.list-active {
+    border-color: color-mix(in srgb, var(--color-primary) 50%, var(--color-border));
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    color: var(--color-primary);
+  }
+
+  .publication-filter-button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .publication-entry[hidden] {
+    display: none;
+  }
+
+  .academic-toast {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 40;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    background: var(--color-card);
+    box-shadow: 0 12px 30px rgb(0 0 0 / 0.12);
+    color: var(--color-foreground);
+    font-size: 0.8rem;
+    opacity: 0;
+    padding: 0.65rem 0.85rem;
+    pointer-events: none;
+    transform: translateY(0.5rem);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .academic-toast.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 640px) {
+    .academic-news-row,
+    .academic-education-card {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .academic-news-row > :nth-child(3),
+    .academic-education-card > :nth-child(2) {
+      flex-basis: calc(100% - 3rem);
+    }
+
+    .academic-news-row > :last-child,
+    .academic-education-card > :last-child {
+      margin-left: 3rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .academic-news-row,
+    .academic-education-card,
+    .academic-toast,
+    .publication-filter-button {
+      transition: none;
+    }
+  }
+</style>

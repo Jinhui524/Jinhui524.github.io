@@ -111,6 +111,13 @@ const langAttr = currentLocale === 'en' ? 'en' : 'zh'
         box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
       }
 
+      @media (prefers-reduced-motion: reduce) {
+        :global(.click-particle) {
+          display: none !important;
+          animation: none !important;
+        }
+      }
+
       @keyframes particle-explosion {
         0% {
           opacity: 1;
@@ -419,7 +426,7 @@ const langAttr = currentLocale === 'en' ? 'en' : 'zh'
           history.pushState(null, '', href)
 
           targetElement.scrollIntoView({
-            behavior: 'smooth',
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
             block: 'start'
           })
         })
@@ -447,6 +454,10 @@ const langAttr = currentLocale === 'en' ? 'en' : 'zh'
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+        const coarsePointer = window.matchMedia('(pointer: coarse)')
+        let lastParticleAt = 0
+
         function createParticle(
           x: number,
           y: number,
@@ -473,6 +484,10 @@ const langAttr = currentLocale === 'en' ? 'en' : 'zh'
           }, 1100)
         }
         document.addEventListener('click', (e) => {
+          // Keep this decorative effect opt-in for users who have asked for less
+          // motion, touch devices, and rapid repeated clicks.
+          if (reducedMotion.matches || coarsePointer.matches || Date.now() - lastParticleAt < 120) return
+          lastParticleAt = Date.now()
           const particleCount = 10
           const baseDistance = 18
           for (let i = 0; i < particleCount; i++) {

@@ -28,10 +28,20 @@
   // Listen for toast event
   document.addEventListener('toast', (e) => {
     const { message } = (e as CustomEvent).detail
+    document.querySelector('[data-toast-region]')?.remove()
     const toast = document.createElement('div')
+    toast.setAttribute('data-toast-region', '')
+    toast.setAttribute('role', 'status')
+    toast.setAttribute('aria-live', 'polite')
+    toast.setAttribute('aria-atomic', 'true')
     toast.className =
-      'animate fixed bottom-8 z-20 px-4 py-2 bg-muted text-foreground rounded-lg border border-border shadow-lg flex items-center gap-2'
-    toast.innerHTML = `<svg width='22' height='22' viewBox='0 0 24 24' fill='currentColor'>${Icons.info}</svg> <span>${message}</span>`
+      'animate fixed bottom-8 left-1/2 z-20 -translate-x-1/2 px-4 py-2 bg-muted text-foreground rounded-lg border border-border shadow-lg flex items-center gap-2'
+    const icon = document.createElement('span')
+    icon.setAttribute('aria-hidden', 'true')
+    icon.innerHTML = `<svg width='22' height='22' viewBox='0 0 24 24' fill='currentColor'>${Icons.info}</svg>`
+    const text = document.createElement('span')
+    text.textContent = String(message ?? '')
+    toast.append(icon, text)
     document.body.appendChild(toast)
     setTimeout(() => {
       toast.remove()
