@@ -38,7 +38,14 @@ const { friends } = friendsData
       </div>
 
       <div class='bg-gradient-to-br from-background to-muted/30 rounded-2xl p-6 border border-border/30'>
-        <FriendList list={friends[0]} />
+        <div class='space-y-6'>
+          {friends.map((group) => (
+            <section>
+              <h3 class='mb-3 text-lg font-semibold text-foreground'>{group.desc}</h3>
+              <FriendList list={group} />
+            </section>
+          ))}
+        </div>
       </div>
     </section>
 

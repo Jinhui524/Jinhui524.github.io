@@ -1,7 +1,6 @@
 ---
 // import { ClientRouter } from 'astro:transitions'
 
-import { prod } from '@/utils/server'
 import type { SiteMeta } from '@/types'
 import config from '@/site-config'
 
@@ -100,14 +99,3 @@ const socialImageURL = new URL(ogImage ? ogImage : '/favicon/favicon-512x512.png
     }, 100)
   })
 </script> -->
-
-{
-  /* User script*/
-  prod && (
-    <script>
-      console.log( '%c Astro Theme Axi %c https://github.com/Axi404/',
-      'color:#fff;background:linear-gradient(90deg,#448bff,#44e9ff);padding:5px 0;',
-      'color:#000;background:linear-gradient(90deg,#44e9ff,#ffffff);padding:5px 10px 5px 0px;' )
-    </script>
-  )
-}

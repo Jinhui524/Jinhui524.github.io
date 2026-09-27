@@ -54,7 +54,6 @@ export const theme: ThemeUserConfig = {
     location: 'Hunan, China',
     githubUsername: 'Jinhui524',
     email: 'Luojh0524@163.com',
-    googleScholar: 'https://scholar.google.com/',
     blogStartDate: '2026-04-14',
     domains: {
       main: 'jinhui524.github.io',
